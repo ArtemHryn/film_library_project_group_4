@@ -18,6 +18,9 @@
     "url": "https://github.com/goitacademy/parcel-project-template/issues"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "basiclightbox": "^5.0.4",
+    "firebase": "^9.10.0",
     "modern-normalize": "^1.1.0"
   },
   "devDependencies": {

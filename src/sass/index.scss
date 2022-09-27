@@ -1,2 +1,9 @@
 @import './common';
-@import './example';
+@import './utils/variables';
+@import './utils/placeholder';
+@import './utils/mixins';
+// @import './example';
+@import './components/header';
+@import './components/film-library.scss';
+@import './components/footer';
+@import './base/global-reset';
