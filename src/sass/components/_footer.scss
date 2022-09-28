@@ -1,0 +1,38 @@
+.footer {
+    padding: 30 0 30 0;
+    background-color: #F7F7F7;
+}
+.footer__container {
+    display: flex;
+    justify-content: center;
+}
+.footer__text {
+    font-size: 14px;
+    line-height: 1.18;
+    color: #545454;
+    text-align: center;
+    width: 240px;
+@media screen and (min-width: 768px) {
+    width: 100%;
+    font-size: 16px;
+    }
+}
+.footer__modal-open {
+    background-color: inherit;
+    color: inherit;
+    text-decoration: underline;
+&:focus,
+&:hover {
+    transform: scale(1.05);
+    }
+}
+.footer__icon {
+    display: inline;
+    padding: 0 10 0 10;
+}
+.developers {
+@media screen and (max-width: 767.9px) {
+    display: block;
+    margin-top: 10px;
+    }
+}

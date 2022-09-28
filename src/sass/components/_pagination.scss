@@ -1,22 +1,43 @@
 .pagination-box {
+  display: flex;
+  justify-content: center;
 }
 
 .pagination-list {
-  list-style: none;
   display: flex;
+  margin-bottom: 60px;
 }
 
-.pagination-item {
+// .pagination-item {
 
-}
+// }
 
 .pagination-btn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 40px;
   height: 40px;
-  
+  border-radius: 5px;
+  background-color: transparent;
+
+  &:hover,
+  &:focus,
   &:active {
     color: white;
-    background-color: #FF6B08;
+    background-color: #ff6b08;
     border-radius: 5px;
   }
+}
+
+.btn-prev-next {
+   width: 40px;
+  height: 40px;
+  border-radius: 5px;
 }

@@ -2,13 +2,13 @@ export class Pagination {
   constructor({
     currentPage = 1,
     totalPages = 1,
-      containerSelector = '.pagination-box',
-    onPageChange
+    containerSelector = '.pagination-box',
+    onPageChange,
   }) {
     this.currentPage = currentPage;
     this.totalPages = totalPages;
-      this.container = document.querySelector(containerSelector);
-      this.onPageChange = onPageChange;
+    this.container = document.querySelector(containerSelector);
+    this.onPageChange = onPageChange;
   }
 
   init() {
@@ -36,18 +36,18 @@ export class Pagination {
   }
 
   setEvents() {
-      this.container.addEventListener('click', (evt) => {
-          const { target } = evt;
-          const li = target.closest('[data-page]');
-          const pageNumber = li.dataset.page;
-          const activeLi = this.container.querySelector('.active');
-          activeLi.classList.remove('active');
-          this.currentPage = Number(pageNumber);
-          li.classList.add('active');
+    this.container.addEventListener('click', evt => {
+      const { target } = evt;
+      const li = target.closest('[data-page]');
+      const pageNumber = li.dataset.page;
+      const activeLi = this.container.querySelector('.active');
+      activeLi.classList.remove('active');
+      this.currentPage = Number(pageNumber);
+      li.classList.add('active');
 
-          if (typeof this.onPageChange === "function") {
-              this.onPageChange(this.currentPage)
-          }
+      if (typeof this.onPageChange === 'function') {
+        this.onPageChange(this.currentPage);
+      }
     });
   }
 }
