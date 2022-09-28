@@ -63,7 +63,6 @@ function onLibraryClick(e) {
   removeFormListener();
 }
 
-
 function onQueueClick(e) {
   addCurrentPageClass(refs.queue, 'lib-btn-current');
   removeCurrentPageClass(refs.wached, 'lib-btn-current');

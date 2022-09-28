@@ -43,6 +43,7 @@ export function signOutUser() {
       userInfo.userName = '';
       userInfo.IsLogIn = false;
       changeBtnLabel('LOG IN'); 
+      
     })
     .catch(error => {
       console.log('somesing wrong');
@@ -56,6 +57,9 @@ onAuthStateChanged(auth, user => {
     userInfo.USER_ID = user.uid;
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
+    userInfo.userImg = user.photoURL;
+    console.log(userInfo.userImg);
+    insertPhotoUrl(userInfo.userImg);
     changeBtnLabel(userInfo.userName);
   } else {
     console.log(user);
@@ -65,4 +69,14 @@ onAuthStateChanged(auth, user => {
 
 function changeBtnLabel(e) {
   refs.login.textContent = e;
+}
+
+
+function insertPhotoUrl(e) {
+  const markup = `<img
+        class="user-img"
+        src='${e}'
+        alt="photo"
+      />`;
+  refs.login.insertAdjacentHTML('beforebegin', markup);
 }
