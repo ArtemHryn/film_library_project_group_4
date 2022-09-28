@@ -1,0 +1,204 @@
+.header {
+  position: relative;
+  margin: 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 230px;
+  @media screen and (min-width: 768px) {
+    height: 216px;
+  }
+  
+}
+.header-home{
+    background-image: url(../images/header/mobile/main@2x.jpg);
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(../images/header/mobile/main@3x.jpg);
+  }
+  @media screen and (min-width: 481px) {
+    background-image: l url(../images/header/tablet/main@2x.jpg);
+    @media screen and (min-device-pixel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: url(../images/header/tablet/main@3x.jpg);
+    }
+    max-width: 768px;
+  }
+
+  @media screen and (min-width: 769px) {
+    background-image: url(../images/header/desktop/main@2x.jpg);
+    @media screen and (min-device-pixel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: url(../images/header/desktop/main@3x.jpg);
+    }
+    max-width: 1280px;
+  }
+}
+
+.header-library{
+    background-image: url(../images/header/mobile/library@2x.jpg);
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    background-image: url(../images/header/mobile/library@3x.jpg);
+  }
+  @media screen and (min-width: 481px) {
+    background-image: l url(../images/header/tablet/library@2x.jpg);
+    @media screen and (min-device-pixel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: url(../images/header/tablet/library@3x.jpg);
+    }
+    max-width: 768px;
+  }
+
+  @media screen and (min-width: 769px) {
+    background-image: url(../images/header/desktop/library@2x.jpg);
+    @media screen and (min-device-pixel-ratio: 2),
+      screen and (min-resolution: 192dpi),
+      screen and (min-resolution: 2dppx) {
+      background-image: url(../images/header/desktop/library@3x.jpg);
+    }
+    max-width: 1280px;
+  }
+}
+
+.nav {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  padding-top: 40px;
+  margin-bottom: 54px;
+  @media screen and (min-width: 482px) {
+    margin-bottom: 40px;
+    gap: 40px;
+  }
+}
+
+.logo-btn {
+  display: flex;
+  align-items: center;
+  background-color: inherit;
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+}
+.logo-svg {
+  @media screen and (min-width: 482px) {
+    margin-right: 10px;
+  }
+}
+
+.logo-text {
+  @media screen and (max-width: 481px) {
+    display: none;
+  }
+}
+
+.home-btn {
+  position: relative;
+  background-color: inherit;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+  margin-left: auto;
+}
+
+.library-btn {
+  background-color: inherit;
+  position: relative;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+}
+
+.login-btn {
+  position: relative;
+  background-color: inherit;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ffffff;
+}
+.search-form {
+  width: 280px;
+  border-bottom: 0.5px solid #ffffff;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 394px;
+  }
+}
+.input-search {
+  background-color: inherit;
+  border: 0;
+  width: 260px;
+
+  padding: 0;
+  margin: 0;
+
+  @media screen and (min-width: 768px) {
+    width: 316px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 374px;
+  }
+}
+
+.submit-btn {
+  background-color: inherit;
+  border: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+.container-inner {
+  // display: flex;
+}
+
+.search-error {
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #ff001b;
+  margin: 0 auto;
+  @media screen and (max-width: 481px) {
+    width: 280px;
+  }
+}
+
+.current-page::after {
+  background-color: #ff001b;
+
+  position: absolute;
+  left: 0;
+  bottom: -3;
+  content: '';
+  width: 100%;
+  height: 3px;
+}
