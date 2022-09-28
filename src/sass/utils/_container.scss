@@ -1,0 +1,13 @@
+.container {
+  // mobile
+  max-width: 100vw;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  @include tablet {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
