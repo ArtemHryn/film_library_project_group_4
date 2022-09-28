@@ -27,6 +27,7 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 32px;
     margin-top: 60px;
+    margin-bottom: 60px;
   }
 
   @media screen and (min-width: $min-desktop-size) {
@@ -45,6 +46,10 @@
 
     @media screen and (max-width: $max-tablet-size) {
       margin-top: 20px;
+    }
+
+    &:last-child {
+      margin-bottom: 40px;
     }
 
     &:hover {
@@ -75,8 +80,7 @@
     }
   }
 
-  &__genre {
-    position: relative;
+  &__text {
     font-family: 'Roboto';
     font-weight: 500;
     font-size: 12px;
@@ -86,34 +90,25 @@
     @media screen and (min-width: $min-desktop-size) {
       font-size: 20px;
       line-height: 1.2;
-    }
-
-    &::after {
-      margin-left: -31px;
-      content: '';
-      width: 1px;
-      border-top: 10px solid $film-genre;
-      display: inline-block;
-      margin-bottom: -1px;
-      @media screen and (min-width: $min-desktop-size) {
-        margin-left: -50px;
-        border-top: 15px solid $film-genre;
-      }
     }
   }
 
-  &__year {
-    font-family: 'Roboto';
+  &__vote {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 20px;
+    font-family: Roboto, sans-serif;
     font-weight: 500;
-    font-size: 12px;
-    line-height: 1.33;
-    color: $film-genre;
-    margin-left: 5px;
-
-    @media screen and (min-width: $min-desktop-size) {
-      font-size: 20px;
-      line-height: 1.2;
-    }
+    font-size: 15px;
+    line-height: 1.17;
+    color: #fff;
+    background-color: #ff6b08;
+    border-radius: 5px;
   }
 }
 
