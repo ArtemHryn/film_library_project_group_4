@@ -1,22 +1,35 @@
 .pagination-box {
+display: flex;
+align-items: center;
+justify-content: center;
 }
 
 .pagination-list {
-  list-style: none;
   display: flex;
 }
 
-.pagination-item {
+// .pagination-item {
 
-}
+// }
 
 .pagination-btn {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  align-items: center;
+
+  color: #000000;
+  background-color: transparent;
   width: 40px;
   height: 40px;
-  
+  border-radius: 5px;
+
+  &:hover,
+  &:focus,
   &:active {
     color: white;
-    background-color: #FF6B08;
-    border-radius: 5px;
+    background-color: #ff6b08;
   }
 }
