@@ -18,7 +18,7 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
- 
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,8 +35,8 @@
   }
 }
 
-.btn-prev-next {
-   width: 40px;
+.btn-arrow {
+  width: 40px;
   height: 40px;
   border-radius: 5px;
   &:hover,
@@ -45,4 +45,15 @@
     color: white;
     background-color: #ff6b08;
   }
+}
+
+.active {
+  color: white;
+  background-color: #ff6b08;
+  border-radius: 5px;
+}
+
+.icon-arrow {
+width: 16px;
+height: 16px;
 }
