@@ -8,3 +8,4 @@ import {
   deleteFilmFromLocaleStorage,
 } from './js/localstorage';
 
+import { lazyLoad } from './js/lazy-load';

@@ -116,3 +116,13 @@
     }
   }
 }
+
+.card-collection img {
+  transform: translateY(-25%);
+  opacity: 0;
+  transition: all 500ms linear 500ms;
+}
+.card-collection img.appear {
+  transform: translateY(0);
+  opacity: 1;
+}
