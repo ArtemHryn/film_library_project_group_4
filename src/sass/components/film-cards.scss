@@ -49,6 +49,8 @@
 
     &:hover {
       cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.25s linear;
     }
   }
 
@@ -113,4 +115,14 @@
       line-height: 1.2;
     }
   }
+}
+
+.card-collection img {
+  transform: translateY(-25%);
+  opacity: 0;
+  transition: all 500ms linear 500ms;
+}
+.card-collection img.appear {
+  transform: translateY(0);
+  opacity: 1;
 }

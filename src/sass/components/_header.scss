@@ -9,6 +9,7 @@
     height: 216px;
   }
 }
+
 .header-home {
   background-image: url(../images/header/mobile/main@2x.jpg);
   @media (min-device-pixel-ratio: 2),
@@ -138,6 +139,7 @@
   text-align: center;
   color: #ffffff;
 }
+
 .search-form {
   width: 280px;
   border-bottom: 0.5px solid #ffffff;
@@ -150,6 +152,7 @@
     width: 394px;
   }
 }
+
 .input-search {
   color: #ffffff;
   background-color: inherit;
@@ -234,4 +237,10 @@
   display: flex;
   gap: 32px;
   justify-content: center;
+}
+
+.user-img{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
