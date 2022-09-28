@@ -1,0 +1,22 @@
+.pagination-box {
+}
+
+.pagination-list {
+  list-style: none;
+  display: flex;
+}
+
+.pagination-item {
+
+}
+
+.pagination-btn {
+  width: 40px;
+  height: 40px;
+  
+  &:active {
+    color: white;
+    background-color: #FF6B08;
+    border-radius: 5px;
+  }
+}
