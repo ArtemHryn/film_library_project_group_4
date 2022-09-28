@@ -26,13 +26,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 32px;
-    max-width: calc(100vw - 80px);
     margin-top: 60px;
   }
 
   @media screen and (min-width: $min-desktop-size) {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    max-width: calc(100vw - 60px);
     grid-column-gap: 16px;
     grid-row-gap: 32px;
   }
