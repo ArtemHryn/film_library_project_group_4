@@ -1,0 +1,116 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  @media screen and (min-width: $min-mobile-size) {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: $min-mobile-size;
+  }
+
+  @media screen and (min-width: $min-tablet-size) {
+    padding-left: 32px;
+    padding-right: 32px;
+    width: $min-tablet-size;
+  }
+
+  @media screen and (min-width: $min-desktop-size) {
+    width: $min-desktop-size;
+  }
+}
+
+.card-collection {
+  @media screen and (min-width: $min-tablet-size) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 32px;
+    margin-top: 60px;
+  }
+
+  @media screen and (min-width: $min-desktop-size) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-column-gap: 16px;
+    grid-row-gap: 32px;
+  }
+
+  &__image {
+    border-radius: 5px;
+    width: -webkit-fill-available;
+  }
+
+  &__item {
+    padding: 0;
+
+    @media screen and (max-width: $max-tablet-size) {
+      margin-top: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__description {
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  &__name {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    color: $film-name;
+    @media screen and (min-width: $min-tablet-size) {
+      line-height: 1.33;
+    }
+    @media screen and (min-width: $min-desktop-size) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  &__genre {
+    position: relative;
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: $film-genre;
+
+    @media screen and (min-width: $min-desktop-size) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    &::after {
+      margin-left: -31px;
+      content: '';
+      width: 1px;
+      border-top: 10px solid $film-genre;
+      display: inline-block;
+      margin-bottom: -1px;
+      @media screen and (min-width: $min-desktop-size) {
+        margin-left: -50px;
+        border-top: 15px solid $film-genre;
+      }
+    }
+  }
+
+  &__year {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: $film-genre;
+    margin-left: 5px;
+
+    @media screen and (min-width: $min-desktop-size) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+}
