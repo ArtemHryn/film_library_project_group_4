@@ -2,7 +2,8 @@ import { MoviesSearchAPIService } from './api-search-movies';
 
 const moviesSearchAPIService = new MoviesSearchAPIService();
 
-const refs = {
+export const refs = {
+  header: document.querySelector('.header'),
   logo: document.querySelector('[data-value="logo"]'),
   home: document.querySelector('[data-value="home"]'),
   library: document.querySelector('[data-value="library"]'),
@@ -13,7 +14,7 @@ const refs = {
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
 refs.library.addEventListener('click', onLibraryClick);
-refs.login.addEventListener('click', onLoginClick);
+
 
 function addLibraryListener() {
   refs.wached = document.querySelector('[data-value="wached"]');
@@ -45,6 +46,8 @@ function onHomeClick(e) {
   markupSearchQuery();
   addCurrentPageClass(refs.home, 'current-page');
   removeCurrentPageClass(refs.library, 'current-page');
+    removeCurrentPageClass(refs.header, 'header-library');
+    addCurrentPageClass(refs.header, 'header-home');
   addFormListener();
 }
 
@@ -53,14 +56,13 @@ function onLibraryClick(e) {
   markupLibraryBtn();
   addCurrentPageClass(refs.library, 'current-page');
   removeCurrentPageClass(refs.home, 'current-page');
+  removeCurrentPageClass(refs.header, 'header-home');
+  addCurrentPageClass(refs.header, 'header-library');
   addLibraryListener();
   onQueueClick();
   removeFormListener();
 }
 
-function onLoginClick(e) {
-    
-}
 
 function onQueueClick(e) {
   addCurrentPageClass(refs.queue, 'lib-btn-current');
