@@ -1,0 +1,162 @@
+.backdrop-team {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+
+    z-index: 998;
+
+    padding: 15px;
+
+}
+
+.backdrop-team--is-hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
+
+    & .modal-team {
+        visibility: hidden;
+        pointer-events: none;
+        opacity: 0.3;
+        transform: translate(-75%, -90%) scale(3);
+    }
+}
+
+.modal-team {
+    position: relative;
+
+    z-index: 999;
+
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px 15px 20px;
+
+    @media screen and (min-width: 768px) {
+        width: 580px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+
+        width: 900px;
+        padding: 20px 15px 35px;
+    }
+
+    visibility: visible;
+    opacity: 1;
+
+    background-color: FFFFFF;
+
+    border-radius: 15px;
+
+    box-shadow: 0 28px 42px rgba(0, 0, 0, 0.38),
+    0 20px 20px rgba(0, 0, 0, 0.33);
+
+}
+
+
+.team-title-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+
+    @media screen and (min-width: 768px) {
+        padding-left: 50px;
+    }
+
+    @media screen and (min-width: 1280px) {
+        justify-content: center;
+        padding-left: 0;
+    }
+}
+
+
+.team__name {
+    text-align: center;
+    text-transform: uppercase;
+    color: #000000;
+    font-size: 20px;
+
+    @media screen and (min-width: 768px) {
+        font-size: 30px;
+    }
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.team__item {
+    position: relative;
+    border-radius: 50px;
+    padding-bottom: 5px;
+    overflow: hidden;
+
+    transition: box-shadow 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover,
+    &:focus {
+        box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    }
+}
+
+.img-wrapper {
+    overflow: hidden;
+    }
+
+
+.team__text-content {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+
+    @media screen and (min-width: 768px) {
+        font-size: 13px;
+    }
+}
+
+.team__member {
+    margin-bottom: 3px;
+    font-size: 13px;
+color: #8C8C8C;
+    @media screen and (min-width: 768px) {
+        margin-bottom: 5px;
+        font-size: 16px;
+    }
+}
+
+.team__role {
+    color: #ff6b08;
+}
+.team__img {
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 50%;
+
+    margin-bottom: 5px;
+
+    width: 120px;
+    height: 120px;
+
+    @media screen and (min-width: 768px) {
+        width: 150px;
+        height: 150px;
+    }
+
+    transition: transform 800ms cubic-bezier(0.4, 0, 0.2, 1);
+
+    .team__item:hover &,
+    .team__item:focus & {
+        transform: scale(1.2);
+    }
+}
