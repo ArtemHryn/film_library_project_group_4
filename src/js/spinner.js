@@ -3,7 +3,7 @@ const spinner = document.querySelector('.loader');
 
 showSpinner()
 
-function showSpinner() {
+export function showSpinner() {
     if (spinner.classList.contains('loader')) {
       return;
     }
