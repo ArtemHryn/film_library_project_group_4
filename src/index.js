@@ -8,3 +8,4 @@ import {
   deleteFilmFromLocaleStorage,
 } from './js/localstorage';
 
+import './js/pagination'
