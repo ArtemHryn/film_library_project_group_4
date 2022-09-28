@@ -144,6 +144,12 @@
   border: 1px solid #000;
   border-radius: 5px;
   background-color: #ffffff;
+  &:hover,
+  &:focus {
+    background-color: #ff6b01;
+    color: #fff;
+    border: none;
+  }
   @media screen and (min-width: 768px) {
     width: 125px;
   }
