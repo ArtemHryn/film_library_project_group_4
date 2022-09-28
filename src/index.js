@@ -7,3 +7,4 @@ import './js/change-page';
 import "./js/user/login";
 import './js/pagination'
 
+import { lazyLoad } from './js/lazy-load';
