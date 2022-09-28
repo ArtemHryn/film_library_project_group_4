@@ -42,8 +42,8 @@ export class Pagination {
       const pageNumber = li.dataset.page;
       const activeLi = this.container.querySelector('.active');
       activeLi.classList.remove('active');
-      this.currentPage = Number(pageNumber);
-      li.classList.add('active');
+        this.currentPage = Number(pageNumber);
+        li.classList.add('active');
 
       if (typeof this.onPageChange === 'function') {
         this.onPageChange(this.currentPage);
