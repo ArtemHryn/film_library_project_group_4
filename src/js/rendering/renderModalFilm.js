@@ -13,9 +13,7 @@ export function renderFilmModal(
   },
   genresList
 ) {
-  const listOfGenres = genresList.filter(genreID =>
-    genres.includes(genreID.id)
-  );
+  const genresListEl = genres.map(genre => genre.name)
   return ` <div class="film-modal js-film-modal" data-id='${id}'>
     <div class="poster-container">
       <img
@@ -47,7 +45,7 @@ export function renderFilmModal(
           </tr>
           <tr>
             <td class="info-table__head">Genre</td>
-            <td class="info-table__value">${listOfGenres.join(', ')}</td>
+            <td class="info-table__value">${genresListEl.join(', ')}</td>
           </tr>
         </tbody>
       </table>
@@ -59,9 +57,11 @@ export function renderFilmModal(
       </div>
       <div class="btn-wraper">
         <button type="button" class="film-modal__btn js-add-to-watched">${
-          isWatched ? 'Added to wathced' : 'add to Watched'
+          isWatched ? 'Added to wathced' : 'Add to Watched'
         }</button>
-        <button type="button" class="film-modal__btn js-add-to-queue">add to queue</button>
+        <button type="button" class="film-modal__btn js-add-to-queue">${
+          isQueue ? 'Added to queue' : 'Add to queue'
+        }</button>
       </div>
     </div>
     <button class="close-btn " data-modal-close>
