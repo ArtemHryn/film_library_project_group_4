@@ -1,5 +1,6 @@
 import { MoviesTrendAPIService } from './api-trending';
 import { MoviesFullInfoAPIService } from './api-full-info-movie';
+import { MoviesSearchAPIService } from './api-search-movies';
 import { renderFilms } from './rendering/renderFilms';
 import { lazyLoad } from './lazy-load';
 import { renderFilmModal } from './rendering/renderModalFilm';
@@ -10,6 +11,7 @@ import { showSpinner, hideSpinner } from './spinner';
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
+const searchFilm = new MoviesSearchAPIService();
 
 const filmContainer = document.querySelector('.js-card-collection');
 const backdrop = document.querySelector('.js-backdrop');
@@ -19,6 +21,7 @@ const homeBtn = document.querySelector('.js-home-btn');
 filmContainer.addEventListener('click', film);
 myLibrary.addEventListener('click', onShowLibrary);
 homeBtn.addEventListener('click', filmer);
+// searchEl.addEventListener('submit', onSearchFilm);
 
 filmer();
 
@@ -55,7 +58,7 @@ async function film(e) {
     .addEventListener('click', onCloseModal);
 
   //добавив
-  document.addEventListener('keydown', onEscBtnPress);
+  window.addEventListener('keydown', onEscBtnPress);
   document.addEventListener('click', onBackdropClick);
   document.body.style.overflow = 'hidden';
 }
@@ -68,6 +71,8 @@ async function filmer() {
   filmContainer.innerHTML = renderFilms(films.results, genres);
   lazyLoad();
   hideSpinner();
+  const searchEl = document.querySelector('#search-form');
+  searchEl.addEventListener('submit', onSearchFilm);
 }
 
 async function onAddToWatched(e) {
@@ -82,7 +87,7 @@ function onCloseModal() {
   backdrop.classList.add('is-hidden');
 
   // добавив
-  document.removeEventListener('keydown', onEscBtnPress);
+  window.removeEventListener('keydown', onEscBtnPress);
   document.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
 }
@@ -109,6 +114,21 @@ function onAddToQueue(e) {
   onCloseModal();
 }
 
+async function onSearchFilm(e) {
+  try {
+    e.preventDefault();
+    searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+    const searchResult = await searchFilm.fetchMovies();
+    console.log(searchResult);
+    console.log(await trending.genres);
+    const genres = await trending.genres;
+    filmContainer.innerHTML = renderFilms(searchResult, genres);
+    lazyLoad();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 function prepareForDBInfo(el, isWatched, isQueue) {
   const element = el.target.closest('[data-id]');
   const id = +element.dataset.id;
@@ -131,8 +151,8 @@ async function findFilmsInDB(searchBy) {
 function onEscBtnPress(e) {
   if (e.code === 'Escape') {
     onCloseModal();
+    window.removeEventListener('keydown', onEscBtnPress);
   }
-  document.removeEventListener('keydown', onEscBtnPress);
 }
 
 function onBackdropClick(e) {
