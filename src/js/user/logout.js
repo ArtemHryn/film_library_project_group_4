@@ -1,4 +1,5 @@
 import { refs } from '../refs/index';
+import {signOutUser} from '../firebase/auth'
 
 export function addLogoutListener() {
   refs.logout = document.querySelector('[data-value="logout"]');

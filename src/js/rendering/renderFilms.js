@@ -9,7 +9,6 @@ export function renderFilms(films, genres) {
         const listOfGenres = genres.filter(genreID =>
           genre_ids.includes(genreID.id)
         );
-        console.log(genre_ids);
         if (poster_path) {
           poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
         } else {
