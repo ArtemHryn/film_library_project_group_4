@@ -32,7 +32,7 @@ async function film(e) {
   const id = film.dataset.id;
   MovieInfo.movieId = +film.dataset.id;
   const filmData = await MovieInfo.fetchMovies();
-  genres = await trending.fetchGenres();
+  const genres = await trending.fetchGenres();
   backdrop.classList.remove('is-hidden');
   const getFilm = await getTaskFromFirebaseStorage(id);
 
