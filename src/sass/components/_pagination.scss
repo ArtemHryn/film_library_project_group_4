@@ -16,7 +16,7 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 16px;
 
   display: flex;
@@ -30,8 +30,8 @@
   &:hover,
   &:focus,
   &:active {
-    color: white;
-    background-color: #ff6b08;
+    color: $accent-color;
+    background-color: $film-genre;
   }
 }
 
@@ -42,18 +42,22 @@
   &:hover,
   &:focus,
   &:active {
-    color: white;
-    background-color: #ff6b08;
+    color: $accent-color;
+    background-color: $film-genre;
   }
 }
 
 .active {
-  color: white;
-  background-color: #ff6b08;
+  color: $accent-color;
+  background-color: $film-genre;
   border-radius: 5px;
 }
 
 .icon-arrow {
 width: 16px;
 height: 16px;
+}
+
+.display-none {
+display: none;
 }
