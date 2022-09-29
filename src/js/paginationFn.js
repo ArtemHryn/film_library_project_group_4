@@ -59,12 +59,22 @@ function onPrevPage() {
   if (+currentPage < 2) {
     return;
   }
+
   currentPage -= 1;
 
+  // moviesTrendAPIService.decrementPage();
+  // moviesTrendAPIService.fetchMovies();
   renderPages();
+
+  if (currentPage <= 3) {
+    hideBtn();
+  }
 }
 
 function onNextPage() {
+  if (currentPage) {
+  }
+
   currentPage += 1;
 
   moviesTrendAPIService.incrementPage();
@@ -77,11 +87,16 @@ function onNextPage() {
 }
 
 function onInfinitLeft() {
-  
+  paginationContainerRef.innerHTML = '';
+  currentPage -= 5;
+  renderPages();
 }
 
 function onInfinitRight() {
- 
+  paginationContainerRef.innerHTML = '';
+  currentPage += 5;
+  console.log(lastPageBtnRef.textContent);
+  renderPages();
 }
 
 function renderPages() {
@@ -109,6 +124,7 @@ function renderPages() {
 async function lastPageValue() {
   const movies = await moviesTrendAPIService.fetchMovies();
   lastPageBtnRef.textContent = movies.total_pages;
+  // lastPageBtnRef.textContent = 10;
 }
 
 function hideBtn() {
