@@ -17,12 +17,11 @@ const filmContainer = document.querySelector('.js-card-collection');
 const backdrop = document.querySelector('.js-backdrop');
 const myLibrary = document.querySelector('.js-library-btn');
 const homeBtn = document.querySelector('.js-home-btn');
-const searchEl = document.querySelector('#search-form');
 
 filmContainer.addEventListener('click', film);
 myLibrary.addEventListener('click', onShowLibrary);
 homeBtn.addEventListener('click', filmer);
-searchEl.addEventListener('submit', onSearchFilm);
+// searchEl.addEventListener('submit', onSearchFilm);
 
 filmer();
 
@@ -72,6 +71,8 @@ async function filmer() {
   filmContainer.innerHTML = renderFilms(films.results, genres);
   lazyLoad();
   hideSpinner();
+  const searchEl = document.querySelector('#search-form');
+  searchEl.addEventListener('submit', onSearchFilm);
 }
 
 async function onAddToWatched(e) {
@@ -117,12 +118,12 @@ async function onSearchFilm(e) {
   try {
     e.preventDefault();
     searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
-    const searchResult = await searchFilm.fetchMovies()
+    const searchResult = await searchFilm.fetchMovies();
     console.log(searchResult);
     console.log(await trending.genres);
     const genres = await trending.genres;
     filmContainer.innerHTML = renderFilms(searchResult, genres);
-      lazyLoad();
+    lazyLoad();
   } catch (error) {
     console.log(error);
   }
@@ -150,8 +151,7 @@ async function findFilmsInDB(searchBy) {
 function onEscBtnPress(e) {
   if (e.code === 'Escape') {
     onCloseModal();
-      window.removeEventListener('keydown', onEscBtnPress);
-
+    window.removeEventListener('keydown', onEscBtnPress);
   }
 }
 
