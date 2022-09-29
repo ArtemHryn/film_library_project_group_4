@@ -25,7 +25,10 @@ export class MoviesSearchAPIService {
 
   incrementPage() {
     this.page += 1;
-    }
+  }
+  decrement() {
+    this.page -= 1;
+  }
     
      get query() {
     return this.searchQuery;
