@@ -27,7 +27,7 @@ async function film(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-  
+
   const film = e.target.closest('[data-id]');
   const id = film.dataset.id;
   MovieInfo.movieId = +film.dataset.id;
@@ -53,7 +53,11 @@ async function film(e) {
   document
     .querySelector('[data-modal-close]')
     .addEventListener('click', onCloseModal);
- 
+
+  //добавив
+  document.addEventListener('keydown', onEscBtnPress);
+  document.addEventListener('click', onBackdropClick);
+  document.body.style.overflow = 'hidden';
 }
 
 async function filmer() {
@@ -63,7 +67,7 @@ async function filmer() {
   const genres = await trending.fetchGenres();
   filmContainer.innerHTML = renderFilms(films.results, genres);
   lazyLoad();
-   hideSpinner();
+  hideSpinner();
 }
 
 async function onAddToWatched(e) {
@@ -76,6 +80,11 @@ function onCloseModal() {
   const modal = document.querySelector('.js-film-modal');
   modal.remove();
   backdrop.classList.add('is-hidden');
+
+  // добавив
+  document.removeEventListener('keydown', onEscBtnPress);
+  document.removeEventListener('click', onBackdropClick);
+  document.body.style.overflow = 'auto';
 }
 
 async function onShowQueue() {
@@ -115,4 +124,19 @@ async function findFilmsInDB(searchBy) {
     await trending.fetchGenres()
   );
   lazyLoad();
+}
+
+//додав закриття на ESC і бекдроп
+
+function onEscBtnPress(e) {
+  if (e.code === 'Escape') {
+    onCloseModal();
+  }
+  document.removeEventListener('keydown', onEscBtnPress);
+}
+
+function onBackdropClick(e) {
+  if (e.target === backdrop) {
+    onCloseModal();
+  }
 }
