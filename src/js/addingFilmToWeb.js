@@ -60,7 +60,7 @@ async function filmer() {
   showSpinner();
   const films = await trending.fetchMovies();
   trending.film = films;
-  genres = await trending.fetchGenres();
+  const genres = await trending.fetchGenres();
   filmContainer.innerHTML = renderFilms(films.results, genres);
   lazyLoad();
    hideSpinner();
