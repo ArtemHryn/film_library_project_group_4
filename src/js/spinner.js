@@ -1,13 +1,14 @@
 
 const spinner = document.querySelector('.loader');
 
-showSpinner()
+
 
 export function showSpinner() {
     if (spinner.classList.contains('loader')) {
       return;
     }
-   spinner.classList.add('loader') 
+  spinner.classList.add('loader') 
+  spinner.classList.remove('visually-hidden');
 }
 
 export function hideSpinner() {
@@ -15,4 +16,5 @@ export function hideSpinner() {
       return;
     }
   spinner.classList.add('loader');
+  spinner.classList.add('visually-hidden');
 }

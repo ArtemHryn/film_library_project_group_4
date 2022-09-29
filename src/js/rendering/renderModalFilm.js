@@ -8,6 +8,8 @@ export function renderFilmModal(
     popularity,
     genres,
     overview,
+    isWatched = false,
+    isQueue = false,
   },
   genresList
 ) {
@@ -56,8 +58,10 @@ export function renderFilmModal(
         </p>
       </div>
       <div class="btn-wraper">
-        <button type="button" class="film-modal__btn js-add-to-watched">add to Watched</button>
-        <button type="button" class="film-modal__btn">add to queue</button>
+        <button type="button" class="film-modal__btn js-add-to-watched">${
+          isWatched ? 'Added to wathced' : 'add to Watched'
+        }</button>
+        <button type="button" class="film-modal__btn js-add-to-queue">add to queue</button>
       </div>
     </div>
     <button class="close-btn " data-modal-close>
