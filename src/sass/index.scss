@@ -4,6 +4,7 @@
 @import './utils/mixins';
 @import './utils/container';
 // @import './example';
+@import './components/main-page-pre-load';
 @import './components/header';
 @import './components/film-cards';
 @import './components/pagination';
@@ -12,3 +13,4 @@
 @import './base/global-reset';
 @import './components/film-modal';
 @import './components/spinner';
+@import './components/main-page-pre-load';
