@@ -5,6 +5,7 @@
 }
 
 .backdrop {
+  z-index: 11;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,9 +17,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
+  height: 100vh;
+  overflow: auto;
   transform: translate(-50%, -50%) scale(1);
   padding: 48px 20px 40px;
-  outline: auto;
   background-color: #fff;
   @media screen and (max-width: 767px) {
     max-width: 480px;
@@ -32,6 +34,7 @@
     padding: 40px 36px;
     margin-left: auto;
     margin-right: auto;
+    height: unset;
   }
   @media screen and (min-width: 1024px) {
     gap: 16px;
