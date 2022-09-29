@@ -75,7 +75,9 @@ function onPrevPage() {
   }
 }
 
+
 async function onNextPage() {
+
   currentPage += 1;
   // const movies = await moviesTrendAPIService.fetchMovies();
 
@@ -136,6 +138,7 @@ function renderPages() {
 async function lastPageValue() {
   const movies = await moviesTrendAPIService.fetchMovies();
   lastPageBtnRef.textContent = movies.total_pages;
+  // lastPageBtnRef.textContent = 10;
 }
 
 function hideBtn() {
