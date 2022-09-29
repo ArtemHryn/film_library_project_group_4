@@ -9,3 +9,4 @@ import {
 } from './js/localstorage';
 
 import './js/pagination'
+import './js/back-to-top'
