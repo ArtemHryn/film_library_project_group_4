@@ -6,7 +6,14 @@ import {
   signOut,
 } from 'firebase/auth';
 import { UserInfo } from '../firebase/user';
-import { refs } from '../change-page';
+import { refs } from '../refs/index';
+import {
+  addLogoutListener,
+  changeBtnLabel,
+  removeLogoutListener,
+} from '../user/logout';
+import { insertPhotoUrl } from '../user/login';
+import { toggleClass } from '../changeclass';
 
 export const userInfo = new UserInfo();
 
@@ -42,9 +49,9 @@ export function signOutUser() {
       userInfo.USER_ID = 0;
       userInfo.userName = '';
       userInfo.IsLogIn = false;
-      changeBtnLabel('LOG IN'); 
+      changeBtnLabel('LOG IN');
       toggleClass(refs.login, 'login-text');
-      
+      removeLogoutListener();
     })
     .catch(error => {
       console.log('somesing wrong');
@@ -53,13 +60,11 @@ export function signOutUser() {
 
 onAuthStateChanged(auth, user => {
   if (user) {
-    
-    // console.log('~ user', user);
     userInfo.USER_ID = user.uid;
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
     userInfo.userImg = user.photoURL;
-    // changeBtnLabel(userInfo.userName);
+
     insertPhotoUrl(userInfo.userImg, userInfo.userName);
     addLogoutListener();
     toggleClass(refs.login, 'login-text');
@@ -67,61 +72,3 @@ onAuthStateChanged(auth, user => {
     console.log(user);
   }
 });
-
-
-function changeBtnLabel(e) {
-  refs.login.textContent = e;
-}
-
-
-//  function insertPhotoUrl(e,t) {
-//    const markup = `<img
-//         class="user-img"
-//         src='${e}'
-//         alt="photo"
-//       /><span class='user-name'>${t}</span>`;
-//   //  refs.login.insertAdjacentHTML('afterbegin',markup);
-//    refs.login.innerHTML = markup;
-// }
-
-
- function insertPhotoUrl(e, t) {
-   const markup = `<img
-        class="user-img"
-        src='${e}'
-        alt="photo"
-      /><ul class='popup'>
-      <li class='popup-item'><span class='user-name'>${t}</span></li>
-      <li class='popup-item'><button type='button' class='logout-btn' data-value='logout'>Log Out</button></li>
-      </ul>`;
-   //  refs.login.insertAdjacentHTML('afterbegin',markup);
-   refs.login.innerHTML = markup;
-}
- 
-function addLogoutListener() {
-  refs.logout = document.querySelector('[data-value="logout"]');
-  refs.logout.addEventListener('click', onLogoutClick);
-}
-
-function onLogoutClick(e) {
-signOutUser();
-}
-
-function addClass(elem, cls) {
-  if (elem.classList.contains(cls)) {
-    return;
-  }
-  elem.classList.add(cls);
-}
-
-function removeClass(elem, cls) {
-  if (!elem.classList.contains(cls)) {
-    return;
-  }
-  elem.classList.remove(cls);
-}
-
-
-function toggleClass(elem,cls) {
-  elem.classList.toggle(cls);
-}
