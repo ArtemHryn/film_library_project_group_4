@@ -29,7 +29,11 @@ export class MoviesSearchAPIService {
     this.page += 1;
   }
 
-  get query() {
+  decrement() {
+    this.page -= 1;
+  }
+    
+     get query() {
     return this.searchQuery;
   }
   set query(newQuery) {
