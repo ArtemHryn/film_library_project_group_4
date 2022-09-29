@@ -51,8 +51,12 @@ function onFirstPage() {
 }
 
 async function onLastPage() {
-  moviesTrendAPIService.page = +lastPageBtnRef.textContent;
-  const movies = await moviesTrendAPIService.fetchMovies();
+  //   moviesTrendAPIService.page = +lastPageBtnRef.textContent;
+  //   const movies = await moviesTrendAPIService.fetchMovies();
+
+  paginationContainerRef.innerHTML = '';
+  currentPage = +lastPageBtnRef.textContent - 3;
+  renderPages();
 }
 
 function onPrevPage() {
@@ -71,11 +75,11 @@ function onPrevPage() {
   }
 }
 
-function onNextPage() {
-  if (currentPage) {
-  }
+
+async function onNextPage() {
 
   currentPage += 1;
+  // const movies = await moviesTrendAPIService.fetchMovies();
 
   moviesTrendAPIService.incrementPage();
   moviesTrendAPIService.fetchMovies();
@@ -83,7 +87,12 @@ function onNextPage() {
   if (currentPage > 3) {
     hideBtn();
   }
-  renderPages();
+
+  // if (currentPage > movies.total_pages) {
+  //  return
+  // }
+    
+    renderPages();
 }
 
 function onInfinitLeft() {
@@ -92,10 +101,15 @@ function onInfinitLeft() {
   renderPages();
 }
 
-function onInfinitRight() {
+async function onInfinitRight() {
+  // const movies = await moviesTrendAPIService.fetchMovies();
   paginationContainerRef.innerHTML = '';
   currentPage += 5;
-  console.log(lastPageBtnRef.textContent);
+
+  // if (currentPage > movies.total_pages) {
+  //  return
+  // }
+
   renderPages();
 }
 
