@@ -1,0 +1,225 @@
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.film-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  padding: 48px 20px 40px;
+  outline: auto;
+  background-color: #fff;
+  @media screen and (max-width: 767px) {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    gap: 68px;
+    width: 704px;
+    padding: 40px 36px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media screen and (min-width: 1024px) {
+    gap: 16px;
+    width: 806px;
+    padding: 40px 12px;
+  }
+
+  // max-width: 450px;
+  // width: 100%;
+  // min-height: 609px;
+
+  // padding: 40px;
+
+  // @media screen and (min-width: $min-desktop-size) {
+  //   max-width: 528px;
+  //   min-height: 581px;
+  // }
+}
+
+.poster-container {
+  display: inline-block;
+  height: min-content;
+  background: #000;
+  border-radius: 5px;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 264px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 375px;
+  }
+}
+
+.poster-image {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  border-radius: 5px;
+  @media screen and (min-width: 768px) {
+    width: inherit;
+    margin: 0;
+  }
+}
+
+.info-container {
+  width: 100%;
+  display: inline-block;
+  width: 100%;
+  height: max-content;
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    width: 264px;
+    height: max-content;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 391px;
+  }
+}
+.film-title {
+  font-size: 20px;
+  line-height: 23px;
+  color: #000000;
+  margin-bottom: 20px;
+  @media screen and (min-width: 1024px) {
+    font-size: 30px;
+    line-height: 35px;
+  }
+}
+.info-table {
+  border: none;
+  text-align: left;
+  border-collapse: initial;
+  margin-bottom: 20px;
+}
+
+.info-table__head {
+  font-size: 12px;
+  line-height: 1.33;
+  color: #8c8c8c;
+  padding-right: 40px;
+  &:not(:last-child) {
+    padding-bottom: 8px;
+  }
+}
+
+.info-table__value {
+  font-size: 12px;
+  line-height: 1.33;
+  color: #000000;
+}
+
+.about {
+  margin-bottom: 20px;
+  text-align: left;
+  &__title {
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    text-transform: uppercase;
+    color: #000000;
+  }
+  &__text {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.67;
+    color: #000000;
+  }
+}
+
+.btn-wraper {
+  display: flex;
+  gap: 20px;
+  @media screen and (min-width: 768px) {
+    gap: 15px;
+  }
+}
+
+.film-modal__btn {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  width: 110px;
+  height: 44px;
+  padding: 6px;
+  border: 1px solid #000;
+  border-radius: 5px;
+  background-color: #ffffff;
+  &:hover,
+  &:focus {
+    background-color: #ff6b01;
+    color: #fff;
+    border: none;
+  }
+  @media screen and (min-width: 768px) {
+    width: 125px;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 136px;
+  }
+}
+
+.rating-text {
+  font-size: 12px;
+  line-height: 1.17;
+  padding: 1px 9px;
+  background-color: #ff6b01;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.rating-votes {
+  font-size: 12px;
+  line-height: 1.17;
+  padding: 1px 4px;
+  background-color: #f7f7f7;
+  color: #000000;
+  border-radius: 5px;
+}
+
+.close-btn {
+  //   display: flex;
+  //   justify-content: center;
+  //   position: absolute;
+  //   right: 8px;
+  //   top: 8px;
+  //   border: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  &__icon {
+    width: 30px;
+    height: 30px;
+    fill: #000;
+  }
+}

@@ -1,0 +1,123 @@
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 0;
+  padding-bottom: 0;
+
+  @media screen and (min-width: $min-mobile-size) {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: $min-mobile-size;
+  }
+
+  @media screen and (min-width: $min-tablet-size) {
+    padding-left: 32px;
+    padding-right: 32px;
+    width: $min-tablet-size;
+  }
+
+  @media screen and (min-width: $min-desktop-size) {
+    width: $min-desktop-size;
+  }
+}
+
+.card-collection {
+  @media screen and (min-width: $min-tablet-size) {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 32px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  @media screen and (min-width: $min-desktop-size) {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-column-gap: 16px;
+    grid-row-gap: 32px;
+  }
+
+  &__image {
+    border-radius: 5px;
+    width: -webkit-fill-available;
+  }
+
+  &__item {
+    padding: 0;
+
+    @media screen and (max-width: $max-tablet-size) {
+      margin-top: 20px;
+    }
+
+    &:last-child {
+      margin-bottom: 40px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.03);
+      transition: transform 0.25s linear;
+    }
+  }
+
+  &__description {
+    margin-top: 10px;
+    padding: 0;
+  }
+
+  &__name {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.17;
+    text-transform: uppercase;
+    color: $film-name;
+    @media screen and (min-width: $min-tablet-size) {
+      line-height: 1.33;
+    }
+    @media screen and (min-width: $min-desktop-size) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  &__text {
+    font-family: 'Roboto';
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: $film-genre;
+
+    @media screen and (min-width: $min-desktop-size) {
+      font-size: 20px;
+      line-height: 1.2;
+    }
+  }
+
+  &__vote {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 20px;
+    font-family: Roboto, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.17;
+    color: #fff;
+    background-color: #ff6b08;
+    border-radius: 5px;
+  }
+}
+
+.card-collection img {
+  transform: translateY(-25%);
+  opacity: 0;
+  transition: all 500ms linear 500ms;
+}
+.card-collection img.appear {
+  transform: translateY(0);
+  opacity: 1;
+}
