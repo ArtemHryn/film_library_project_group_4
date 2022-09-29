@@ -1,19 +1,13 @@
+import { refs } from './refs/index';
 import { MoviesSearchAPIService } from './api-search-movies';
+import { addClass, removeClass } from './changeclass';
+import { onYouTubeIframeAPIReady } from './YTplayer';
 
 const moviesSearchAPIService = new MoviesSearchAPIService();
-
-const refs = {
-  logo: document.querySelector('[data-value="logo"]'),
-  home: document.querySelector('[data-value="home"]'),
-  library: document.querySelector('[data-value="library"]'),
-  login: document.querySelector('[data-value="login"]'),
-  container: document.querySelector('#container-js'),
-};
 
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
 refs.library.addEventListener('click', onLibraryClick);
-refs.login.addEventListener('click', onLoginClick);
 
 function addLibraryListener() {
   refs.wached = document.querySelector('[data-value="wached"]');
@@ -43,43 +37,44 @@ function onHomeClick(e) {
   removeLibraryListener();
   clearContainer();
   markupSearchQuery();
-  addCurrentPageClass(refs.home, 'current-page');
-  removeCurrentPageClass(refs.library, 'current-page');
+  addClass(refs.home, 'current-page');
+  removeClass(refs.library, 'current-page');
+  removeClass(refs.header, 'header-library');
+  addClass(refs.header, 'header-home');
   addFormListener();
+  // onYouTubeIframeAPIReady('R4bkJYAy4Ws');
 }
 
 function onLibraryClick(e) {
   clearContainer();
   markupLibraryBtn();
-  addCurrentPageClass(refs.library, 'current-page');
-  removeCurrentPageClass(refs.home, 'current-page');
+  addClass(refs.library, 'current-page');
+  removeClass(refs.home, 'current-page');
+  removeClass(refs.header, 'header-home');
+  addClass(refs.header, 'header-library');
   addLibraryListener();
   onQueueClick();
   removeFormListener();
 }
 
-function onLoginClick(e) {
-    
-}
-
 function onQueueClick(e) {
-  addCurrentPageClass(refs.queue, 'lib-btn-current');
-  removeCurrentPageClass(refs.wached, 'lib-btn-current');
+  addClass(refs.queue, 'lib-btn-current');
+  removeClass(refs.wached, 'lib-btn-current');
 }
 
 function onWachedClick() {
-  addCurrentPageClass(refs.wached, 'lib-btn-current');
-  removeCurrentPageClass(refs.queue, 'lib-btn-current');
+  addClass(refs.wached, 'lib-btn-current');
+  removeClass(refs.queue, 'lib-btn-current');
 }
 
 function onFormSubmit(e) {
   e.preventDefault();
   let onSearchText = e.currentTarget.elements.searchQuery.value.trim();
   if (!onSearchText) {
-    removeCurrentPageClass(refs.erorr, 'visually-hidden');
+    removeClass(refs.erorr, 'visually-hidden');
     return;
   }
-  addCurrentPageClass(refs.erorr, 'visually-hidden');
+  addClass(refs.erorr, 'visually-hidden');
   moviesSearchAPIService.query = onSearchText;
 }
 
@@ -112,18 +107,4 @@ function markupSearchQuery() {
     <p class="search-error visually-hidden">
       Search result not successful. Enter the correct movie name and
     </p>`;
-}
-
-function addCurrentPageClass(elem, cls) {
-  if (elem.classList.contains(cls)) {
-    return;
-  }
-  elem.classList.add(cls);
-}
-
-function removeCurrentPageClass(elem, cls) {
-  if (!elem.classList.contains(cls)) {
-    return;
-  }
-  elem.classList.remove(cls);
 }
