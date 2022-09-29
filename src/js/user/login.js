@@ -6,7 +6,7 @@ refs.login.addEventListener('click', onLoginClick);
 
 function onLoginClick(e) {
   if (userInfo.IsLogIn) {
-    signOutUser();
+    // signOutUser();
     return;
   }
   singIn();

@@ -43,6 +43,7 @@ export function signOutUser() {
       userInfo.userName = '';
       userInfo.IsLogIn = false;
       changeBtnLabel('LOG IN'); 
+      toggleClass(refs.login, 'login-text');
       
     })
     .catch(error => {
@@ -53,14 +54,15 @@ export function signOutUser() {
 onAuthStateChanged(auth, user => {
   if (user) {
     
-    console.log('~ user', user);
+    // console.log('~ user', user);
     userInfo.USER_ID = user.uid;
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
     userInfo.userImg = user.photoURL;
-    console.log(userInfo.userImg);
-    insertPhotoUrl(userInfo.userImg);
-    changeBtnLabel(userInfo.userName);
+    // changeBtnLabel(userInfo.userName);
+    insertPhotoUrl(userInfo.userImg, userInfo.userName);
+    addLogoutListener();
+    toggleClass(refs.login, 'login-text');
   } else {
     console.log(user);
   }
@@ -72,11 +74,54 @@ function changeBtnLabel(e) {
 }
 
 
-function insertPhotoUrl(e) {
-  const markup = `<img
+//  function insertPhotoUrl(e,t) {
+//    const markup = `<img
+//         class="user-img"
+//         src='${e}'
+//         alt="photo"
+//       /><span class='user-name'>${t}</span>`;
+//   //  refs.login.insertAdjacentHTML('afterbegin',markup);
+//    refs.login.innerHTML = markup;
+// }
+
+
+ function insertPhotoUrl(e, t) {
+   const markup = `<img
         class="user-img"
         src='${e}'
         alt="photo"
-      />`;
-  refs.login.insertAdjacentHTML('beforebegin', markup);
+      /><ul class='popup'>
+      <li class='popup-item'><span class='user-name'>${t}</span></li>
+      <li class='popup-item'><button type='button' class='logout-btn' data-value='logout'>Log Out</button></li>
+      </ul>`;
+   //  refs.login.insertAdjacentHTML('afterbegin',markup);
+   refs.login.innerHTML = markup;
+}
+ 
+function addLogoutListener() {
+  refs.logout = document.querySelector('[data-value="logout"]');
+  refs.logout.addEventListener('click', onLogoutClick);
+}
+
+function onLogoutClick(e) {
+signOutUser();
+}
+
+function addClass(elem, cls) {
+  if (elem.classList.contains(cls)) {
+    return;
+  }
+  elem.classList.add(cls);
+}
+
+function removeClass(elem, cls) {
+  if (!elem.classList.contains(cls)) {
+    return;
+  }
+  elem.classList.remove(cls);
+}
+
+
+function toggleClass(elem,cls) {
+  elem.classList.toggle(cls);
 }
