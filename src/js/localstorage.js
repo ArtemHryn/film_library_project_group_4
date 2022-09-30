@@ -65,8 +65,13 @@ export function addToLocalStorage(films) {
   localStorage.setItem(FILMS, JSON.stringify(films));
 }
 
-export function filterTasks(films, id) {
-  return films.filter(film => film.id !== id);
+export function filterTasks(id) {
+  const filmsFromLocalStorage = JSON.parse(getFilmFromLocalStorage());
+  if (!filmsFromLocalStorage.length) {
+    return undefined;
+  }
+  const findFilmById = filmsFromLocalStorage.find(film => film.id === id);
+  return findFilmById;
 }
 
 export function rewriteLocalStorage(films, film) {
