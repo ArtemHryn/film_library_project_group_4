@@ -32,6 +32,9 @@ export function addToLocalStorage(films) {
 
 export async function checkFilmById(id) {
   const filmsFromLocalStorage = await JSON.parse(getFilmFromLocalStorage());
+    console.log(filmsFromLocalStorage);
+  console.log(filmsFromLocalStorage.length);
+  
   if (!filmsFromLocalStorage.length) {
     return undefined;
   }
