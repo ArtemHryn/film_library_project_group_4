@@ -1,48 +1,9 @@
-import { Pagination } from './paginationclass';
-import { throttle, debounce } from 'throttle-debounce';
-
-const pagination = new Pagination();
-
-const paginationContainerRef = document.querySelector('.js-pagination-box');
-const prevBtnRef = document.querySelector('.js-prev-btn');
-const nextBtnRef = document.querySelector('.js-next-btn');
+import { pagination } from './paginationBth';
+import { refs } from '../refs/index';
 
 
-paginationContainerRef.addEventListener('click', throttle(700, onChangePage));
-prevBtnRef.addEventListener('click', throttle(700, onPrevPage));
-nextBtnRef.addEventListener('click', throttle(700, onNextPage));
 
-
-function onChangePage(evt) {
-  if (evt.target.nodeName !== 'BUTTON') {
-    return;
-  }
-  if (!evt.target.closest('[data-page]')) {
-    return
-  }
-  const li = evt.target.closest('[data-page]');
-  pagination.currentPage = +li.dataset.page;
-  renderPages();
-}
-
-function onPrevPage() {
-  if (pagination.currentPage <= 1) {
-    return;
-  }
-  pagination.currentPage -= 1;
-  renderPages();
-}
-
-function onNextPage() {
-    if (pagination.currentPage === pagination.totalPages) {
-      return;
-    }
-  pagination.currentPage += 1;
-  renderPages();
-}
-
-
-function renderPages() {
+export function renderPages() {
   let itemsTemplate = '';
   let loll = '';
   let firstmarkup = '';
@@ -128,8 +89,5 @@ if (pagination.totalPages <= 5 ) {
   }
 }
 loll = firstmarkup + itemsTemplate + lastmarkup;
-  paginationContainerRef.innerHTML = loll;
-  console.log('pagination.currentPage',pagination.currentPage);
+  refs.paginationContainerRef.innerHTML = loll;
 }
-
-renderPages();
