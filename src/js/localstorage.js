@@ -30,10 +30,11 @@ export function addToLocalStorage(films) {
   localStorage.setItem(FILMS, JSON.stringify(films));
 }
 
-export function checkFilmById(id) {
-  const filmsFromLocalStorage = JSON.parse(getFilmFromLocalStorage());
-  console.log(filmsFromLocalStorage);
+export async function checkFilmById(id) {
+  const filmsFromLocalStorage = await JSON.parse(getFilmFromLocalStorage());
+    console.log(filmsFromLocalStorage);
   console.log(filmsFromLocalStorage.length);
+  
   if (!filmsFromLocalStorage.length) {
     return undefined;
   }
