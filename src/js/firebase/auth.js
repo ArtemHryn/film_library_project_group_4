@@ -28,6 +28,7 @@ export function singIn() {
       const token = credential.accessToken;
       // The signed-in user info.
       const user = result.user;
+      document.querySelector('#audio').play();
       // console.log(user);
       // ...
     })
