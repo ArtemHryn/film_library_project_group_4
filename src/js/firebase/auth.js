@@ -13,7 +13,7 @@ import {
   removeLogoutListener,
 } from '../user/logout';
 import { insertPhotoUrl } from '../user/login';
-import { toggleClass } from '../changeclass';
+import { toggleClass } from '../utils/changeclass';
 
 export const userInfo = new UserInfo();
 

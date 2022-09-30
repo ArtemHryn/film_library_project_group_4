@@ -1,4 +1,5 @@
 let player;
+let isPlayed = false;
 export function onYouTubeIframeAPIReady(id) {
   player = new YT.Player('player', {
     height: '390',
@@ -15,6 +16,7 @@ export function onYouTubeIframeAPIReady(id) {
       onStateChange: onPlayerStateChange,
     },
   });
+  isPlayed = true;
 }
 
 // 4. The API will call this function when the video player is ready.
@@ -41,5 +43,9 @@ export function getyt() {
 }
 
 export function deleteyt() {
+  if (!isPlayed) {
+    return;
+  }
   player.destroy();
+  isPlayed = false;
 }
