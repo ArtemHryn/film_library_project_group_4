@@ -26,7 +26,6 @@ const homeBtn = document.querySelector('.js-home-btn');
 filmContainer.addEventListener('click', film);
 myLibrary.addEventListener('click', onShowLibrary);
 homeBtn.addEventListener('click', filmer);
-// searchEl.addEventListener('submit', onSearchFilm);
 
 filmer();
 
