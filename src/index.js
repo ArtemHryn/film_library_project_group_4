@@ -10,3 +10,5 @@ import './js/user/login';
 import './js/pagination';
 import './js/addingFilmToWeb';
 import './js/main-page-pre-load';
+
+import './js/togle-theme';

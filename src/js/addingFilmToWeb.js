@@ -8,7 +8,7 @@ import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
 import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
-import {addFilmToLocalStorage, getFilmFromLocalStorage} from './localstorage'
+import { addFilmToLocalStorage, getFilmFromLocalStorage } from './localstorage';
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -74,16 +74,16 @@ async function filmer() {
   hideSpinner();
   const searchEl = document.querySelector('#search-form');
   searchEl.addEventListener('submit', onSearchFilm);
-  searchFilm.query = ''
+  searchFilm.query = '';
 }
 
 async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
-  console.log(userInfo.isLogIn)
+  console.log(userInfo.isLogIn);
   if (userInfo.isLogIn) {
     addToFirebaseStorage(dbInfo);
   } else {
-    addFilmToLocalStorage(dbInfo)
+    addFilmToLocalStorage(dbInfo);
   }
   onCloseModal();
 }
@@ -117,11 +117,11 @@ async function onShowWatched() {
 
 function onAddToQueue(e) {
   const dbInfo = prepareForDBInfo(e, false, true);
-    if (userInfo.isLogIn) {
-      addToFirebaseStorage(dbInfo);
-    } else {
-      addFilmToLocalStorage(dbInfo);
-    }
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo);
+  }
   onCloseModal();
 }
 
@@ -142,7 +142,8 @@ async function onSearchFilm(e) {
 function prepareForDBInfo(el, isWatched, isQueue) {
   const element = el.target.closest('[data-id]');
   const id = +element.dataset.id;
-  const filmsList = searchFilm.query !== '' ? searchFilm.films : trending.film.results;
+  const filmsList =
+    searchFilm.query !== '' ? searchFilm.films : trending.film.results;
   const filmInfo = filmsList.filter(film => film.id === id);
   return { ...filmInfo[0], isWatched, isQueue };
 }
@@ -151,14 +152,14 @@ async function findFilmsInDB(searchBy) {
   const films = await getTaskFromFirebaseStorage();
 
   if (!films) {
-   filmContainer.innerHTML = ''
-    return
+    filmContainer.innerHTML = '';
+    return;
   }
 
   const filteredFilms = films.filter(film => film[searchBy]);
   if (filteredFilms.length === 0) {
-       filmContainer.innerHTML = '';
-       return;
+    filmContainer.innerHTML = '';
+    return;
   }
   filmContainer.innerHTML = renderFilms(
     filteredFilms,
