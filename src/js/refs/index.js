@@ -12,4 +12,9 @@ export const refs = {
   paginationContainerRef: document.querySelector('.js-pagination-box'),
   prevBtnRef: document.querySelector('.js-prev-btn'),
   nextBtnRef: document.querySelector('.js-next-btn'),
+  filmContainer: document.querySelector('.js-card-collection'),
+  backdrop: document.querySelector('.js-backdrop'),
+  addToWatched: document.querySelector('.js-add-to-watched'),
+  addtoQueue: document.querySelector('.js-add-to-queue'),
+  closeModalFilm: document.querySelector('[data-modal-close]'),
 };

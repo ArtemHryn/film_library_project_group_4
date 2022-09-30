@@ -13,24 +13,20 @@ import {
   getFilmFromLocalStorage,
   checkFilmById,
 } from './localstorage';
+import { refs } from './refs';
+import { addModalListeres } from './header/listerners';
 
-const trending = new MoviesTrendAPIService();
+export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
-const searchFilm = new MoviesSearchAPIService();
+export const searchFilm = new MoviesSearchAPIService();
 
-const filmContainer = document.querySelector('.js-card-collection');
-const backdrop = document.querySelector('.js-backdrop');
-const myLibrary = document.querySelector('.js-library-btn');
-const homeBtn = document.querySelector('.js-home-btn');
-
-filmContainer.addEventListener('click', film);
-myLibrary.addEventListener('click', onShowLibrary);
-homeBtn.addEventListener('click', filmer);
+refs.filmContainer.addEventListener('click', film);
 
 filmer();
 
 async function film(e) {
   e.preventDefault();
+
   if (e.target.nodeName !== 'IMG') {
     return;
   }
@@ -40,29 +36,23 @@ async function film(e) {
   MovieInfo.movieId = id;
   const filmData = await MovieInfo.fetchMovies();
   const genres = await trending.fetchGenres();
-  backdrop.classList.remove('is-hidden');
+  refs.backdrop.classList.remove('is-hidden');
   const getFilm = await getFilmById(id);
+
   if (getFilm) {
     const { isQueue, isWatched } = getFilm;
-    backdrop.innerHTML = renderFilmModal(
+    refs.backdrop.innerHTML = renderFilmModal(
       { ...filmData, isWatched, isQueue },
       genres
     );
   } else {
-    backdrop.innerHTML = renderFilmModal(filmData, genres);
+    refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
   }
-
-  const addToWatched = document.querySelector('.js-add-to-watched');
-  const addtoQueue = document.querySelector('.js-add-to-queue');
-  addToWatched.addEventListener('click', onAddToWatched);
-  addtoQueue.addEventListener('click', onAddToQueue);
-  document
-    .querySelector('[data-modal-close]')
-    .addEventListener('click', onCloseModal);
+  addModalListeres();
 
   //добавив
   window.addEventListener('keydown', onEscBtnPress);
-  document.addEventListener('click', onBackdropClick);
+  refs.backdrop.addEventListener('click', onBackdropClick);
   document.body.style.overflow = 'hidden';
 }
 
@@ -73,78 +63,15 @@ async function getFilmById(id) {
   return checkFilmById(id);
 }
 
-async function filmer() {
-  showSpinner();
-  const films = await trending.fetchMovies();
-  trending.film = films;
-  const genres = await trending.fetchGenres();
-  filmContainer.innerHTML = renderFilms(films.results, genres);
-  lazyLoad();
-  hideSpinner();
-  const searchEl = document.querySelector('#search-form');
-  searchEl.addEventListener('submit', onSearchFilm);
-  searchFilm.query = '';
-}
-
-async function onAddToWatched(e) {
-  const dbInfo = prepareForDBInfo(e, true, false);
-  if (userInfo.isLogIn) {
-    addToFirebaseStorage(dbInfo);
-  } else {
-    addFilmToLocalStorage(dbInfo);
-  }
-  onCloseModal();
-}
-
-function onCloseModal() {
+export function onCloseModal() {
   const modal = document.querySelector('.js-film-modal');
   modal.remove();
-  backdrop.classList.add('is-hidden');
+  refs.backdrop.classList.add('is-hidden');
 
   // добавив
   window.removeEventListener('keydown', onEscBtnPress);
-  document.removeEventListener('click', onBackdropClick);
+  refs.backdrop.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
-}
-
-async function onShowQueue() {
-  findFilmsInDB('isQueue');
-}
-
-async function onShowLibrary() {
-  const watchedBtn = document.querySelector('[data-value="wached"]');
-  const queueBtn = document.querySelector('[data-value="queue"]');
-  watchedBtn.addEventListener('click', onShowWatched);
-  queueBtn.addEventListener('click', onShowQueue);
-  findFilmsInDB('isQueue');
-}
-
-async function onShowWatched() {
-  findFilmsInDB('isWatched');
-}
-
-function onAddToQueue(e) {
-  const dbInfo = prepareForDBInfo(e, false, true);
-  if (userInfo.isLogIn) {
-    addToFirebaseStorage(dbInfo);
-  } else {
-    addFilmToLocalStorage(dbInfo);
-  }
-  onCloseModal();
-}
-
-async function onSearchFilm(e) {
-  try {
-    e.preventDefault();
-    searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
-    const lookedForFilms = await searchFilm.fetchMovies();
-    searchFilm.films = lookedForFilms.results;
-    const genres = await trending.genres;
-    filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
-    lazyLoad();
-  } catch (error) {
-    console.log(error);
-  }
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {
@@ -157,23 +84,29 @@ function prepareForDBInfo(el, isWatched, isQueue) {
 }
 
 async function findFilmsInDB(searchBy) {
-  const films = await getFilms();
+  try {
+    showSpinner();
+    const films = await getFilms();
 
-  if (!films) {
-    filmContainer.innerHTML = '';
-    return;
-  }
+    if (!films) {
+      refs.filmContainer.innerHTML = '';
+      return;
+    }
 
-  const filteredFilms = films.filter(film => film[searchBy]);
-  if (filteredFilms.length === 0) {
-    filmContainer.innerHTML = '';
-    return;
+    const filteredFilms = films.filter(film => film[searchBy]);
+    if (filteredFilms.length === 0) {
+      refs.filmContainer.innerHTML = '';
+      return;
+    }
+    refs.filmContainer.innerHTML = renderFilms(
+      filteredFilms,
+      await trending.fetchGenres()
+    );
+    setInterval(() => hideSpinner(), 2000);
+    lazyLoad();
+  } catch (error) {
+    console.log(error);
   }
-  filmContainer.innerHTML = renderFilms(
-    filteredFilms,
-    await trending.fetchGenres()
-  );
-  lazyLoad();
 }
 
 async function getFilms() {
@@ -193,7 +126,66 @@ function onEscBtnPress(e) {
 }
 
 function onBackdropClick(e) {
-  if (e.target === backdrop) {
+  if (e.target === refs.backdrop) {
     onCloseModal();
   }
+}
+
+//for export
+export async function onSearchFilm(e) {
+  try {
+    showSpinner();
+    searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+    const lookedForFilms = await searchFilm.fetchMovies();
+    searchFilm.films = lookedForFilms.results;
+    const genres = await trending.genres;
+    refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
+    hideSpinner();
+    lazyLoad();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function onShowWatched() {
+  findFilmsInDB('isWatched');
+}
+
+export async function onShowQueue() {
+  findFilmsInDB('isQueue');
+}
+
+export async function filmer() {
+  try {
+    showSpinner();
+    const films = await trending.fetchMovies();
+    trending.film = films;
+    const genres = await trending.fetchGenres();
+    refs.filmContainer.innerHTML = renderFilms(films.results, genres);
+    hideSpinner();
+    lazyLoad();
+    searchFilm.query = '';
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function onAddToWatched(e) {
+  const dbInfo = prepareForDBInfo(e, true, false);
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo);
+  }
+  onCloseModal();
+}
+
+export function onAddToQueue(e) {
+  const dbInfo = prepareForDBInfo(e, false, true);
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo);
+  }
+  onCloseModal();
 }
