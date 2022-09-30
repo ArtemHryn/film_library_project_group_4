@@ -10,6 +10,10 @@
     width: $min-mobile-size;
   }
 
+  @media screen and (max-width: $max-tablet-size) {
+    margin-bottom: 40px;
+  }
+
   @media screen and (min-width: $min-tablet-size) {
     padding-left: 32px;
     padding-right: 32px;
@@ -27,7 +31,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 32px;
-    margin-top: 60px;
   }
 
   @media screen and (min-width: $min-desktop-size) {
@@ -46,10 +49,6 @@
 
     @media screen and (max-width: $max-tablet-size) {
       margin-top: 20px;
-    }
-
-    &:last-child {
-      margin-bottom: 40px;
     }
 
     &:hover {
