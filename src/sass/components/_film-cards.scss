@@ -1,4 +1,4 @@
-.container {
+.container-gallery {
   margin-left: auto;
   margin-right: auto;
   padding-top: 0;
@@ -116,6 +116,13 @@
   transform: translateY(-25%);
   opacity: 0;
   transition: all 500ms linear 500ms;
+
+  @media screen and (min-width: $min-tablet-size) {
+    height: 455px;
+  }
+  @media screen and (min-width: $min-desktop-size) {
+    height: 575px;
+  }
 }
 .card-collection img.appear {
   transform: translateY(0);
