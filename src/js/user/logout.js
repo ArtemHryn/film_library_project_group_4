@@ -1,3 +1,4 @@
+import { signOutUser } from '../firebase/auth';
 import { refs } from '../refs/index';
 
 export function addLogoutListener() {
@@ -10,9 +11,9 @@ export function removeLogoutListener() {
 }
 
 function onLogoutClick(e) {
+  console.log('hhh');
   signOutUser();
 }
-
 
 export function changeBtnLabel(e) {
   refs.login.textContent = e;

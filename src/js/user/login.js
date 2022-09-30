@@ -1,5 +1,5 @@
 import { refs } from '../refs/index';
-import { singIn, signOutUser } from '../firebase/auth';
+import { singIn } from '../firebase/auth';
 import { userInfo } from '../firebase/auth';
 
 refs.login.addEventListener('click', onLoginClick);
