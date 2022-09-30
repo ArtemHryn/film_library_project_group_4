@@ -8,7 +8,11 @@ import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
 import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
-import {addFilmToLocalStorage, getFilmFromLocalStorage} from './localstorage'
+import {
+  addFilmToLocalStorage,
+  getFilmFromLocalStorage,
+  checkFilmById,
+} from './localstorage';
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -33,13 +37,12 @@ async function film(e) {
   }
 
   const film = e.target.closest('[data-id]');
-  const id = film.dataset.id;
-  MovieInfo.movieId = +film.dataset.id;
+  const id = +film.dataset.id;
+  MovieInfo.movieId = id;
   const filmData = await MovieInfo.fetchMovies();
   const genres = await trending.fetchGenres();
   backdrop.classList.remove('is-hidden');
-  const getFilm = await getTaskFromFirebaseStorage(id);
-
+  const getFilm = await getFilmById(id);
   if (getFilm) {
     const { isQueue, isWatched } = getFilm;
     backdrop.innerHTML = renderFilmModal(
@@ -62,6 +65,13 @@ async function film(e) {
   window.addEventListener('keydown', onEscBtnPress);
   document.addEventListener('click', onBackdropClick);
   document.body.style.overflow = 'hidden';
+}
+
+async function getFilmById(id) {
+  if (userInfo.isLogIn) {
+    return await getTaskFromFirebaseStorage(id);
+  }
+  return checkFilmById(id)
 }
 
 async function filmer() {
@@ -148,7 +158,7 @@ function prepareForDBInfo(el, isWatched, isQueue) {
 }
 
 async function findFilmsInDB(searchBy) {
-  const films = await getTaskFromFirebaseStorage();
+  const films = await getFilms();
 
   if (!films) {
    filmContainer.innerHTML = ''
@@ -167,12 +177,19 @@ async function findFilmsInDB(searchBy) {
   lazyLoad();
 }
 
+async function getFilms() {
+  if (userInfo.isLogIn) {
+    return await getTaskFromFirebaseStorage();
+  }
+
+  return JSON.parse(getFilmFromLocalStorage());
+}
+
 //додав закриття на ESC і бекдроп
 
 function onEscBtnPress(e) {
   if (e.code === 'Escape') {
     onCloseModal();
-    window.removeEventListener('keydown', onEscBtnPress);
   }
 }
 
