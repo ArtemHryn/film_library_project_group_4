@@ -1,5 +1,9 @@
 import { refs } from '../refs/index';
-import { onYouTubeIframeAPIReady, gety, deleteyt } from '../youtubeApi/YTplayer';   // youtube
+import {
+  onYouTubeIframeAPIReady,
+  gety,
+  deleteyt,
+} from '../youtubeApi/YTplayer'; // youtube
 import {
   onHomeClick,
   onLibraryClick,
@@ -7,8 +11,7 @@ import {
   onWachedClick,
   onFormSubmit,
 } from './eventFunctions';
-
-
+import { onAddToWatched, onAddToQueue, onCloseModal } from '../addingFilmToWeb';
 
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
@@ -18,7 +21,6 @@ refs.yt.addEventListener('click', onytClick); // youtube
 
 function onytClick(e) {
   onYouTubeIframeAPIReady('R4bkJYAy4Ws');
-
 }
 
 export function addLibraryListener() {
@@ -46,4 +48,13 @@ export function addFormListener() {
 
 export function removeFormListener() {
   refs.form.removeEventListener('submit', onFormSubmit);
+}
+
+export function addModalListeres() {
+  refs.addToWatched = document.querySelector('.js-add-to-watched');
+  refs.addtoQueue = document.querySelector('.js-add-to-queue');
+  refs.closeModalFilm = document.querySelector('[data-modal-close]');
+  refs.addToWatched.addEventListener('click', onAddToWatched);
+  refs.addtoQueue.addEventListener('click', onAddToQueue);
+  refs.closeModalFilm.addEventListener('click', onCloseModal);
 }

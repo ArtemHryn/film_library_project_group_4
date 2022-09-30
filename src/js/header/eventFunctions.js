@@ -7,12 +7,18 @@ import {
   removeFormListener,
 } from './listerners';
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
-import { MoviesSearchAPIService } from '../api-search-movies';
+import {
+  onSearchFilm,
+  onShowWatched,
+  onShowQueue,
+  filmer,
+} from '../addingFilmToWeb';
 
-
-import { onYouTubeIframeAPIReady, gety, deleteyt } from '../youtubeApi/YTplayer';   // youtube
-
-const moviesSearchAPIService = new MoviesSearchAPIService();
+import {
+  onYouTubeIframeAPIReady,
+  gety,
+  deleteyt,
+} from '../youtubeApi/YTplayer'; // youtube
 
 export function onHomeClick(e) {
   removeLibraryListener();
@@ -23,6 +29,7 @@ export function onHomeClick(e) {
   removeClass(refs.header, 'header-library');
   addClass(refs.header, 'header-home');
   addFormListener();
+  filmer()
 }
 
 export function onLibraryClick(e) {
@@ -35,18 +42,20 @@ export function onLibraryClick(e) {
   addLibraryListener();
   onQueueClick();
   removeFormListener();
-
+  onShowQueue(e);
   deleteyt(); // youtube
 }
 
 export function onQueueClick(e) {
   addClass(refs.queue, 'lib-btn-current');
   removeClass(refs.wached, 'lib-btn-current');
+  onShowQueue(e);
 }
 
-export function onWachedClick() {
+export function onWachedClick(e) {
   addClass(refs.wached, 'lib-btn-current');
   removeClass(refs.queue, 'lib-btn-current');
+  onShowWatched(e);
 }
 
 export function onFormSubmit(e) {
@@ -57,5 +66,6 @@ export function onFormSubmit(e) {
     return;
   }
   addClass(refs.erorr, 'visually-hidden');
-  moviesSearchAPIService.query = onSearchText;
+  onSearchFilm(e);
+  // moviesSearchAPIService.query = onSearchText;
 }
