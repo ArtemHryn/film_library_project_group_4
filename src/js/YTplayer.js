@@ -6,7 +6,7 @@ export function onYouTubeIframeAPIReady(id) {
     videoId: `${id}`,
     enablejsapi: 1,
     origin: 'https://ArtemHryn.github.io',
-
+    host: 'https://www.youtube.com',
     playerVars: {
       playsinline: 1,
     },
