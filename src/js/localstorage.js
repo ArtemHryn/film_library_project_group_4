@@ -32,7 +32,7 @@ export function addToLocalStorage(films) {
 
 export function checkFilmById(id) {
   const filmsFromLocalStorage = JSON.parse(getFilmFromLocalStorage());
-  if (!filmsFromLocalStorage.length) {
+  if (!filmsFromLocalStorage.length === 0) {
     return undefined;
   }
   const findFilmById = filmsFromLocalStorage.find(film => film.id === id);
