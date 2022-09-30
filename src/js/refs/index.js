@@ -5,4 +5,5 @@ export const refs = {
   library: document.querySelector('[data-value="library"]'),
   login: document.querySelector('[data-value="login"]'),
   container: document.querySelector('#container-js'),
+  yt: document.querySelector('[data-value="yt"]'),
 };
