@@ -7,3 +7,4 @@ import './js/paginationFn'
 import "./js/user/login";
 import './js/pagination';
 import './js/addingFilmToWeb';
+import './js/team-modal';
