@@ -8,6 +8,7 @@ import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
 import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
+import {addFilmToLocalStorage, getFilmFromLocalStorage} from './localstorage'
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -73,11 +74,17 @@ async function filmer() {
   hideSpinner();
   const searchEl = document.querySelector('#search-form');
   searchEl.addEventListener('submit', onSearchFilm);
+  searchFilm.query = ''
 }
 
 async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
-  addToFirebaseStorage(dbInfo);
+  console.log(userInfo.isLogIn)
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo)
+  }
   onCloseModal();
 }
 
@@ -110,7 +117,11 @@ async function onShowWatched() {
 
 function onAddToQueue(e) {
   const dbInfo = prepareForDBInfo(e, false, true);
-  addToFirebaseStorage(dbInfo);
+    if (userInfo.isLogIn) {
+      addToFirebaseStorage(dbInfo);
+    } else {
+      addFilmToLocalStorage(dbInfo);
+    }
   onCloseModal();
 }
 
@@ -118,11 +129,10 @@ async function onSearchFilm(e) {
   try {
     e.preventDefault();
     searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
-    const searchResult = await searchFilm.fetchMovies();
-    console.log(searchResult);
-    console.log(await trending.genres);
+    const lookedForFilms = await searchFilm.fetchMovies();
+    searchFilm.films = lookedForFilms.results;
     const genres = await trending.genres;
-    filmContainer.innerHTML = renderFilms(searchResult, genres);
+    filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
     lazyLoad();
   } catch (error) {
     console.log(error);
@@ -132,13 +142,24 @@ async function onSearchFilm(e) {
 function prepareForDBInfo(el, isWatched, isQueue) {
   const element = el.target.closest('[data-id]');
   const id = +element.dataset.id;
-  const filmInfo = trending.film.results.filter(film => film.id === id);
+  const filmsList = searchFilm.query !== '' ? searchFilm.films : trending.film.results;
+  const filmInfo = filmsList.filter(film => film.id === id);
   return { ...filmInfo[0], isWatched, isQueue };
 }
 
 async function findFilmsInDB(searchBy) {
   const films = await getTaskFromFirebaseStorage();
+
+  if (!films) {
+   filmContainer.innerHTML = ''
+    return
+  }
+
   const filteredFilms = films.filter(film => film[searchBy]);
+  if (filteredFilms.length === 0) {
+       filmContainer.innerHTML = '';
+       return;
+  }
   filmContainer.innerHTML = renderFilms(
     filteredFilms,
     await trending.fetchGenres()

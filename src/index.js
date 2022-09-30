@@ -9,3 +9,7 @@ import "./js/user/login";
 import './js/addingFilmToWeb';
 import './js/iframe_api.js';
 import './js/pagination/paginationfunction'
+import './js/back-to-top';
+import './js/team-modal';
+import './js/main-page-pre-load';
+

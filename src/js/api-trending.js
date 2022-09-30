@@ -38,6 +38,9 @@ https://api.themoviedb.org/3/genre/movie/list?api_key=29563162ad0b73335f880d5650
   incrementPage() {
     this.page += 1;
   }
+  decrement() {
+    this.page -= 1;
+  }
   get film() {
     return this.addFilm
   }
