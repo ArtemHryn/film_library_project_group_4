@@ -1,3 +1,8 @@
+body.modal-open {
+    overflow: hidden;
+}
+
+
 .backdrop-team {
     position: fixed;
     top: 0;
@@ -9,6 +14,8 @@
     z-index: 998;
 
     padding: 15px;
+    visibility: visible;
+    opacity: 1;
 
 }
 
@@ -20,7 +27,7 @@
     & .modal-team {
         visibility: hidden;
         pointer-events: none;
-        opacity: 0.3;
+        // opacity: 0.3;
         transform: translate(-75%, -90%) scale(3);
     }
 }
@@ -45,14 +52,14 @@
         left: 50%;
         transform: translate(-50%, -50%) scale(1);
 
-        width: 900px;
+        width: 1050px;
         padding: 20px 15px 35px;
     }
 
     visibility: visible;
     opacity: 1;
 
-    background-color: FFFFFF;
+    background-color: #fff;
 
     border-radius: 15px;
 
@@ -66,9 +73,15 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    width: 200px;
+    border-radius: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(rgb(245, 103, 37), rgb(126, 78, 45));
 
     @media screen and (min-width: 768px) {
-        padding-left: 50px;
+        // padding-left: 50px;
+        width: 300px;
     }
 
     @media screen and (min-width: 1280px) {
@@ -79,10 +92,13 @@
 
 
 .team__name {
-    text-align: center;
+    // text-align: center;
     text-transform: uppercase;
+    opacity: 1;
     color: #000000;
     font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
 
     @media screen and (min-width: 768px) {
         font-size: 30px;
@@ -98,7 +114,7 @@
 
 .team__item {
     position: relative;
-    border-radius: 50px;
+    border-radius: 25px;
     padding-bottom: 5px;
     overflow: hidden;
 
@@ -107,6 +123,7 @@
     &:hover,
     &:focus {
         box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+        // transform: translate 500ms scale(1.2);
     }
 }
 
@@ -128,7 +145,7 @@
 .team__member {
     margin-bottom: 3px;
     font-size: 13px;
-color: #8C8C8C;
+color: #111111;
     @media screen and (min-width: 768px) {
         margin-bottom: 5px;
         font-size: 16px;
@@ -159,4 +176,37 @@ color: #8C8C8C;
     .team__item:focus & {
         transform: scale(1.2);
     }
+}
+.modal-team__close-btn {
+    position: absolute;
+    
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    border: none;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    // color: #000000;
+    
+
+    @media screen and (min-width: 768px) {
+        top: 10px;
+        right: 10px;
+    }
+
+    &:hover {
+        background-color: #ff6b01;
+            // color: #fff;
+            border: none;
+            transform: scale(1.1);
+        }
+}
+
+.modal-team__close-icon {
+    fill: currentColor;
 }
