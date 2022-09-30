@@ -8,6 +8,7 @@ import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
 import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
+import {addFilmToLocalStorage, getFilmFromLocalStorage} from './localstorage'
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -78,7 +79,12 @@ async function filmer() {
 
 async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
-  addToFirebaseStorage(dbInfo);
+  console.log(userInfo.isLogIn)
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo)
+  }
   onCloseModal();
 }
 
@@ -111,7 +117,11 @@ async function onShowWatched() {
 
 function onAddToQueue(e) {
   const dbInfo = prepareForDBInfo(e, false, true);
-  addToFirebaseStorage(dbInfo);
+    if (userInfo.isLogIn) {
+      addToFirebaseStorage(dbInfo);
+    } else {
+      addFilmToLocalStorage(dbInfo);
+    }
   onCloseModal();
 }
 
