@@ -4,6 +4,9 @@ export function onYouTubeIframeAPIReady(id) {
     height: '390',
     width: '640',
     videoId: `${id}`,
+    enablejsapi: 1,
+    origin: 'https://ArtemHryn.github.io',
+    host: 'https://www.youtube.com',
     playerVars: {
       playsinline: 1,
     },
@@ -31,4 +34,12 @@ function onPlayerStateChange(event) {
 }
 function stopVideo() {
   player.stopVideo();
+}
+
+export function getyt() {
+  player.getIframe();
+}
+
+export function deleteyt() {
+  player.destroy();
 }

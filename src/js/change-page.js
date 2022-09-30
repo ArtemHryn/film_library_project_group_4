@@ -1,13 +1,21 @@
 import { refs } from './refs/index';
 import { MoviesSearchAPIService } from './api-search-movies';
 import { addClass, removeClass } from './changeclass';
-import { onYouTubeIframeAPIReady } from './YTplayer';
+import { onYouTubeIframeAPIReady, gety, deleteyt } from './YTplayer';
+
+// onYouTubeIframeAPIReady('R4bkJYAy4Ws');
 
 const moviesSearchAPIService = new MoviesSearchAPIService();
 
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
 refs.library.addEventListener('click', onLibraryClick);
+refs.yt.addEventListener('click', onytClick);
+
+function onytClick(e) {
+  onYouTubeIframeAPIReady('R4bkJYAy4Ws');
+// gety()
+}
 
 function addLibraryListener() {
   refs.wached = document.querySelector('[data-value="wached"]');
@@ -17,6 +25,9 @@ function addLibraryListener() {
 }
 
 function removeLibraryListener() {
+  if (!refs.queue) {
+    return;
+  }
   refs.queue.removeEventListener('click', onQueueClick);
   refs.wached.removeEventListener('click', onWachedClick);
 }
@@ -55,6 +66,8 @@ function onLibraryClick(e) {
   addLibraryListener();
   onQueueClick();
   removeFormListener();
+
+ deleteyt()
 }
 
 function onQueueClick(e) {
