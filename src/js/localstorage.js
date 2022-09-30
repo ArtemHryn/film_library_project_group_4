@@ -33,23 +33,28 @@
 //   deleteFilmFromLocaleStorage,
 // };
 
-
-
-const FILMS = 'films'
-
+const FILMS = 'films';
 
 export function createFilm(film, wached = false, queue = false) {
   film.isWached = wached;
   film.isQueue = queue;
-  return film
+  return film;
 }
-
 
 export function addFilmToLocalStorage(film) {
   const parsedLocalStorage = getFilmFromLocalStorage(FILMS);
   const films = parsedLocalStorage ? JSON.parse(parsedLocalStorage) : [];
-  films.push(film);
-  addToLocalStorage(films);
+
+  const checkFilmsAtStorage = films.find(e => {
+    return e.id === film.id;
+  });
+  if (!checkFilmsAtStorage) {
+    films.push(film);
+    addToLocalStorage(films);
+    return;
+  }
+  const rewritedLocalStorage = rewriteLocalStorage(films, film);
+  addToLocalStorage(rewritedLocalStorage);
 }
 
 export function getFilmFromLocalStorage(key = FILMS) {
@@ -64,12 +69,9 @@ export function filterTasks(films, id) {
   return films.filter(film => film.id !== id);
 }
 
-// export function rewriteLocalStorage(films, id) {
-//   return films.map(film => {
-//     if (film.id === id) {
-//       film.isChecked = !film.isChecked;
-//       return film;
-//     }
-//     return film;
-//   });
-// }
+export function rewriteLocalStorage(films, film) {
+  return films.map(e => {
+    if (e.id === film.id) return film;
+    return e;
+  });
+}
