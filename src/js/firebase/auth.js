@@ -6,7 +6,14 @@ import {
   signOut,
 } from 'firebase/auth';
 import { UserInfo } from '../firebase/user';
-import { refs } from '../change-page';
+import { refs } from '../refs/index';
+import {
+  addLogoutListener,
+  changeBtnLabel,
+  removeLogoutListener,
+} from '../user/logout';
+import { insertPhotoUrl } from '../user/login';
+import { toggleClass } from '../changeclass';
 
 export const userInfo = new UserInfo();
 
@@ -42,8 +49,9 @@ export function signOutUser() {
       userInfo.USER_ID = 0;
       userInfo.userName = '';
       userInfo.IsLogIn = false;
-      changeBtnLabel('LOG IN'); 
-      
+      changeBtnLabel('LOG IN');
+      toggleClass(refs.login, 'login-text');
+      removeLogoutListener();
     })
     .catch(error => {
       console.log('somesing wrong');
@@ -52,31 +60,15 @@ export function signOutUser() {
 
 onAuthStateChanged(auth, user => {
   if (user) {
-    
-    console.log('~ user', user);
     userInfo.USER_ID = user.uid;
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
     userInfo.userImg = user.photoURL;
-    console.log(userInfo.userImg);
-    insertPhotoUrl(userInfo.userImg);
-    changeBtnLabel(userInfo.userName);
+
+    insertPhotoUrl(userInfo.userImg, userInfo.userName);
+    addLogoutListener();
+    toggleClass(refs.login, 'login-text');
   } else {
     console.log(user);
   }
 });
-
-
-function changeBtnLabel(e) {
-  refs.login.textContent = e;
-}
-
-
-function insertPhotoUrl(e) {
-  const markup = `<img
-        class="user-img"
-        src='${e}'
-        alt="photo"
-      />`;
-  refs.login.insertAdjacentHTML('beforebegin', markup);
-}

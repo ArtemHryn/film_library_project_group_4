@@ -1,5 +1,6 @@
 import { MoviesTrendAPIService } from './api-trending';
 import { MoviesFullInfoAPIService } from './api-full-info-movie';
+import { MoviesSearchAPIService } from './api-search-movies';
 import { renderFilms } from './rendering/renderFilms';
 import { lazyLoad } from './lazy-load';
 import { renderFilmModal } from './rendering/renderModalFilm';
@@ -7,9 +8,11 @@ import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
 import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
+import {addFilmToLocalStorage, getFilmFromLocalStorage} from './localstorage'
 
 const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
+const searchFilm = new MoviesSearchAPIService();
 
 const filmContainer = document.querySelector('.js-card-collection');
 const backdrop = document.querySelector('.js-backdrop');
@@ -19,6 +22,7 @@ const homeBtn = document.querySelector('.js-home-btn');
 filmContainer.addEventListener('click', film);
 myLibrary.addEventListener('click', onShowLibrary);
 homeBtn.addEventListener('click', filmer);
+// searchEl.addEventListener('submit', onSearchFilm);
 
 filmer();
 
@@ -27,7 +31,7 @@ async function film(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-  
+
   const film = e.target.closest('[data-id]');
   const id = film.dataset.id;
   MovieInfo.movieId = +film.dataset.id;
@@ -53,7 +57,11 @@ async function film(e) {
   document
     .querySelector('[data-modal-close]')
     .addEventListener('click', onCloseModal);
- 
+
+  //добавив
+  window.addEventListener('keydown', onEscBtnPress);
+  document.addEventListener('click', onBackdropClick);
+  document.body.style.overflow = 'hidden';
 }
 
 async function filmer() {
@@ -63,12 +71,20 @@ async function filmer() {
   const genres = await trending.fetchGenres();
   filmContainer.innerHTML = renderFilms(films.results, genres);
   lazyLoad();
-   hideSpinner();
+  hideSpinner();
+  const searchEl = document.querySelector('#search-form');
+  searchEl.addEventListener('submit', onSearchFilm);
+  searchFilm.query = ''
 }
 
 async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
-  addToFirebaseStorage(dbInfo);
+  console.log(userInfo.isLogIn)
+  if (userInfo.isLogIn) {
+    addToFirebaseStorage(dbInfo);
+  } else {
+    addFilmToLocalStorage(dbInfo)
+  }
   onCloseModal();
 }
 
@@ -76,6 +92,11 @@ function onCloseModal() {
   const modal = document.querySelector('.js-film-modal');
   modal.remove();
   backdrop.classList.add('is-hidden');
+
+  // добавив
+  window.removeEventListener('keydown', onEscBtnPress);
+  document.removeEventListener('click', onBackdropClick);
+  document.body.style.overflow = 'auto';
 }
 
 async function onShowQueue() {
@@ -96,23 +117,67 @@ async function onShowWatched() {
 
 function onAddToQueue(e) {
   const dbInfo = prepareForDBInfo(e, false, true);
-  addToFirebaseStorage(dbInfo);
+    if (userInfo.isLogIn) {
+      addToFirebaseStorage(dbInfo);
+    } else {
+      addFilmToLocalStorage(dbInfo);
+    }
   onCloseModal();
+}
+
+async function onSearchFilm(e) {
+  try {
+    e.preventDefault();
+    searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+    const lookedForFilms = await searchFilm.fetchMovies();
+    searchFilm.films = lookedForFilms.results;
+    const genres = await trending.genres;
+    filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
+    lazyLoad();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {
   const element = el.target.closest('[data-id]');
   const id = +element.dataset.id;
-  const filmInfo = trending.film.results.filter(film => film.id === id);
+  const filmsList = searchFilm.query !== '' ? searchFilm.films : trending.film.results;
+  const filmInfo = filmsList.filter(film => film.id === id);
   return { ...filmInfo[0], isWatched, isQueue };
 }
 
 async function findFilmsInDB(searchBy) {
   const films = await getTaskFromFirebaseStorage();
+
+  if (!films) {
+   filmContainer.innerHTML = ''
+    return
+  }
+
   const filteredFilms = films.filter(film => film[searchBy]);
+  if (filteredFilms.length === 0) {
+       filmContainer.innerHTML = '';
+       return;
+  }
   filmContainer.innerHTML = renderFilms(
     filteredFilms,
     await trending.fetchGenres()
   );
   lazyLoad();
+}
+
+//додав закриття на ESC і бекдроп
+
+function onEscBtnPress(e) {
+  if (e.code === 'Escape') {
+    onCloseModal();
+    window.removeEventListener('keydown', onEscBtnPress);
+  }
+}
+
+function onBackdropClick(e) {
+  if (e.target === backdrop) {
+    onCloseModal();
+  }
 }

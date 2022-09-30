@@ -3,6 +3,6 @@ const db = getDatabase();
 
 export function removeFromFirebase(id) {
   try {
-    return remove(ref(db, `tasks/${USER_ID}`));
+    return remove(ref(db, `films/${USER_ID}`));
   } catch (error) {}
 }
