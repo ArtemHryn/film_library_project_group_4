@@ -89,7 +89,6 @@ async function filmer() {
 
 async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
-  console.log(userInfo.isLogIn)
   if (userInfo.isLogIn) {
     addToFirebaseStorage(dbInfo);
   } else {
