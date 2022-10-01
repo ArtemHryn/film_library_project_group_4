@@ -21,13 +21,25 @@ body.dark-theme {
   //     #5d4a1f 62.5%,
   //     #5d4a1f 100%
   //   );
+  & .pagination-btn {
+    color: ($dark-theme-text);
+  }
   & .card-collection__name {
     color: ($dark-theme-text);
   }
   & .footer {
-    background-color: goldenrod;
+    background: linear-gradient(to right, #000000, #434343);
     &__text {
       color: #ffffff;
     }
+  }
+  & .film-modal {
+    background: linear-gradient(to right, #000000, #434343);
+  }
+  & .film-title,
+  & .about__title,
+  & .about__text,
+  & .info-table__value {
+    color: ($dark-theme-text);
   }
 }
