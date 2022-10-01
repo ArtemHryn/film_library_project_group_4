@@ -20,7 +20,7 @@ refs.library.addEventListener('click', onLibraryClick);
 refs.yt.addEventListener('click', onytClick); // youtube
 
 function onytClick(e) {
-  onYouTubeIframeAPIReady('R4bkJYAy4Ws');
+  // onYouTubeIframeAPIReady('R4bkJYAy4Ws');
 }
 
 export function addLibraryListener() {
