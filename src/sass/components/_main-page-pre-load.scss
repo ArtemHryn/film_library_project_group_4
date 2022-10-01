@@ -8,88 +8,69 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  //   background: linear-gradient(to right, white, orange);
+  background-color: #ffffff;
 }
 
-.page-loader {
-  width: 244px;
-  height: 118px;
+.anim-loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
   position: relative;
-  overflow: hidden;
+  border: 3px solid;
+  border-color: #182025 #182025 transparent transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
 
-  &::before,
-  &:after {
+  &:after,
+  &::before {
     content: '';
+    box-sizing: border-box;
     position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     bottom: 0;
+    margin: auto;
+    border: 3px solid;
+    border-color: transparent transparent #890b1b #890b1b;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
   }
 
   &::before {
-    width: inherit;
-    height: 0.2em;
-    background-color: black;
-  }
-
-  &::after {
-    box-sizing: border-box;
-    width: 50%;
-    height: inherit;
-    border: 0.2em solid black;
-    border-radius: 50%;
-    left: 25%;
+    width: 32px;
+    height: 32px;
+    border-color: #182025 #182025 transparent transparent;
+    animation: rotation 1.5s linear infinite;
   }
 }
 
-.page-loader span {
-  position: absolute;
-  width: 5%;
-  height: 10%;
-  background-color: black;
-  border-radius: 50%;
-  bottom: 0.2em;
-  left: -5%;
-  animation: 2s linear infinite;
-  transform-origin: 50% -3em;
-  animation-name: run, rotating;
-}
-
-.page-loader span:nth-child(2) {
-  animation-delay: 0.075s;
-}
-.page-loader span:nth-child(3) {
-  animation-delay: 0.15s;
-}
-
-@keyframes run {
+@keyframes rotation {
   0% {
-    left: -5%;
-  }
-  10%,
-  60% {
-    left: calc((100% - 5%) / 2);
-  }
-  70%,
-  100% {
-    left: 100%;
-  }
-}
-
-@keyframes rotating {
-  0%,
-  10% {
     transform: rotate(0deg);
   }
-  60%,
   100% {
-    transform: rotate(-1turn);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotationBack {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
   }
 }
 
 // HIDING
 
 .loaded_hiding .pre-loader {
-  transition: 0.3s opacity;
+  transition: 0.5s opacity;
   opacity: 0;
 }
 
