@@ -1,12 +1,13 @@
 let player;
 let isPlayed = false;
 export function onYouTubeIframeAPIReady(id) {
+  console.log(window.location.href);
   player = new YT.Player('player', {
     height: '390',
     width: '640',
     videoId: `${id}`,
     enablejsapi: 1,
-    origin: 'https://ArtemHryn.github.io',
+    origin: window.location.href,
     host: 'https://www.youtube.com',
     playerVars: {
       playsinline: 1,
@@ -19,14 +20,10 @@ export function onYouTubeIframeAPIReady(id) {
   isPlayed = true;
 }
 
-// 4. The API will call this function when the video player is ready.
 function onPlayerReady(event) {
   event.target.playVideo();
 }
 
-// 5. The API calls this function when the player's state changes.
-//    The function indicates that when playing a video (state=1),
-//    the player should play for six seconds and then stop.
 let done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING && !done) {
@@ -35,6 +32,9 @@ function onPlayerStateChange(event) {
   }
 }
 function stopVideo() {
+  if (!isPlayed) {
+    return;
+  }
   player.stopVideo();
 }
 

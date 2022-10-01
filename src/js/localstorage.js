@@ -47,3 +47,15 @@ export function rewriteLocalStorage(films, film) {
     return e;
   });
 }
+
+export function deleteFilmFromLocalStorage(film, param) {
+  if (!param) return;
+  const parsedLocalStorage = getFilmFromLocalStorage(FILMS);
+  if (!parsedLocalStorage) {
+    return
+  }
+  const filteredFilms = JSON.parse(parsedLocalStorage).filter(
+    e => e.id !== film.id
+  );
+  addToLocalStorage(filteredFilms);
+}

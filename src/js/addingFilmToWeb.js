@@ -12,9 +12,11 @@ import {
   addFilmToLocalStorage,
   getFilmFromLocalStorage,
   checkFilmById,
+  deleteFilmFromLocalStorage,
 } from './localstorage';
 import { refs } from './refs';
 import { addModalListeres } from './header/listerners';
+import { removeFromFirebase } from './firebase/remove.js';
 
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -22,7 +24,7 @@ export const searchFilm = new MoviesSearchAPIService();
 
 refs.filmContainer.addEventListener('click', film);
 
-filmer();
+// filmer();
 
 async function film(e) {
   e.preventDefault();
@@ -77,10 +79,14 @@ export function onCloseModal() {
 function prepareForDBInfo(el, isWatched, isQueue) {
   const element = el.target.closest('[data-id]');
   const id = +element.dataset.id;
+  const filmInfo = getFilmInfo(id);
+  return { ...filmInfo[0], isWatched, isQueue };
+}
+
+function getFilmInfo(id) {
   const filmsList =
     searchFilm.query !== '' ? searchFilm.films : trending.film.results;
-  const filmInfo = filmsList.filter(film => film.id === id);
-  return { ...filmInfo[0], isWatched, isQueue };
+  return filmsList.filter(film => film.id === id);
 }
 
 async function findFilmsInDB(searchBy) {
@@ -172,6 +178,18 @@ export async function filmer() {
 
 export async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
+
+  const checkFilm = await getFilmById(dbInfo.id);
+
+  if (checkFilm && checkFilm.isWatched) {
+    removeFromFirebase(checkFilm.id, checkFilm.isWatched);
+    return;
+  }
+
+  if (!userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
+    deleteFilmFromLocalStorage(checkFilm, checkFilm.isWatched);
+    return;
+  }
   if (userInfo.isLogIn) {
     addToFirebaseStorage(dbInfo);
   } else {
@@ -180,8 +198,20 @@ export async function onAddToWatched(e) {
   onCloseModal();
 }
 
-export function onAddToQueue(e) {
+export async function onAddToQueue(e) {
   const dbInfo = prepareForDBInfo(e, false, true);
+  const checkFilm = await getFilmById(dbInfo.id);
+
+  if (userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
+    removeFromFirebase(checkFilm.id, checkFilm.isQueue);
+    return;
+  }
+
+  if (!userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
+    deleteFilmFromLocalStorage(checkFilm, checkFilm.isQueue);
+    return;
+  }
+
   if (userInfo.isLogIn) {
     addToFirebaseStorage(dbInfo);
   } else {
