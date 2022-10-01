@@ -219,3 +219,27 @@ export async function onAddToQueue(e) {
   }
   onCloseModal();
 }
+
+// функція для пошуку офф трейлера
+
+
+ async function checkTreilersArr() {
+   try {
+     const treilersArr = await MovieInfo.fetchTreiler()    
+     const offTreiler = treilersArr.find(treiler => {
+       if (treiler.name === "Official Trailer") {
+         return treiler
+       }
+      else if (treiler.name === 'Official Teaser') {
+            return treiler;
+      }
+       
+     })
+     return offTreiler;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+checkTreilersArr().then(offTreiler => console.log(offTreiler))
+
