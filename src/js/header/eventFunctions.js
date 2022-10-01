@@ -1,5 +1,5 @@
 import { refs } from '../refs/index';
-import { addClass, removeClass } from '../utils/changeclass';
+import { addClass, removeClass, toggleClass } from '../utils/changeclass';
 import {
   addLibraryListener,
   removeLibraryListener,
@@ -7,12 +7,24 @@ import {
   removeFormListener,
 } from './listerners';
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
+
 import {
-  onSearchFilm,
   onShowWatched,
   onShowQueue,
-  filmer,
 } from '../addingFilmToWeb';
+
+
+
+import {
+  onYouTubeIframeAPIReady,
+  gety,
+  deleteyt,
+} from '../youtubeApi/YTplayer'; // youtube
+import { changeAPI } from '../pagination/paginationBth';
+import { trending, searchFilm } from '../addingFilmToWeb';
+import { filmContainer } from "../refs/index";
+
+
 
 import {
   onYouTubeIframeAPIReady,
@@ -28,8 +40,15 @@ export function onHomeClick(e) {
   removeClass(refs.library, 'current-page');
   removeClass(refs.header, 'header-library');
   addClass(refs.header, 'header-home');
+    addClass(refs.container, 'search-form__margn');
+  // toggleClass(refs.container, 'search-form__margn');
   addFormListener();
-  filmer()
+
+  //filmer()
+    changeAPI.resetALLpage();
+    // const searchFilm = searchFilm;
+    changeAPI.Page = true;
+    changeAPI.changetrendingApi();
 }
 
 export function onLibraryClick(e) {
@@ -39,6 +58,8 @@ export function onLibraryClick(e) {
   removeClass(refs.home, 'current-page');
   removeClass(refs.header, 'header-home');
   addClass(refs.header, 'header-library');
+  // toggleClass(refs.container, 'search-form__margn');
+    removeClass(refs.container, 'search-form__margn');
   addLibraryListener();
   onQueueClick();
   removeFormListener();
@@ -66,6 +87,13 @@ export function onFormSubmit(e) {
     return;
   }
   addClass(refs.erorr, 'visually-hidden');
-  onSearchFilm(e);
-  // moviesSearchAPIService.query = onSearchText;
+  // onSearchFilm(e);
+
+
+  searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+  changeAPI.resetALLpage()
+  // const searchFilm = searchFilm;
+  changeAPI.Page = false;
+  changeAPI.changetrendingApi()
+
 }

@@ -22,7 +22,8 @@ export const searchFilm = new MoviesSearchAPIService();
 
 refs.filmContainer.addEventListener('click', film);
 
-filmer();
+
+// filmer();
 
 async function film(e) {
   e.preventDefault();
