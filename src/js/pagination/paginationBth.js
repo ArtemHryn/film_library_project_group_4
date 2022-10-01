@@ -5,19 +5,19 @@ import { renderPages } from './renderNumPage';
 
 export const pagination = new Pagination();
 
-
-
-refs.paginationContainerRef.addEventListener('click', throttle(700, onChangePage));
+refs.paginationContainerRef.addEventListener(
+  'click',
+  throttle(700, onChangePage)
+);
 refs.prevBtnRef.addEventListener('click', throttle(700, onPrevPage));
 refs.nextBtnRef.addEventListener('click', throttle(700, onNextPage));
-
 
 function onChangePage(evt) {
   if (evt.target.nodeName !== 'BUTTON') {
     return;
   }
   if (!evt.target.closest('[data-page]')) {
-    return
+    return;
   }
   const li = evt.target.closest('[data-page]');
   pagination.currentPage = +li.dataset.page;
@@ -33,12 +33,11 @@ function onPrevPage() {
 }
 
 function onNextPage() {
-    if (pagination.currentPage === pagination.totalPages) {
-      return;
-    }
+  if (pagination.currentPage === pagination.totalPages) {
+    return;
+  }
   pagination.currentPage += 1;
   renderPages();
 }
-
 
 renderPages();
