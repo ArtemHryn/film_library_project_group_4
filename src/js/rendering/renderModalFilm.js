@@ -1,3 +1,5 @@
+import { changeBackdrop } from '../addBackdrop';
+
 export function renderFilmModal(
   {
     id,
@@ -10,10 +12,13 @@ export function renderFilmModal(
     overview,
     isWatched = false,
     isQueue = false,
+    backdrop_path,
   },
   genresList
 ) {
-  const genresListEl = genres.map(genre => genre.name)
+  changeBackdrop(backdrop_path);
+
+  const genresListEl = genres.map(genre => genre.name);
   return ` <div class="film-modal js-film-modal" data-id='${id}'>
     <div class="poster-container">
       <img

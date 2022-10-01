@@ -45,6 +45,13 @@
     @content;
   }
 }
+
+@mixin desktop-modal {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
 @mixin btnAnimation($col, $br) {
   position: relative;
   transition: color 300ms cubic-bezier(0.57, 0.21, 0.69, 1.25),
