@@ -51,6 +51,11 @@ export function rewriteLocalStorage(films, film) {
 export function deleteFilmFromLocalStorage(film, param) {
   if (!param) return;
   const parsedLocalStorage = getFilmFromLocalStorage(FILMS);
-  const filtredTasks = parsedLocalStorage.filter(e => e.id !== film.id);
-  addToLocalStorage(filtredTasks);
+  if (!parsedLocalStorage) {
+    return
+  }
+  const filteredFilms = JSON.parse(parsedLocalStorage).filter(
+    e => e.id !== film.id
+  );
+  addToLocalStorage(filteredFilms);
 }
