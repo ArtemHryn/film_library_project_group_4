@@ -20,10 +20,8 @@
   "dependencies": {
     "axios": "^0.27.2",
     "basiclightbox": "^5.0.4",
-    "debounce": "^1.2.1",
     "firebase": "^9.10.0",
     "modern-normalize": "^1.1.0",
-    "throttle": "^1.0.3",
     "throttle-debounce": "^5.0.0"
   },
   "devDependencies": {
