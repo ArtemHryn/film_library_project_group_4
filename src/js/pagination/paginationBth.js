@@ -49,8 +49,3 @@ changeAPI.changetrendingApi();
 
 
 renderPages();
-
-
-function changeApi(params) {
-  
-}
