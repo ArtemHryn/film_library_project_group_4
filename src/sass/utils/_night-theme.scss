@@ -42,4 +42,14 @@ body.dark-theme {
   & .info-table__value {
     color: ($dark-theme-text);
   }
+  & .turn-to-top__btn {
+    border-color: ($accent-color);
+    &::after {
+      border-top-color: ($accent-color);
+      border-left-color: ($accent-color);
+    }
+    &::before {
+      background-color: ($accent-color);
+    }
+  }
 }
