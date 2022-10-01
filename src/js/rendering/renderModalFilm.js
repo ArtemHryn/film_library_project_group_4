@@ -1,23 +1,21 @@
 import { changeBackdrop } from '../addBackdrop';
 
-export function renderFilmModal(
-  {
-    id,
-    poster_path,
-    original_title,
-    vote_average,
-    vote_count,
-    popularity,
-    genres,
-    overview,
-    isWatched = false,
-    isQueue = false,
-    backdrop_path,
-  },
-  genresList
-) {
+export function renderFilmModal({
+  id,
+  poster_path,
+  original_title,
+  vote_average,
+  vote_count,
+  popularity,
+  genres,
+  overview,
+  isWatched = false,
+  isQueue = false,
+  backdrop_path,
+  isTreiler = true,
+  trailerId = 'R4bkJYAy4Ws',
+}) {
   changeBackdrop(backdrop_path);
-
   const genresListEl = genres.map(genre => genre.name);
   return ` <div class="film-modal js-film-modal" data-id='${id}'>
     <div class="poster-container">
@@ -67,6 +65,11 @@ export function renderFilmModal(
         <button type="button" class="film-modal__btn js-add-to-queue">${
           isQueue ? 'Added to queue' : 'Add to queue'
         }</button>
+        <button type="button" class="film-modal__btn" ${
+          isTreiler ? '' : disabled
+        } data-open-trailer data-trailerId='${trailerId}'>
+        ${isTreiler ? 'Watch Treiler' : 'Treiler isn`t available'}
+        </button>
       </div>
     </div>
     <button class="close-btn " data-modal-close>

@@ -18,6 +18,8 @@ import { refs } from './refs';
 import { addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
 
+import { addTrailerListener } from "./openTrailer";
+
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
 export const searchFilm = new MoviesSearchAPIService();
@@ -46,12 +48,15 @@ async function film(e) {
     refs.backdrop.innerHTML = renderFilmModal(
       { ...filmData, isWatched, isQueue },
       genres
+      
     );
+    
   } else {
     refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
+    
   }
   addModalListeres();
-
+addTrailerListener()
   //добавив
   window.addEventListener('keydown', onEscBtnPress);
   refs.backdrop.addEventListener('click', onBackdropClick);
