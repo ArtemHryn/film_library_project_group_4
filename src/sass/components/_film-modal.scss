@@ -21,13 +21,13 @@
   overflow: auto;
   transform: translate(-50%, -50%) scale(1);
   padding: 48px 20px 40px;
-  background-color: #fff;
+  background-color: ($modal-bg);
   @media screen and (max-width: 767px) {
     max-width: 480px;
     margin-left: auto;
     margin-right: auto;
   }
-  @media screen and (min-width: 768px) {
+  @include tablet {
     display: flex;
     gap: 68px;
     width: 704px;
@@ -36,7 +36,7 @@
     margin-right: auto;
     height: unset;
   }
-  @media screen and (min-width: 1024px) {
+  @include desktop-modal {
     gap: 16px;
     width: 806px;
     padding: 40px 12px;
@@ -65,11 +65,11 @@
     margin-bottom: 30px;
   }
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 264px;
   }
 
-  @media screen and (min-width: 1024px) {
+  @include desktop-modal {
     width: 375px;
   }
 }
@@ -79,7 +79,7 @@
   margin-right: auto;
   width: 100%;
   border-radius: 5px;
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: inherit;
     margin: 0;
   }
@@ -90,21 +90,21 @@
   display: inline-block;
   width: 100%;
   height: max-content;
-  @media screen and (min-width: 768px) {
+  @include tablet {
     display: inline-block;
     width: 264px;
     height: max-content;
   }
-  @media screen and (min-width: 1024px) {
+  @include desktop-modal {
     width: 391px;
   }
 }
 .film-title {
   font-size: 20px;
   line-height: 23px;
-  color: #000000;
+  color: ($film-name);
   margin-bottom: 20px;
-  @media screen and (min-width: 1024px) {
+  @include desktop-modal {
     font-size: 30px;
     line-height: 35px;
   }
@@ -119,7 +119,7 @@
 .info-table__head {
   font-size: 12px;
   line-height: 1.33;
-  color: #8c8c8c;
+  color: ($modal-seconds-text);
   padding-right: 40px;
   &:not(:last-child) {
     padding-bottom: 8px;
@@ -129,7 +129,7 @@
 .info-table__value {
   font-size: 12px;
   line-height: 1.33;
-  color: #000000;
+  color: ($film-name);
 }
 
 .about {
@@ -147,14 +147,14 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 1.67;
-    color: #000000;
+    color: ($film-name);
   }
 }
 
 .btn-wraper {
   display: flex;
   gap: 20px;
-  @media screen and (min-width: 768px) {
+  @include tablet {
     gap: 15px;
   }
 }
@@ -176,10 +176,10 @@
     color: #fff;
     border: none;
   }
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 125px;
   }
-  @media screen and (min-width: 1024px) {
+  @include desktop-modal {
     width: 136px;
   }
 }

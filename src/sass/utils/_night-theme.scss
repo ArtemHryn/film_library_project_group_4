@@ -1,0 +1,33 @@
+body.light-theme {
+  background-color: #ffffff;
+}
+
+body.dark-theme {
+  background-size: contain;
+  background-image: url('https://www.astroosvita.kiev.ua/proekty/astromasterklas/nebo_0.jpg');
+  // background: radial-gradient(
+  //     ellipse farthest-corner at right bottom,
+  //     #fedb37 0%,
+  //     #fdb931 8%,
+  //     #9f7928 30%,
+  //     #8a6e2f 40%,
+  //     transparent 80%
+  //   ),
+  //   radial-gradient(
+  //     ellipse farthest-corner at left top,
+  //     #ffffff 0%,
+  //     #ffffac 8%,
+  //     #d1b464 25%,
+  //     #5d4a1f 62.5%,
+  //     #5d4a1f 100%
+  //   );
+  & .card-collection__name {
+    color: ($dark-theme-text);
+  }
+  & .footer {
+    background-color: goldenrod;
+    &__text {
+      color: #ffffff;
+    }
+  }
+}
