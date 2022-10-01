@@ -1,7 +1,8 @@
 export default function preLoader() {
   window.setTimeout(function () {
-    document.body.classList.add('loaded_hiding');
+    document.body.classList.add('loadedhiding');
     document.body.classList.add('loaded');
-  }, 1650);
+    document.body.classList.remove('loadedhiding');
+  }, 1500);
 }
 preLoader();
