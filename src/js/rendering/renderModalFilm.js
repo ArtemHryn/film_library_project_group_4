@@ -13,7 +13,7 @@ export function renderFilmModal({
   isQueue = false,
   backdrop_path,
   isTreiler = true,
-  trailerId = 'R4bkJYAy4Ws',
+  key = 'R4bkJYAy4Ws',
 }) {
   changeBackdrop(backdrop_path);
   const genresListEl = genres.map(genre => genre.name);
@@ -67,7 +67,7 @@ export function renderFilmModal({
         }</button>
         <button type="button" class="film-modal__btn" ${
           isTreiler ? '' : disabled
-        } data-open-trailer data-trailerId='${trailerId}'>
+        } data-open-trailer data-trailerId='${key}'>
         ${isTreiler ? 'Watch Treiler' : 'Treiler isn`t available'}
         </button>
       </div>

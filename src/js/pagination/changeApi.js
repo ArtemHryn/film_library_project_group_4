@@ -39,7 +39,6 @@ export class ChangeApi {
       const films = await trending.fetchMovies();
       pagination.TotalPages = films.total_pages;            // set to pagination totalfetchpage
       renderPages();                                        // rerenderpage to apply totalfetchpage
-      console.log('~ films', films);
       trending.film = films;
         const genres = await trending.fetchGenres();
 

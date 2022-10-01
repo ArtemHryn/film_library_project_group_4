@@ -17,16 +17,13 @@ import {
 import { refs } from './refs';
 import { addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
-
-import { addTrailerListener } from "./openTrailer";
+import { addTrailerListener } from './openTrailer';
 
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
 export const searchFilm = new MoviesSearchAPIService();
 
 refs.filmContainer.addEventListener('click', film);
-
-// filmer();
 
 async function film(e) {
   e.preventDefault();
@@ -38,25 +35,22 @@ async function film(e) {
   const film = e.target.closest('[data-id]');
   const id = +film.dataset.id;
   MovieInfo.movieId = id;
-  const filmData = await MovieInfo.fetchMovies();
+  const { key } = await checkTreilersArr();
+  const filmData = { ...(await MovieInfo.fetchMovies()), key, isTreiler: Boolean(key) };
   const genres = await trending.fetchGenres();
   refs.backdrop.classList.remove('is-hidden');
   const getFilm = await getFilmById(id);
-
   if (getFilm) {
     const { isQueue, isWatched } = getFilm;
     refs.backdrop.innerHTML = renderFilmModal(
       { ...filmData, isWatched, isQueue },
       genres
-      
     );
-    
   } else {
     refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
-    
   }
   addModalListeres();
-addTrailerListener()
+  addTrailerListener();
   //добавив
   window.addEventListener('keydown', onEscBtnPress);
   refs.backdrop.addEventListener('click', onBackdropClick);
@@ -185,7 +179,6 @@ export async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
 
   const checkFilm = await getFilmById(dbInfo.id);
-  console.log(checkFilm);
 
   if (userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
     removeFromFirebase(checkFilm.id, checkFilm.isWatched);
@@ -232,24 +225,18 @@ export async function onAddToQueue(e) {
 
 // функція для пошуку офф трейлера
 
-
- async function checkTreilersArr() {
-   try {
-     const treilersArr = await MovieInfo.fetchTreiler()    
-     const offTreiler = treilersArr.find(treiler => {
-       if (treiler.name === "Official Trailer") {
-         return treiler
-       }
-      else if (treiler.name === 'Official Teaser') {
-            return treiler;
+async function checkTreilersArr() {
+  try {
+    const treilersArr = await MovieInfo.fetchTreiler();
+    const offTreiler = treilersArr.find(treiler => {
+      if (treiler.name === 'Official Trailer') {
+        return treiler;
+      } else if (treiler.name === 'Official Teaser') {
+        return treiler;
       }
-       
-     })
-     return offTreiler;
+    });
+    return offTreiler;
   } catch (error) {
     console.log(error);
   }
 }
-
-checkTreilersArr().then(offTreiler => console.log(offTreiler))
-

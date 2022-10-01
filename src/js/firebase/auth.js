@@ -69,7 +69,5 @@ onAuthStateChanged(auth, user => {
     insertPhotoUrl(userInfo.userImg, userInfo.userName);
     addLogoutListener();
     toggleClass(refs.login, 'login-text');
-  } else {
-    console.log(user);
   }
 });
