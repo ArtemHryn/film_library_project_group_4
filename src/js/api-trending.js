@@ -7,7 +7,7 @@ export class MoviesTrendAPIService {
   constructor() {
     this.page = 1;
     this.genres = this.fetchGenres();
-    this.addFilm = {}
+    this.addFilm = {};
   }
 
   async fetchMovies() {
@@ -26,13 +26,17 @@ export class MoviesTrendAPIService {
         `
 https://api.themoviedb.org/3/genre/movie/list?api_key=29563162ad0b73335f880d56505c78bf&language=en-US`
       );
-      return listofGenres.data.genres
+      return listofGenres.data.genres;
     } catch (error) {
       throw new Error(`Oops, something went wrong`);
     }
-  } 
+  }
   resetPage() {
     this.page = 1;
+  }
+
+  set Page(newPage) {
+    this.page = newPage;
   }
 
   incrementPage() {
@@ -42,10 +46,10 @@ https://api.themoviedb.org/3/genre/movie/list?api_key=29563162ad0b73335f880d5650
     this.page -= 1;
   }
   get film() {
-    return this.addFilm
+    return this.addFilm;
   }
   set film(newFilm) {
-    this.addFilm = newFilm
+    this.addFilm = newFilm;
   }
 }
 

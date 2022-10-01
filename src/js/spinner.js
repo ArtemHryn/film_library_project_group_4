@@ -1,17 +1,19 @@
-const spinner = document.querySelector('.loader');
+
+import { addClass, removeClass } from './utils/changeclass';
+import { refs } from './refs/index';
 
 export function showSpinner() {
-  if (!spinner.classList.contains('loader')) {
+  if (refs.spinner.classList.contains('loader')) {
     return;
   }
-  spinner.classList.add('loader');
-  spinner.classList.remove('visually-hidden');
+  addClass(refs.spinner, 'loader');
+  removeClass(refs.spinner, 'visually-hidden');
 }
 
 export function hideSpinner() {
-  if (!spinner.classList.contains('loader')) {
+  if (!refs.spinner.classList.contains('loader')) {
     return;
   }
-  spinner.classList.add('loader');
-  spinner.classList.add('visually-hidden');
+  addClass(refs.spinner, 'visually-hidden');
+  removeClass(refs.spinner, 'loader');
 }

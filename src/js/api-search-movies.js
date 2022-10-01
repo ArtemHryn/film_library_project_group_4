@@ -2,6 +2,7 @@ import { API_KEY } from './API_KEY';
 import axios from 'axios';
 import { BASE_URL } from './api-trending';
 
+
 export class MoviesSearchAPIService {
   constructor() {
     this.searchQuery = ''; //'Titanic' ------> для тестування(string)
@@ -25,6 +26,10 @@ export class MoviesSearchAPIService {
     this.page = 1;
   }
 
+  set Page(newPage) {
+    this.page = newPage;
+  }
+
   incrementPage() {
     this.page += 1;
   }
@@ -32,8 +37,8 @@ export class MoviesSearchAPIService {
   decrement() {
     this.page -= 1;
   }
-    
-     get query() {
+
+  get query() {
     return this.searchQuery;
   }
   set query(newQuery) {

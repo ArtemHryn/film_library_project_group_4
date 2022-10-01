@@ -2,10 +2,14 @@ import { Pagination } from './paginationclass';
 import { throttle } from 'throttle-debounce';
 import { refs } from '../refs/index';
 import { renderPages } from './renderNumPage';
+// import { changetrendingApi } from './changeApi';
+import { ChangeApi } from './changeApi';
 
 export const pagination = new Pagination();
 
-
+export const changeAPI = new ChangeApi
+changeAPI.changetrendingApi()
+// changetrendingApi();
 
 refs.paginationContainerRef.addEventListener('click', throttle(700, onChangePage));
 refs.prevBtnRef.addEventListener('click', throttle(700, onPrevPage));
@@ -22,6 +26,7 @@ function onChangePage(evt) {
   const li = evt.target.closest('[data-page]');
   pagination.currentPage = +li.dataset.page;
   renderPages();
+changeAPI.changetrendingApi();
 }
 
 function onPrevPage() {
@@ -30,6 +35,7 @@ function onPrevPage() {
   }
   pagination.currentPage -= 1;
   renderPages();
+changeAPI.changetrendingApi();
 }
 
 function onNextPage() {
@@ -38,7 +44,13 @@ function onNextPage() {
     }
   pagination.currentPage += 1;
   renderPages();
+changeAPI.changetrendingApi();
 }
 
 
 renderPages();
+
+
+function changeApi(params) {
+  
+}
