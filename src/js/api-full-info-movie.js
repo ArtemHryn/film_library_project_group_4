@@ -10,6 +10,10 @@ export class MoviesFullInfoAPIService {
      async fetchMovies() {
          try {
       const response = await axios.get(`${BASE_URL}movie/${this.movieId}?api_key=${API_KEY}`);
+      const response2 = await axios.get(
+        `https://api.themoviedb.org/3/movie/${this.movieId}/videos?api_key=29563162ad0b73335f880d56505c78bf&language=en-US`
+      );
+      console.log(response2);
       return response.data;
     } catch (error) {
       throw new Error(`Oops, something went wrong`)

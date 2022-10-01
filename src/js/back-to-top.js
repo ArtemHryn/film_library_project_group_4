@@ -13,8 +13,14 @@ document.addEventListener("scroll", () => {
 });
 
 scrollBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
-  });
+scrollToTop()
 });
+
+
+
+export function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+}

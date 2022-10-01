@@ -1,4 +1,6 @@
 export const refs = {
+  //body
+  body:document.querySelector('body'),
   //header
   header: document.querySelector('.header'),
   logo: document.querySelector('[data-value="logo"]'),
@@ -22,4 +24,5 @@ export const refs = {
   //spinner
   spinner: document.querySelector('.loader'),
 
+trailerModal :document.querySelector('[data-modal-trailer]'),
 };

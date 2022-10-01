@@ -145,8 +145,8 @@
   cursor: default;
 }
 
-.login-text{
-cursor: pointer;
+.login-text {
+  cursor: pointer;
 }
 
 .search-form {
@@ -260,9 +260,8 @@ cursor: pointer;
 }
 
 .user-name {
-  color:#ffffff ;
-padding: 5px 10px;
-
+  color: #ffffff;
+  padding: 5px 10px;
 }
 
 .popup {
@@ -298,18 +297,15 @@ padding: 5px 10px;
   text-align: center;
   color: #ffffff;
   cursor: pointer;
-    border-radius: 5px;
-    text-transform: uppercase;
+  border-radius: 5px;
+  text-transform: uppercase;
 }
 
-.logout-btn:hover{
-    background: #ff6b01;
+.logout-btn:hover {
+  background: #ff6b01;
   box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
-
 }
 
-
-.popup-item:not(:last-child){
-margin-bottom: 15px;
-
+.popup-item:not(:last-child) {
+  margin-bottom: 15px;
 }
