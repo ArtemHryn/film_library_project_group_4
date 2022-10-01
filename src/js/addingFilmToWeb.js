@@ -180,14 +180,17 @@ export async function onAddToWatched(e) {
   const dbInfo = prepareForDBInfo(e, true, false);
 
   const checkFilm = await getFilmById(dbInfo.id);
+  console.log(checkFilm);
 
-  if (checkFilm && checkFilm.isWatched) {
+  if (userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
     removeFromFirebase(checkFilm.id, checkFilm.isWatched);
+    onCloseModal();
     return;
   }
 
   if (!userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
     deleteFilmFromLocalStorage(checkFilm, checkFilm.isWatched);
+    onCloseModal();
     return;
   }
   if (userInfo.isLogIn) {
@@ -204,11 +207,13 @@ export async function onAddToQueue(e) {
 
   if (userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
     removeFromFirebase(checkFilm.id, checkFilm.isQueue);
+    onCloseModal();
     return;
   }
 
   if (!userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
     deleteFilmFromLocalStorage(checkFilm, checkFilm.isQueue);
+    onCloseModal();
     return;
   }
 
