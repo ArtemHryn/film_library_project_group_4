@@ -16,7 +16,7 @@ body.modal-open {
     padding: 15px;
     visibility: visible;
     opacity: 1;
-
+transition: opacity 850ms cubic-bezier(0.4, 0, 0.2, 1), visibility 850ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .backdrop-team--is-hidden {
@@ -28,7 +28,7 @@ body.modal-open {
         visibility: hidden;
         pointer-events: none;
         // opacity: 0.3;
-        transform: translate(-75%, -90%) scale(3);
+        transform: scale(1.5);
     }
 }
 
@@ -65,7 +65,10 @@ body.modal-open {
 
     box-shadow: 0 28px 42px rgba(0, 0, 0, 0.38),
     0 20px 20px rgba(0, 0, 0, 0.33);
-
+transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1),
+opacity 600ms cubic-bezier(0.4, 0, 0.2, 1),
+visibility 800ms cubic-bezier(0.4, 0, 0.2, 1),
+box-shadow 600ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 
@@ -123,7 +126,7 @@ body.modal-open {
     &:hover,
     &:focus {
         box-shadow: 0 16px 32px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-        // transform: translate 500ms scale(1.2);
+        transform: translate 500ms scale(1.2);
     }
 }
 
@@ -190,7 +193,7 @@ color: #111111;
     background-color: #fff;
     border-radius: 50%;
     cursor: pointer;
-    transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
     // color: #000000;
     
 
@@ -201,12 +204,48 @@ color: #111111;
 
     &:hover {
         background-color: #ff6b01;
-            // color: #fff;
-            border: none;
+            color: #fff;
+            
             transform: scale(1.1);
         }
 }
 
 .modal-team__close-icon {
     fill: currentColor;
+}
+
+.team__social {
+    display: flex;
+    justify-content: center;
+}
+
+.team__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.team__link:not(:last-child) {
+    margin-right: 15px;
+}
+
+.team__social {
+    display: flex;
+    justify-content: center;
+}
+.team__link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    transition: all 500ms;
+
+}
+.team__link:hover,
+.team__link:focus{
+    fill: #ff6b08;
+    transform: scale(1.2);
+}
+.team__link:not(:last-child) {
+    margin-right: 10px;
 }
