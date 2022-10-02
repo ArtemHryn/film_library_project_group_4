@@ -87,7 +87,12 @@ if (pagination.totalPages <= 5 ) {
     <button type="button" class="pagination-btn">${i}</button></li>`;
     itemsTemplate += template;
   }
-}
-loll = firstmarkup + itemsTemplate + lastmarkup;
+  }
+  if (window.screen.width < 481) {
+    loll = itemsTemplate ;
+  } else {
+      loll = firstmarkup + itemsTemplate + lastmarkup;
+  }
+
   refs.paginationContainerRef.innerHTML = loll;
 }

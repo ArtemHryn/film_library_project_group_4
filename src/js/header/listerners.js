@@ -1,10 +1,5 @@
 import { refs } from '../refs/index';
 import {
-  onYouTubeIframeAPIReady,
-  gety,
-  deleteyt,
-} from '../youtubeApi/YTplayer'; // youtube
-import {
   onHomeClick,
   onLibraryClick,
   onQueueClick,
@@ -16,12 +11,6 @@ import { onAddToWatched, onAddToQueue, onCloseModal } from '../addingFilmToWeb';
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
 refs.library.addEventListener('click', onLibraryClick);
-
-refs.yt.addEventListener('click', onytClick); // youtube
-
-function onytClick(e) {
-  // onYouTubeIframeAPIReady('R4bkJYAy4Ws');
-}
 
 export function addLibraryListener() {
   refs.wached = document.querySelector('[data-value="wached"]');

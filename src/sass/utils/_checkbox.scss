@@ -1,7 +1,16 @@
 .toggle_switch {
+  padding: 0;
+  margin: 0;
+  scale: 0.5;
   width: 100px;
   height: 45px;
-  position: relative;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  @include desktop{
+      right: 20px;
+        scale: 0.65;
+  }
 }
 
 .switch {

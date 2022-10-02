@@ -17,7 +17,10 @@ import {
 import { refs } from './refs';
 import { addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
-import { addTrailerListener } from './openTrailer';
+import {
+  addTrailerListener,
+  removeBackdropListener,
+} from './youtubeApi/openTrailer';
 
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -73,6 +76,7 @@ export function onCloseModal() {
   window.removeEventListener('keydown', onEscBtnPress);
   refs.backdrop.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
+  removeBackdropListener();
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {

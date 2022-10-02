@@ -67,7 +67,7 @@ export function renderFilmModal({
         }</button>
         <button type="button" class="film-modal__btn" ${
           isTreiler ? '' : disabled
-        } data-open-trailer data-trailerId='${key}'>
+        } data-open-trailer data-trailerId='${key}' >
         ${isTreiler ? 'Watch Treiler' : 'Treiler isn`t available'}
         </button>
       </div>

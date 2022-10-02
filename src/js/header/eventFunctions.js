@@ -9,7 +9,6 @@ import {
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
 import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
 
-import { deleteyt } from '../youtubeApi/YTplayer'; // youtube
 import { changeAPI } from '../pagination/paginationBth';
 import { searchFilm } from '../addingFilmToWeb';
 
@@ -21,12 +20,11 @@ export function onHomeClick(e) {
   removeClass(refs.library, 'current-page');
   removeClass(refs.header, 'header-library');
   addClass(refs.header, 'header-home');
-  addClass(refs.container, 'search-form__margn');
-
   addFormListener();
   changeAPI.resetALLpage();
   changeAPI.Page = true;
   changeAPI.changetrendingApi();
+  e.target.blur();
 }
 
 export function onLibraryClick(e) {
@@ -36,24 +34,26 @@ export function onLibraryClick(e) {
   removeClass(refs.home, 'current-page');
   removeClass(refs.header, 'header-home');
   addClass(refs.header, 'header-library');
-  removeClass(refs.container, 'search-form__margn');
   addLibraryListener();
+  e.target.blur();
   onQueueClick();
   removeFormListener();
   onShowQueue(e);
-  deleteyt(); // youtube
 }
 
 export function onQueueClick(e) {
   addClass(refs.queue, 'lib-btn-current');
   removeClass(refs.wached, 'lib-btn-current');
+
   onShowQueue(e);
+  e.target.blur();
 }
 
 export function onWachedClick(e) {
   addClass(refs.wached, 'lib-btn-current');
   removeClass(refs.queue, 'lib-btn-current');
   onShowWatched(e);
+  e.target.blur();
 }
 
 export function onFormSubmit(e) {

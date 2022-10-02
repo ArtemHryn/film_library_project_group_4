@@ -6,12 +6,6 @@
   background-position: center;
   height: 230px;
   margin-bottom: 20px;
-  @media screen and (min-width: 768px) {
-    height: 216px;
-  }
-  @include tablet{
-    margin-bottom: 60px;
-  }
 }
 
 .header-home {
@@ -29,6 +23,8 @@
       background-image: url(../images/header/tablet/main@3x.jpg);
     }
     max-width: 768px;
+    height: 216px;
+    margin-bottom: 60px;
   }
 
   @media screen and (min-width: 769px) {
@@ -57,6 +53,8 @@
       background-image: url(../images/header/tablet/library@3x.jpg);
     }
     max-width: 768px;
+    height: 216px;
+    margin-bottom: 60px;
   }
 
   @media screen and (min-width: 769px) {
@@ -71,31 +69,48 @@
 }
 
 .nav {
-  display: flex;
+  @include centeredFlex(flex, center, null);
+  // display: flex;
   gap: 30px;
-  align-items: center;
+  // align-items: center;
   padding-top: 40px;
   margin-bottom: 54px;
-  @media screen and (min-width: 482px) {
+  @media screen and (min-width: 481px) {
     margin-bottom: 40px;
     gap: 40px;
   }
 }
 
 .logo-btn {
-  z-index: 10;
-  display: flex;
-  align-items: center;
+  @include centeredFlex(flex, center, null);
+  // z-index: 10;
+  // display: flex;
+  // align-items: center;
   background-color: inherit;
-  font-family: Roboto;
-  font-size: 30px;
-  font-weight: 500;
-  line-height: 35px;
-  letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
+  @include fontRegular(Roboto, 30px, 500, 35px, #ffffff, center);
+  // font-family: Roboto;
+  // font-size: 30px;
+  // font-weight: 500;
+  // line-height: 35px;
+  // letter-spacing: 0em;
+  // text-align: center;
+  // color: #ffffff;
+  @include transition((color, text-shadow));
+  &:hover,
+  &:focus {
+    color: #ff6b01;
+    text-shadow: rgba(255, 107, 1, 0.6) 3px 3px 10px;
+  }
+  &:hover .logo-svg,
+  &:focus .logo-svg {
+    stroke: #ff6b01;
+    box-shadow: 0px 3px 43px rgba(255, 107, 1, 0.6);
+  }
 }
+
 .logo-svg {
+  stroke: #ffffff;
+  @include transition((stroke, box-shadow));
   @media screen and (min-width: 520px) {
     margin-right: 10px;
   }
@@ -110,39 +125,68 @@
 .home-btn {
   position: relative;
   background-color: inherit;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
+  // font-family: Roboto;
+  // font-size: 12px;
+  // font-weight: 500;
+  // line-height: 14px;
   letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
+  // text-align: center;
+  // color: #ffffff;
   margin-left: auto;
+  @include transition((color, text-shadow));
+  &:hover,
+  &:focus {
+    color: #ff6b01;
+    text-shadow: #ff6b01 1px 0px 10px;
+  }
 }
 
 .library-btn {
-  background-color: inherit;
   position: relative;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
+  background-color: inherit;
+  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
+
+  // font-family: Roboto;
+  // font-size: 12px;
+  // font-weight: 500;
+  // line-height: 14px;
   letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
+  // text-align: center;
+  // color: #ffffff;
+  @include transition((color, text-shadow));
+  &:hover,
+  &:focus {
+    color: #ff6b01;
+    text-shadow: #ff6b01 1px 0px 10px;
+  }
 }
 
 .login-btn {
   position: relative;
   background-color: inherit;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
+
+  // font-family: Roboto;
+  // font-size: 12px;
+  // font-weight: 500;
+  // line-height: 14px;
   letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
+  // text-align: center;
+  // color: #ffffff;
   cursor: default;
+  @include transition((color, text-shadow));
+  &:hover,
+  &:focus {
+    color: #ff6b01;
+    text-shadow: #ff6b01 1px 0px 10px;
+  }
+  &:hover .popup,
+  &:focus .popup {
+    // opacity: 1;
+    // display: block;
+    visibility: visible;
+  }
 }
 
 .login-text {
@@ -153,17 +197,18 @@
   width: 280px;
   border-bottom: 0.5px solid #ffffff;
   margin: 0 auto;
-
-  @media screen and (min-width: 768px) {
+  margin-bottom: 16px;
+  @include tablet {
     width: 336px;
+    margin-bottom: 20px;
   }
-  @media screen and (min-width: 1280px) {
+  @include desktop {
     width: 394px;
   }
 }
-.search-form__margn{
-  margin-bottom: 24px;
-}
+// .search-form__margn {
+//   margin-bottom: 24px;
+// }
 
 .input-search {
   color: #ffffff;
@@ -174,36 +219,35 @@
   padding: 0;
   margin: 0;
 
-  @media screen and (min-width: 768px) {
+  @include tablet {
     width: 316px;
   }
-  @media screen and (min-width: 1280px) {
+  @include desktop {
     width: 374px;
   }
 }
 
 .submit-btn {
   background-color: inherit;
+  //   background-image: url(../images/sprite.svg#icon-search);
+  // background-size: 15px 15px;
   border: 0;
-
   margin: 0;
   padding: 0;
 }
 
-// .container-inner {
-//   display: flex;
-//   gap: 32px;
-//   justify-content: center;
-// }
-
+.search-svg {
+  stroke: #ffffff;
+}
 .search-error {
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 16px;
+  @include fontRegular(Roboto, 14px, 400, 16px, #ff001b, center);
+  // font-family: Roboto;
+  // font-size: 14px;
+  // font-weight: 400;
+  // line-height: 16px;
   letter-spacing: 0em;
-  text-align: center;
-  color: #ff001b;
+  // text-align: center;
+  // color: #ff001b;
   margin: 0 auto;
   @media screen and (max-width: 481px) {
     width: 280px;
@@ -211,11 +255,10 @@
 }
 
 .current-page::after {
-  background-color: #ff001b;
-
   position: absolute;
   left: 0;
   bottom: -3;
+  background-color: #ff001b;
   content: '';
   width: 100%;
   height: 3px;
@@ -223,20 +266,28 @@
 
 .lib-btn {
   background-color: inherit;
-  color: #ffffff;
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
+  @include fontRegular(Roboto, 12px, 500, 16px, #ffffff, center);
+  // color: #ffffff;
+  // font-family: 'Roboto';
+  // font-style: normal;
+  // font-weight: 500;
+  // font-size: 12px;
+  // line-height: 16px;
   /* or 133% */
 
-  text-align: center;
+  // text-align: center;
   text-transform: uppercase;
   width: 152px;
   height: 44px;
   border-radius: 5px;
   border: 1px solid #ffffff;
+  @include transition((color, text-shadow));
+  &:hover,
+  &:focus {
+    background-color: #ff6b01;
+    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+    border: 0;
+  }
 }
 
 .lib-btn-current {
@@ -246,9 +297,10 @@
 }
 
 .btn-flex {
-  display: flex;
+  @include centeredFlex(flex, null, center);
+  // display: flex;
   gap: 32px;
-  justify-content: center;
+  // justify-content: center;
 }
 
 .user-img {
@@ -277,25 +329,21 @@
   background-color: #ff0019c4;
   box-shadow: 0px 8px 43px rgba(243, 0, 0, 0.6);
   border-radius: 5px;
-}
-
-.login-btn:hover .popup {
-  // opacity: 1;
-  // display: block;
-  visibility: visible;
+  @include transition(visibility);
 }
 
 .logout-btn {
   width: 85px;
   padding: 8px 15px;
   background-color: inherit;
-  font-family: Roboto;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
+  // font-family: Roboto;
+  // font-size: 12px;
+  // font-weight: 500;
+  // line-height: 14px;
   letter-spacing: 0em;
-  text-align: center;
-  color: #ffffff;
+  // text-align: center;
+  // color: #ffffff;
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
