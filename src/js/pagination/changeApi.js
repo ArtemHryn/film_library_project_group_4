@@ -8,6 +8,7 @@ import { renderPages } from './renderNumPage';
 // import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
 import { renderFilms } from '../rendering/renderFilms';
 
+
 export class ChangeApi {
   constructor() {
     this.page = 'trending';
@@ -42,7 +43,6 @@ export class ChangeApi {
     searchFilm.Page = pagination.currentPage; //searchpage set paginationpage
     const lookedForFilms = await searchFilm.fetchMovies();
     pagination.TotalPages = lookedForFilms.total_pages; // set to pagination totalfetchpage
-    console.log('~ lookedForFilms', lookedForFilms);
     renderPages(); // rerenderpage to apply totalfetchpage
     searchFilm.films = lookedForFilms.results;
     const genres = await trending.genres;
@@ -73,13 +73,12 @@ export class ChangeApi {
       pagination.CurrentPage,
       'isWatched'
     );
-    console.log('wached', response.data);
-    console.log('wached pages', response.totalPages);
      refs.filmContainer.innerHTML = renderFilms(
        response.data,
        await trending.fetchGenres()
      );
     pagination.totalPages = response.totalPages;
+       lazyLoad();
     renderPages();
   }
   async queue() {
@@ -87,12 +86,11 @@ export class ChangeApi {
       pagination.CurrentPage,
       'isQueue'
     );
-    console.log('queue', response.data);
-    console.log('queue pages', response.totalPages);
     refs.filmContainer.innerHTML = renderFilms(
       response.data,
       await trending.fetchGenres()
     );
+    lazyLoad()
     pagination.totalPages = response.totalPages;
     renderPages();
   }
