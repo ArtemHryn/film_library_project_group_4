@@ -9,6 +9,7 @@ export const refs = {
   login: document.querySelector('[data-value="login"]'),
   container: document.querySelector('#container-js'),
   //pagination
+  pagination: document.querySelector('.js-pagination'),
   paginationContainerRef: document.querySelector('.js-pagination-box'),
   prevBtnRef: document.querySelector('.js-prev-btn'),
   nextBtnRef: document.querySelector('.js-next-btn'),

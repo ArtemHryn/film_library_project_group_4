@@ -1,4 +1,5 @@
 .container-gallery {
+  min-height: 50vh;
   margin-left: auto;
   margin-right: auto;
   padding-top: 0;
@@ -118,6 +119,7 @@
 
   @media screen and (min-width: $min-tablet-size) {
     height: 455px;
+    object-fit: cover;
   }
   @media screen and (min-width: $min-desktop-size) {
     height: 575px;

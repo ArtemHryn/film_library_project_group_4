@@ -1,57 +1,59 @@
 // .turn-to-top{
 //     text-align: end;
 //     position: sticky;
-    
+
 // }
-.turn-to-top__btn{
-    position: fixed;
-    right: 10px;
-    bottom: 150px;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    border: 2px solid #000;
-    border-radius: 50%;
-
-    &:hover{
-        background-color: #FF6B01;
-        border: #FF6B01;
-        &::after{
-            border-top: 5px solid #fff;
-            border-left: 5px solid #fff;
-        }
-        &::before{
-            background-color: #fff; 
-        }
+.turn-to-top__btn {
+  position: fixed;
+  right: 10px;
+  bottom: 100px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border: 2px solid #000;
+  border-radius: 50%;
+  scale: 0.8;
+  @include tablet {
+    bottom: 80px;
+    scale: 1;
+  }
+  &:hover {
+    background-color: #ff6b01;
+    border: #ff6b01;
+    &::after {
+      border-top: 5px solid #fff;
+      border-left: 5px solid #fff;
     }
-    &::before,
-    &::after{
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    &::before {
+      background-color: #fff;
     }
-    &::after{
-        width: 15px;
-        height: 15px;
-        transform: translate(-50%,-65%) rotate(45deg);
-        // background-color: #fff;
-        border-top: 5px solid #000;
-        border-left: 5px solid #000;
-
-    }
-    &::before{
-        width: 5px;
-        height: 25px;
-        border-radius: 3px 3px 0 0;
-        background-color: #000;
-    }
-    
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &::after {
+    width: 15px;
+    height: 15px;
+    transform: translate(-50%, -65%) rotate(45deg);
+    // background-color: #fff;
+    border-top: 5px solid #000;
+    border-left: 5px solid #000;
+  }
+  &::before {
+    width: 5px;
+    height: 25px;
+    border-radius: 3px 3px 0 0;
+    background-color: #000;
+  }
 }
 
 // .turn-to-top__btn-img{
 //     width: 50px;
-//     height: 50px; 
+//     height: 50px;
 //     stroke: currentColor;
 // }

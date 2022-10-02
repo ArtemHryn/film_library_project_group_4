@@ -1,6 +1,6 @@
 import { ref, get, getDatabase } from 'firebase/database';
 import { userInfo } from './auth';
-
+import { hideSpinner } from '../spinner';
 const db = getDatabase();
 
 export function getTaskFromFirebaseStorage(id) {
@@ -16,9 +16,11 @@ export function getTaskFromFirebaseStorage(id) {
         return Object.values(snapshot.val());
       } else {
         console.log('No data available');
+        setInterval(() => hideSpinner(), 2000);
       }
     })
     .catch(error => {
+      setInterval(() => hideSpinner(), 2000);
       console.error(error);
     });
 }
