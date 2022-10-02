@@ -22,7 +22,7 @@ function addBackdropListener() {
   
 }
 
-function removeBackdropListener() {
+export function removeBackdropListener() {
   refs.trailerModal.removeEventListener('click', onBackdropClick);
 }
 
