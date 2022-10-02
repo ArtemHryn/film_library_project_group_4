@@ -12,7 +12,7 @@ export function renderFilmModal({
   isWatched = false,
   isQueue = false,
   backdrop_path,
-  isTreiler = true,
+  isTrailer = true,
   key = 'R4bkJYAy4Ws',
 }) {
   changeBackdrop(backdrop_path);
@@ -66,9 +66,9 @@ export function renderFilmModal({
           isQueue ? 'Added to queue' : 'Add to queue'
         }</button>
         <button type="button" class="film-modal__btn" ${
-          isTreiler ? '' : disabled
+          isTrailer ? '' : 'disabled'
         } data-open-trailer data-trailerId='${key}'>
-        ${isTreiler ? 'Watch Treiler' : 'Treiler isn`t available'}
+        ${isTrailer ? 'Watch Trailer' : 'Trailer isn`t available'}
         </button>
       </div>
     </div>
