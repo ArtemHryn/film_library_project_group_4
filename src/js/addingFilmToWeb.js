@@ -38,8 +38,13 @@ async function film(e) {
   const film = e.target.closest('[data-id]');
   const id = +film.dataset.id;
   MovieInfo.movieId = id;
-  const { key } = await checkTreilersArr();
-  const filmData = { ...(await MovieInfo.fetchMovies()), key, isTreiler: Boolean(key) };
+  const trailerInfo = await checkTreilersArr();
+  const key = trailerInfo ? trailerInfo.key : undefined;
+  const filmData = {
+    ...(await MovieInfo.fetchMovies()),
+    key,
+    isTrailer: Boolean(key),
+  };
   const genres = await trending.fetchGenres();
   refs.backdrop.classList.remove('is-hidden');
   const getFilm = await getFilmById(id);
