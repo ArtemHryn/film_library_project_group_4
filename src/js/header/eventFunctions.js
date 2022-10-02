@@ -25,6 +25,7 @@ export function onHomeClick(e) {
   changeAPI.Page = true;
   changeAPI.changetrendingApi();
   e.target.blur();
+  removeClass(refs.pagination, 'visually-hidden');
 }
 
 export function onLibraryClick(e) {
@@ -39,6 +40,7 @@ export function onLibraryClick(e) {
   onQueueClick();
   removeFormListener();
   onShowQueue(e);
+  addClass(refs.pagination, 'visually-hidden');
 }
 
 export function onQueueClick(e) {
@@ -46,14 +48,12 @@ export function onQueueClick(e) {
   removeClass(refs.wached, 'lib-btn-current');
 
   onShowQueue(e);
-  
 }
 
 export function onWachedClick(e) {
   addClass(refs.wached, 'lib-btn-current');
   removeClass(refs.queue, 'lib-btn-current');
   onShowWatched(e);
-
 }
 
 export function onFormSubmit(e) {

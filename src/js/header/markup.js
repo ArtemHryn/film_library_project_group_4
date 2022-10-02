@@ -18,7 +18,7 @@ export function markupSearchQuery() {
       />
       <button type="submit" class="submit-btn">
         <svg width="15" height="15" class='search-svg'>
-          <use href="/sprite.f14d31f7.svg#icon-search"></use>
+          <use href="./images/sprite.svg#icon-search"></use>
         </svg>
       </button>
     </form>

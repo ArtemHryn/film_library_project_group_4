@@ -312,6 +312,8 @@
 }
 
 .user-name {
+  white-space: nowrap;
+  display: block;
   color: #ffffff;
   padding: 5px 10px;
 }
