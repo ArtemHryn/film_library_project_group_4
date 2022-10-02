@@ -5,7 +5,8 @@ import { renderFilms } from '../rendering/renderFilms';
 import { showSpinner, hideSpinner } from '../spinner';
 import { lazyLoad } from '../lazy-load';
 import { renderPages } from './renderNumPage';
-import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
+// import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
+import { renderFilms } from '../rendering/renderFilms';
 
 export class ChangeApi {
   constructor() {
@@ -74,7 +75,10 @@ export class ChangeApi {
     );
     console.log('wached', response.data);
     console.log('wached pages', response.totalPages);
-    onShowWatched(response.data);
+     refs.filmContainer.innerHTML = renderFilms(
+       response.data,
+       await trending.fetchGenres()
+     );
     pagination.totalPages = response.totalPages;
     renderPages();
   }
@@ -85,7 +89,10 @@ export class ChangeApi {
     );
     console.log('queue', response.data);
     console.log('queue pages', response.totalPages);
-    onShowQueue(response.data);
+    refs.filmContainer.innerHTML = renderFilms(
+      response.data,
+      await trending.fetchGenres()
+    );
     pagination.totalPages = response.totalPages;
     renderPages();
   }
