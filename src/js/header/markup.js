@@ -22,7 +22,7 @@ export function markupSearchQuery() {
       </button>
     </form>
     <p class="search-error visually-hidden">
-      Search result not successful. Enter the correct movie name and
+      Search result is not successful. Enter the correct movie name, please.
     </p>`;
 }
 
