@@ -42,6 +42,7 @@ function onBackdropClick(e) {
     toggleClass(refs.trailerModal, 'is-hidden');
     toggleClass(refs.body, 'no-scroll');
     deleteyt();
+    document.removeEventListener('keydown', onEscClick);
     removeBackdropListener();
     setTimeout(() => {
       addCloseListeners();
