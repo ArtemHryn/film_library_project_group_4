@@ -1,10 +1,7 @@
 import { refs } from '../refs/index';
 import { toggleClass } from '../utils/changeclass';
 import { onYouTubeIframeAPIReady, deleteyt } from './YTplayer';
-import {
-  removeListenerForTrailer,
-  addListenerFromTrailer,
-} from '../addingFilmToWeb';
+
 
 export function addTrailerListener() {
   refs.dataOpenTrailer = document.querySelector('[data-open-trailer]');
