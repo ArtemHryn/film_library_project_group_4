@@ -10,7 +10,6 @@ import { getTaskFromFirebaseStorage } from './firebase/get';
 import { showSpinner, hideSpinner } from './spinner';
 import {
   addFilmToLocalStorage,
-  getFilmFromLocalStorage,
   checkFilmById,
   deleteFilmFromLocalStorage,
 } from './localstorage';
@@ -21,6 +20,7 @@ import {
   addTrailerListener,
   removeTrailerListener,
 } from './youtubeApi/openTrailer';
+import { getlistOfFilmsPerPage, getFilms, filterForLibrary } from './helper';
 
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -59,9 +59,6 @@ async function film(e) {
   }
   addModalListeres();
   addTrailerListener();
-  //добавив
-  // window.addEventListener('keydown', onEscBtnPress);
-  // refs.backdrop.addEventListener('click', onBackdropClick);
   addCloseListeners();
   document.body.style.overflow = 'hidden';
 }
@@ -77,10 +74,6 @@ export function onCloseModal() {
   const modal = document.querySelector('.js-film-modal');
   modal.remove();
   refs.backdrop.classList.add('is-hidden');
-
-  // добавив
-  // window.removeEventListener('keydown', onEscBtnPress);
-  // refs.backdrop.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
   removeCloseListener();
   removeTrailerListener();
@@ -110,7 +103,7 @@ async function findFilmsInDB(searchBy) {
       return;
     }
 
-    const filteredFilms = films.filter(film => film[searchBy]);
+    const filteredFilms = filterForLibrary(films, searchBy)
     if (filteredFilms.length === 0) {
       refs.filmContainer.innerHTML = '';
       hideSpinner();
@@ -125,14 +118,6 @@ async function findFilmsInDB(searchBy) {
   } catch (error) {
     console.log(error);
   }
-}
-
-async function getFilms() {
-  if (userInfo.isLogIn) {
-    return await getTaskFromFirebaseStorage();
-  }
-
-  return JSON.parse(getFilmFromLocalStorage());
 }
 
 //додав закриття на ESC і бекдроп
@@ -254,9 +239,6 @@ async function checkTreilersArr() {
   }
 }
 
-
-
-
 export function removeCloseListener() {
     window.removeEventListener('keydown', onEscBtnPress);
     refs.backdrop.removeEventListener('click', onBackdropClick);
@@ -266,3 +248,14 @@ export function addCloseListeners() {
   window.addEventListener('keydown', onEscBtnPress);
   refs.backdrop.addEventListener('click', onBackdropClick);
 }
+
+export async function getListOfFilmsByPage(page, searchBy) {
+  const films = await getFilms()
+  if(!films) return {data: [], totalPages: 0}
+  const getFimsBySearch = filterForLibrary(films, searchBy)
+  const lastIndex = page * 20 - 1
+  const listOfFilmsPerPage = getlistOfFilmsPerPage(getFimsBySearch, lastIndex)
+  const totalPages = Math.ceil(getFimsBySearch.length / 20);
+  return  {data: listOfFilmsPerPage, totalPages}
+}
+

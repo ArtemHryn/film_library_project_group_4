@@ -42,6 +42,7 @@
 
   &__image {
     border-radius: 5px;
+    width: -moz-available;
     width: -webkit-fill-available;
   }
 
@@ -116,10 +117,9 @@
   transform: translateY(-25%);
   opacity: 0;
   transition: all 500ms linear 500ms;
-
+  object-fit: cover;
   @media screen and (min-width: $min-tablet-size) {
     height: 455px;
-    object-fit: cover;
   }
   @media screen and (min-width: $min-desktop-size) {
     height: 575px;
