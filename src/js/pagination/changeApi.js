@@ -1,55 +1,94 @@
-import {refs } from '../refs/index';
+import { refs } from '../refs/index';
 import { pagination } from '../pagination/paginationBth';
-import { trending, searchFilm  } from '../addingFilmToWeb';
+import { trending, searchFilm, getListOfFilmsByPage } from '../addingFilmToWeb';
 import { renderFilms } from '../rendering/renderFilms';
 import { showSpinner, hideSpinner } from '../spinner';
 import { lazyLoad } from '../lazy-load';
 import { renderPages } from './renderNumPage';
+import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
 
 export class ChangeApi {
   constructor() {
-    this.page = true;
+    this.page = 'trending';
   }
-   changetrendingApi() {
-    if (!this.page) {
-      this.saerch();
-    } else {
-      this.trending()
+  changetrendingApi() {
+    switch (this.page) {
+      case 'trending':
+        this.trending();
+        break;
+      case 'search':
+        this.saerch();
+        break;
+      case 'wached':
+        this.wached();
+        break;
+      case 'queue':
+        this.queue();
+        break;
+      default:
+        this.trending();
+        break;
     }
-    }
-    async saerch() {
-        showSpinner();
-        searchFilm.Page = pagination.currentPage; //searchpage set paginationpage
-        const lookedForFilms = await searchFilm.fetchMovies();
-        pagination.TotalPages = lookedForFilms.total_pages; // set to pagination totalfetchpage
-        console.log('~ lookedForFilms', lookedForFilms);
-        renderPages(); // rerenderpage to apply totalfetchpage
-        searchFilm.films = lookedForFilms.results;
-        const genres = await trending.genres;
-        refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
-        lazyLoad();
-        setTimeout(() => {
-           hideSpinner(); 
-        }, 1000);
-        
-    }
-    async trending(){
+  }
+  // if (!this.page) {
+  //   this.saerch();
+  // } else {
+  //   this.trending()
+  // }
+  // }
+  async saerch() {
     showSpinner();
-      trending.Page = pagination.currentPage;               // trendingpage set paginationpage
-      const films = await trending.fetchMovies();
-      pagination.TotalPages = films.total_pages;            // set to pagination totalfetchpage
-      renderPages();                                        // rerenderpage to apply totalfetchpage
-      trending.film = films;
-        const genres = await trending.fetchGenres();
+    searchFilm.Page = pagination.currentPage; //searchpage set paginationpage
+    const lookedForFilms = await searchFilm.fetchMovies();
+    pagination.TotalPages = lookedForFilms.total_pages; // set to pagination totalfetchpage
+    console.log('~ lookedForFilms', lookedForFilms);
+    renderPages(); // rerenderpage to apply totalfetchpage
+    searchFilm.films = lookedForFilms.results;
+    const genres = await trending.genres;
+    refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
+    lazyLoad();
+    setTimeout(() => {
+      hideSpinner();
+    }, 1000);
+  }
+  async trending() {
+    showSpinner();
+    trending.Page = pagination.currentPage; // trendingpage set paginationpage
+    const films = await trending.fetchMovies();
+    pagination.TotalPages = films.total_pages; // set to pagination totalfetchpage
+    renderPages(); // rerenderpage to apply totalfetchpage
+    trending.film = films;
+    const genres = await trending.fetchGenres();
 
-      refs.filmContainer.innerHTML = renderFilms(films.results, genres);
-      
-      lazyLoad();
-            setTimeout(() => {
-              hideSpinner();
-            }, 1000);
-    }
+    refs.filmContainer.innerHTML = renderFilms(films.results, genres);
 
+    lazyLoad();
+    setTimeout(() => {
+      hideSpinner();
+    }, 1000);
+  }
+  async wached() {
+    const response = await getListOfFilmsByPage(
+      pagination.CurrentPage,
+      'isWatched'
+    );
+    console.log('wached', response.data);
+    console.log('wached pages', response.totalPages);
+    onShowWatched(response.data);
+    pagination.totalPages = response.totalPages;
+    renderPages();
+  }
+  async queue() {
+    const response = await getListOfFilmsByPage(
+      pagination.CurrentPage,
+      'isQueue'
+    );
+    console.log('queue', response.data);
+    console.log('queue pages', response.totalPages);
+    onShowQueue(response.data);
+    pagination.totalPages = response.totalPages;
+    renderPages();
+  }
   set Page(newQuery) {
     this.page = newQuery;
   }
@@ -97,5 +136,3 @@ export class ChangeApi {
 
 //   trending.resetPage; // reset page onsearch
 // }
-
-
