@@ -3,8 +3,8 @@ let isPlayed = false;
 export function onYouTubeIframeAPIReady(id) {
   console.log(window.location.href);
   player = new YT.Player('player', {
-    height: '390',
-    width: '640',
+    height: '720',
+    width: '1280',
     videoId: `${id}`,
     enablejsapi: 1,
     origin: window.location.href,
@@ -27,7 +27,7 @@ function onPlayerReady(event) {
 let done = false;
 function onPlayerStateChange(event) {
   if (event.data == YT.PlayerState.PLAYING && !done) {
-    setTimeout(stopVideo, 6000);
+    // setTimeout(stopVideo, 6000);
     done = true;
   }
 }

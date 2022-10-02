@@ -69,11 +69,9 @@ a {
   margin: -1px;
 }
 
-.no-scroll{
- overflow: hidden;
+.no-scroll {
+  overflow: hidden;
 }
-
-
 
 .backdrop {
   position: fixed;
@@ -84,7 +82,7 @@ a {
   background-color: var(--backdrop-bkgd-color);
   z-index: 1;
   opacity: 1;
-  @include transition((opacity,background-color));
+  @include transition((opacity, background-color));
 }
 
 .backdrop.is-hidden {

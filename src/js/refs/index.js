@@ -1,6 +1,6 @@
 export const refs = {
   //body
-  body:document.querySelector('body'),
+  body: document.querySelector('body'),
   //header
   header: document.querySelector('.header'),
   logo: document.querySelector('[data-value="logo"]'),
@@ -8,8 +8,6 @@ export const refs = {
   library: document.querySelector('[data-value="library"]'),
   login: document.querySelector('[data-value="login"]'),
   container: document.querySelector('#container-js'),
-  //youtube test
-  yt: document.querySelector('[data-value="yt"]'),
   //pagination
   paginationContainerRef: document.querySelector('.js-pagination-box'),
   prevBtnRef: document.querySelector('.js-prev-btn'),
@@ -24,5 +22,6 @@ export const refs = {
   //spinner
   spinner: document.querySelector('.loader'),
 
-trailerModal :document.querySelector('[data-modal-trailer]'),
+  //youtube trailer
+  trailerModal: document.querySelector('[data-modal-trailer]'),
 };

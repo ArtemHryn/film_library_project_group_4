@@ -50,5 +50,3 @@ function onNextPage() {
   changeAPI.changetrendingApi();
   scrollToTop();
 }
-
-renderPages();

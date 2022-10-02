@@ -17,7 +17,10 @@ import {
 import { refs } from './refs';
 import { addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
-import { addTrailerListener } from './openTrailer';
+import {
+  addTrailerListener,
+  removeBackdropListener,
+} from './youtubeApi/openTrailer';
 
 export const trending = new MoviesTrendAPIService();
 const MovieInfo = new MoviesFullInfoAPIService();
@@ -35,8 +38,13 @@ async function film(e) {
   const film = e.target.closest('[data-id]');
   const id = +film.dataset.id;
   MovieInfo.movieId = id;
-  const { key } = await checkTreilersArr();
-  const filmData = { ...(await MovieInfo.fetchMovies()), key, isTreiler: Boolean(key) };
+  const trailerInfo = await checkTreilersArr();
+  const key = trailerInfo ? trailerInfo.key : undefined;
+  const filmData = {
+    ...(await MovieInfo.fetchMovies()),
+    key,
+    isTrailer: Boolean(key),
+  };
   const genres = await trending.fetchGenres();
   refs.backdrop.classList.remove('is-hidden');
   const getFilm = await getFilmById(id);
@@ -73,6 +81,7 @@ export function onCloseModal() {
   window.removeEventListener('keydown', onEscBtnPress);
   refs.backdrop.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
+  removeBackdropListener();
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {
