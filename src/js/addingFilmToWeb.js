@@ -106,12 +106,14 @@ async function findFilmsInDB(searchBy) {
 
     if (!films) {
       refs.filmContainer.innerHTML = '';
+      hideSpinner()
       return;
     }
 
     const filteredFilms = films.filter(film => film[searchBy]);
     if (filteredFilms.length === 0) {
       refs.filmContainer.innerHTML = '';
+      hideSpinner();
       return;
     }
     refs.filmContainer.innerHTML = renderFilms(
