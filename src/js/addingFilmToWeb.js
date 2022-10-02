@@ -251,6 +251,7 @@ export function addCloseListeners() {
 
 export async function getListOfFilmsByPage(page, searchBy) {
   const films = await getFilms()
+  if(!films) return {data: [], totalPages: 0}
   const getFimsBySearch = filterForLibrary(films, searchBy)
   const lastIndex = page * 20 - 1
   const listOfFilmsPerPage = getlistOfFilmsPerPage(getFimsBySearch, lastIndex)
