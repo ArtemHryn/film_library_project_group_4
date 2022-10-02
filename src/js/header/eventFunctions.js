@@ -39,6 +39,9 @@ export function onLibraryClick(e) {
   e.target.blur();
   onQueueClick();
   removeFormListener();
+      changeAPI.resetALLpage();
+      changeAPI.Page = 'queue';
+      changeAPI.changetrendingApi();
   // onShowQueue(e);
   // addClass(refs.pagination, 'visually-hidden');
 }

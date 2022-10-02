@@ -77,8 +77,12 @@ export class ChangeApi {
        response.data,
        await trending.fetchGenres()
      );
+    refs.filmContainer.innerHTML = renderFilms(
+      response.data,
+      await trending.fetchGenres()
+    );
+    lazyLoad();
     pagination.totalPages = response.totalPages;
-       lazyLoad();
     renderPages();
   }
   async queue() {
