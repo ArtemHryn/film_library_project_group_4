@@ -19,7 +19,7 @@ import { addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
 import {
   addTrailerListener,
-  removeBackdropListener,
+  removeTrailerListener,
 } from './youtubeApi/openTrailer';
 
 export const trending = new MoviesTrendAPIService();
@@ -60,8 +60,9 @@ async function film(e) {
   addModalListeres();
   addTrailerListener();
   //добавив
-  window.addEventListener('keydown', onEscBtnPress);
-  refs.backdrop.addEventListener('click', onBackdropClick);
+  // window.addEventListener('keydown', onEscBtnPress);
+  // refs.backdrop.addEventListener('click', onBackdropClick);
+  addCloseListeners();
   document.body.style.overflow = 'hidden';
 }
 
@@ -78,10 +79,11 @@ export function onCloseModal() {
   refs.backdrop.classList.add('is-hidden');
 
   // добавив
-  window.removeEventListener('keydown', onEscBtnPress);
-  refs.backdrop.removeEventListener('click', onBackdropClick);
+  // window.removeEventListener('keydown', onEscBtnPress);
+  // refs.backdrop.removeEventListener('click', onBackdropClick);
   document.body.style.overflow = 'auto';
-  removeBackdropListener();
+  removeCloseListener();
+  removeTrailerListener();
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {
@@ -248,4 +250,17 @@ async function checkTreilersArr() {
   } catch (error) {
     console.log(error);
   }
+}
+
+
+
+
+export function removeCloseListener() {
+    window.removeEventListener('keydown', onEscBtnPress);
+    refs.backdrop.removeEventListener('click', onBackdropClick);
+}
+
+export function addCloseListeners() {
+  window.addEventListener('keydown', onEscBtnPress);
+  refs.backdrop.addEventListener('click', onBackdropClick);
 }
