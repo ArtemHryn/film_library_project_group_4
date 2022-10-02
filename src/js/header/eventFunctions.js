@@ -46,14 +46,14 @@ export function onQueueClick(e) {
   removeClass(refs.wached, 'lib-btn-current');
 
   onShowQueue(e);
-  e.target.blur();
+  
 }
 
 export function onWachedClick(e) {
   addClass(refs.wached, 'lib-btn-current');
   removeClass(refs.queue, 'lib-btn-current');
   onShowWatched(e);
-  e.target.blur();
+
 }
 
 export function onFormSubmit(e) {
