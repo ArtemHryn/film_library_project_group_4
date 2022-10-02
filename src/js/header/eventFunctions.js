@@ -13,6 +13,7 @@ import { changeAPI } from '../pagination/paginationBth';
 import { searchFilm } from '../addingFilmToWeb';
 
 export function onHomeClick(e) {
+  e.currentTarget.blur();
   removeLibraryListener();
   clearContainer();
   markupSearchQuery();
@@ -24,7 +25,6 @@ export function onHomeClick(e) {
   changeAPI.resetALLpage();
   changeAPI.Page = true;
   changeAPI.changetrendingApi();
-  e.target.blur();
   removeClass(refs.pagination, 'visually-hidden');
 }
 
