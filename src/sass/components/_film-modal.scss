@@ -21,6 +21,7 @@
 
 .film-modal {
   position: absolute;
+
   top: 50%;
   left: 50%;
   height: 100vh;
@@ -28,6 +29,9 @@
   transform: translate(-50%, -50%) scale(1);
   padding: 48px 20px 40px;
   background-color: ($modal-bg);
+  @media screen and (max-width: 480px) {
+    width: 280px;
+  }
   @media screen and (max-width: 767px) {
     max-width: 480px;
     margin-left: auto;
