@@ -139,7 +139,7 @@ async function lastPageValue() {
     lastPageBtnRef.textContent = movies.total_pages;
     // lastPageBtnRef.textContent = 10;
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
