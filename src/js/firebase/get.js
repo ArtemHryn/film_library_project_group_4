@@ -22,6 +22,6 @@ export function getTaskFromFirebaseStorage(id) {
     })
     .catch(error => {
       setInterval(() => hideSpinner(), 2000);
-      Notify.failure(error);
+      Notify.failure('error');
     });
 }

@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { refs } from '../refs/index';
 import { pagination } from './paginationBth';
 import { trending, searchFilm, getListOfFilmsByPage } from '../addingFilmToWeb';
@@ -31,66 +32,82 @@ export class ChangePageRender {
   }
 
   async saerchPage() {
-    showSpinner();
-    searchFilm.Page = pagination.currentPage;
-    const lookedForFilms = await searchFilm.fetchMovies();
-    pagination.TotalPages = lookedForFilms.total_pages;
-    pagination.renderPages();
-    searchFilm.films = lookedForFilms.results;
-    const genres = await trending.genres;
-    refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
-    lazyLoad();
-    setTimeout(() => {
-      hideSpinner();
-    }, 1000);
+    try {
+      showSpinner();
+      searchFilm.Page = pagination.currentPage;
+      const lookedForFilms = await searchFilm.fetchMovies();
+      pagination.TotalPages = lookedForFilms.total_pages;
+      pagination.renderPages();
+      searchFilm.films = lookedForFilms.results;
+      const genres = await trending.genres;
+      refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
+      lazyLoad();
+      setTimeout(() => {
+        hideSpinner();
+      }, 1000);
+    } catch (error) {
+      Notify.failure('error');
+    }
   }
 
   async trendingPage() {
-    showSpinner();
-    trending.Page = pagination.currentPage;
-    const films = await trending.fetchMovies();
-    pagination.TotalPages = films.total_pages;
-    pagination.renderPages();
-    trending.film = films;
-    const genres = await trending.fetchGenres();
-    refs.filmContainer.innerHTML = renderFilms(films.results, genres);
+    try {
+      showSpinner();
+      trending.Page = pagination.currentPage;
+      const films = await trending.fetchMovies();
+      pagination.TotalPages = films.total_pages;
+      pagination.renderPages();
+      trending.film = films;
+      const genres = await trending.fetchGenres();
+      refs.filmContainer.innerHTML = renderFilms(films.results, genres);
 
-    lazyLoad();
-    setTimeout(() => {
-      hideSpinner();
-    }, 1000);
+      lazyLoad();
+      setTimeout(() => {
+        hideSpinner();
+      }, 1000);
+    } catch (error) {
+      Notify.failure('error');
+    }
   }
 
   async wachedPage() {
-    const response = await getListOfFilmsByPage(
-      pagination.CurrentPage,
-      'isWatched'
-    );
-    refs.filmContainer.innerHTML = renderFilms(
-      response.data,
-      await trending.fetchGenres()
-    );
-    refs.filmContainer.innerHTML = renderFilms(
-      response.data,
-      await trending.fetchGenres()
-    );
-    lazyLoad();
-    pagination.totalPages = response.totalPages;
-    pagination.renderPages();
+    try {
+      const response = await getListOfFilmsByPage(
+        pagination.CurrentPage,
+        'isWatched'
+      );
+      refs.filmContainer.innerHTML = renderFilms(
+        response.data,
+        await trending.fetchGenres()
+      );
+      refs.filmContainer.innerHTML = renderFilms(
+        response.data,
+        await trending.fetchGenres()
+      );
+      lazyLoad();
+      pagination.totalPages = response.totalPages;
+      pagination.renderPages();
+    } catch (error) {
+      Notify.failure('error');
+    }
   }
 
   async queuePage() {
-    const response = await getListOfFilmsByPage(
-      pagination.CurrentPage,
-      'isQueue'
-    );
-    refs.filmContainer.innerHTML = renderFilms(
-      response.data,
-      await trending.fetchGenres()
-    );
-    lazyLoad();
-    pagination.totalPages = response.totalPages;
-    pagination.renderPages();
+    try {
+      const response = await getListOfFilmsByPage(
+        pagination.CurrentPage,
+        'isQueue'
+      );
+      refs.filmContainer.innerHTML = renderFilms(
+        response.data,
+        await trending.fetchGenres()
+      );
+      lazyLoad();
+      pagination.totalPages = response.totalPages;
+      pagination.renderPages();
+    } catch (error) {
+      Notify.failure('error');
+    }
   }
 
   set Page(newQuery) {

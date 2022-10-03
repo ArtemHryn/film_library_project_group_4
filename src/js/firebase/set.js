@@ -8,6 +8,6 @@ export function addToFirebaseStorage(task) {
   try {
     set(ref(db, `films/${userInfo.UserID}/${task.id}`), task);
   } catch (error) {
-    Notify.failure(error);
+    Notify.failure('error');
   }
 }

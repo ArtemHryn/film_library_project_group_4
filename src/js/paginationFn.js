@@ -2,7 +2,7 @@
 // import { MoviesSearchAPIService } from '../js/api-search-movies';
 // import { MoviesFullInfoAPIService } from '../js/api-full-info-movie';
 import { MoviesTrendAPIService } from '../js/api-trending';
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 // const pagination = new Pagination();
 // const moviesSearchAPIService = new MoviesSearchAPIService();
 // const moviesFullInfoAPIService = new MoviesFullInfoAPIService();
@@ -75,9 +75,7 @@ function onPrevPage() {
   }
 }
 
-
 async function onNextPage() {
-
   currentPage += 1;
   // const movies = await moviesTrendAPIService.fetchMovies();
 
@@ -91,8 +89,8 @@ async function onNextPage() {
   // if (currentPage > movies.total_pages) {
   //  return
   // }
-    
-    renderPages();
+
+  renderPages();
 }
 
 function onInfinitLeft() {
@@ -136,9 +134,13 @@ function renderPages() {
 }
 
 async function lastPageValue() {
-  const movies = await moviesTrendAPIService.fetchMovies();
-  lastPageBtnRef.textContent = movies.total_pages;
-  // lastPageBtnRef.textContent = 10;
+  try {
+    const movies = await moviesTrendAPIService.fetchMovies();
+    lastPageBtnRef.textContent = movies.total_pages;
+    // lastPageBtnRef.textContent = 10;
+  } catch (error) {
+    Notify.failure('error');
+  }
 }
 
 function hideBtn() {

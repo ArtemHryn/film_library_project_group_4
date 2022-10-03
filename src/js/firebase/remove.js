@@ -8,7 +8,7 @@ export function removeFromFirebase(id, param) {
     try {
       return remove(ref(db, `films/${userInfo.UserID}/${id}`));
     } catch (error) {
-      Notify.failure(error);
+      Notify.failure('error');
     }
   }
 }
