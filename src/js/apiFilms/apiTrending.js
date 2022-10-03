@@ -1,7 +1,8 @@
 import { API_KEY } from './API_KEY';
 import axios from 'axios';
+import { BASE_URL } from './baseUrl';
 
-export const BASE_URL = 'https://api.themoviedb.org/3/';
+// export const BASE_URL = 'https://api.themoviedb.org/3';
 
 export class MoviesTrendAPIService {
   constructor() {
@@ -12,9 +13,9 @@ export class MoviesTrendAPIService {
 
   async fetchMovies() {
     try {
-      const response = await axios.get(
-        `${BASE_URL}trending/movie/week?api_key=${API_KEY}&page=${this.page}`
-      );
+      const options = { params: { api_key: API_KEY, page: this.page } };
+      const url = `${BASE_URL}/trending/movie/week?`;
+      const response = await axios.get(url, options);
       return response.data;
     } catch (error) {
       throw new Error(`Oops, something went wrong`);
@@ -22,10 +23,9 @@ export class MoviesTrendAPIService {
   }
   async fetchGenres() {
     try {
-      const listofGenres = await axios.get(
-        `
-https://api.themoviedb.org/3/genre/movie/list?api_key=29563162ad0b73335f880d56505c78bf&language=en-US`
-      );
+      const url = `${BASE_URL}/genre/movie/list?`;
+      const options = { params: { api_key: API_KEY, language: 'en-US' } };
+      const listofGenres = await axios.get(url, options);
       return listofGenres.data.genres;
     } catch (error) {
       throw new Error(`Oops, something went wrong`);
