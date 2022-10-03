@@ -1,5 +1,6 @@
 export function renderFilms(films, genres) {
-  let poster = '';
+  let poster =
+    'https://c8.alamy.com/comp/2BHX492/empty-space-for-posters-for-coming-movie-attractions-2BHX492.jpg';
   return films
     .map(
       ({
@@ -18,9 +19,6 @@ export function renderFilms(films, genres) {
         );
         if (poster_path) {
           poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-        } else {
-          poster =
-            'https://c8.alamy.com/comp/2BHX492/empty-space-for-posters-for-coming-movie-attractions-2BHX492.jpg';
         }
         return `<li class="card-collection__item" data-id="${id}">
         <div style="position: relative">
