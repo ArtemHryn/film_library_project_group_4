@@ -9,7 +9,7 @@ export class Pagination {
   }
   renderPages() {
   let itemsTemplate = '';
-  let loll = '';
+  let totalPaginatinMarkup = '';
   let firstmarkup = '';
   let lastmarkup = '';
 
@@ -93,12 +93,12 @@ if (pagination.totalPages <= 5 ) {
   }
   }
   if (window.screen.width < 481) {
-    loll = itemsTemplate ;
+    totalPaginatinMarkup = itemsTemplate ;
   } else {
-      loll = firstmarkup + itemsTemplate + lastmarkup;
+      totalPaginatinMarkup = firstmarkup + itemsTemplate + lastmarkup;
   }
 
-  refs.paginationContainerRef.innerHTML = loll;
+  refs.paginationContainerRef.innerHTML = totalPaginatinMarkup;
 }
 
   get currentPage() {
@@ -133,7 +133,7 @@ if (pagination.totalPages <= 5 ) {
 
 // function renderPages() {
 //   let itemsTemplate = '';
-//   let loll = '';
+//   let totalPaginatinMarkup = '';
 //   let firstmarkup = '';
 //   let lastmarkup = '';
 
@@ -216,6 +216,6 @@ if (pagination.totalPages <= 5 ) {
 //     itemsTemplate += template;
 //   }
 // }
-// loll = firstmarkup + itemsTemplate + lastmarkup;
-//   paginationContainerRef.innerHTML = loll;
+// totalPaginatinMarkup = firstmarkup + itemsTemplate + lastmarkup;
+//   paginationContainerRef.innerHTML = totalPaginatinMarkup;
 // }
