@@ -64,7 +64,7 @@ async function film(e) {
     addCloseListeners();
     document.body.style.overflow = 'hidden';
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -75,7 +75,7 @@ async function getFilmById(id) {
     }
     return checkFilmById(id);
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -125,7 +125,7 @@ async function findFilmsInDB(searchBy) {
     setInterval(() => hideSpinner(), 2000);
     lazyLoad();
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -155,7 +155,7 @@ export async function onSearchFilm(e) {
     hideSpinner();
     lazyLoad();
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -178,7 +178,7 @@ export async function filmer() {
     lazyLoad();
     searchFilm.query = '';
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -206,7 +206,7 @@ export async function onAddToWatched(e) {
     }
     onCloseModal();
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -234,7 +234,7 @@ export async function onAddToQueue(e) {
     }
     onCloseModal();
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -252,7 +252,7 @@ async function checkTreilersArr() {
     });
     return offTreiler;
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 
@@ -279,6 +279,6 @@ export async function getListOfFilmsByPage(page, searchBy) {
     const totalPages = Math.ceil(getFimsBySearch.length / 20);
     return { data: listOfFilmsPerPage, totalPages };
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }

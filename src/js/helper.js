@@ -21,7 +21,7 @@ export async function getFilms() {
 
     return JSON.parse(getFilmFromLocalStorage());
   } catch (error) {
-    Notify.failure('error');
+    Notify.failure(error);
   }
 }
 

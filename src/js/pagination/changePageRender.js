@@ -46,7 +46,7 @@ export class ChangePageRender {
         hideSpinner();
       }, 1000);
     } catch (error) {
-      Notify.failure('error');
+      Notify.failure(error);
     }
   }
 
@@ -66,7 +66,7 @@ export class ChangePageRender {
         hideSpinner();
       }, 1000);
     } catch (error) {
-      Notify.failure('error');
+      Notify.failure(error);
     }
   }
 
@@ -88,7 +88,7 @@ export class ChangePageRender {
       pagination.totalPages = response.totalPages;
       pagination.renderPages();
     } catch (error) {
-      Notify.failure('error');
+      Notify.failure(error);
     }
   }
 
@@ -106,7 +106,7 @@ export class ChangePageRender {
       pagination.totalPages = response.totalPages;
       pagination.renderPages();
     } catch (error) {
-      Notify.failure('error');
+      Notify.failure(error);
     }
   }
 
