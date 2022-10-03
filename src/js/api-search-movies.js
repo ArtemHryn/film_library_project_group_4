@@ -2,7 +2,6 @@ import { API_KEY } from './API_KEY';
 import axios from 'axios';
 import { BASE_URL } from './api-trending';
 
-
 export class MoviesSearchAPIService {
   constructor() {
     this.searchQuery = ''; //'Titanic' ------> для тестування(string)

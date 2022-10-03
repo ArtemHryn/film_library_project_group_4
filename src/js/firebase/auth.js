@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import {
   getAuth,
   signInWithPopup,
@@ -55,7 +56,7 @@ export function signOutUser() {
       removeLogoutListener();
     })
     .catch(error => {
-      console.log('somesing wrong');
+      Notify.failure('something wrong');
     });
 }
 
@@ -71,5 +72,3 @@ onAuthStateChanged(auth, user => {
     toggleClass(refs.login, 'login-text');
   }
 });
-
-

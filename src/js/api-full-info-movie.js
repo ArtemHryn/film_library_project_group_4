@@ -22,7 +22,7 @@ export class MoviesFullInfoAPIService {
     try {
       const response = await axios.get(
         `${BASE_URL}movie/${this.movieId}/videos?api_key=${API_KEY}&language=en-US`
-        );
+      );
       return response.data.results;
     } catch (error) {
       throw new Error(`Oops, something went wrong`);
@@ -37,4 +37,3 @@ export class MoviesFullInfoAPIService {
     return (this.movieId = newId);
   }
 }
-
