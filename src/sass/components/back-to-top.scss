@@ -1,8 +1,4 @@
-// .turn-to-top{
-//     text-align: end;
-//     position: sticky;
 
-// }
 .turn-to-top__btn {
   position: fixed;
   right: 10px;
@@ -10,7 +6,7 @@
   width: 50px;
   height: 50px;
   background: transparent;
-  border: 2px solid #000;
+  border: 2px solid $film-name;
   border-radius: 50%;
   scale: 0.8;
   @include tablet {
@@ -18,14 +14,14 @@
     scale: 1;
   }
   &:hover {
-    background-color: #ff6b01;
-    border: #ff6b01;
+    background-color: $button-and-after;
+    border: $button-and-after;
     &::after {
-      border-top: 5px solid #fff;
-      border-left: 5px solid #fff;
+      border-top: 5px solid $accent-color;
+      border-left: 5px solid $accent-color;
     }
     &::before {
-      background-color: #fff;
+      background-color: $accent-color;
     }
   }
   &::before,
@@ -41,19 +37,14 @@
     height: 15px;
     transform: translate(-50%, -65%) rotate(45deg);
     // background-color: #fff;
-    border-top: 5px solid #000;
-    border-left: 5px solid #000;
+    border-top: 5px solid $film-name;
+    border-left: 5px solid $film-name;
   }
   &::before {
     width: 5px;
     height: 25px;
     border-radius: 3px 3px 0 0;
-    background-color: #000;
+    background-color: $film-name;
   }
 }
 
-// .turn-to-top__btn-img{
-//     width: 50px;
-//     height: 50px;
-//     stroke: currentColor;
-// }
