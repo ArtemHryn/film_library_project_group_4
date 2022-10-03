@@ -70,9 +70,7 @@
 
 .nav {
   @include centeredFlex(flex, center, null);
-  // display: flex;
   gap: 30px;
-  // align-items: center;
   padding-top: 40px;
   margin-bottom: 54px;
   @media screen and (min-width: 481px) {
@@ -83,33 +81,23 @@
 
 .logo-btn {
   @include centeredFlex(flex, center, null);
-  // z-index: 10;
-  // display: flex;
-  // align-items: center;
   background-color: inherit;
-  @include fontRegular(Roboto, 30px, 500, 35px, #ffffff, center);
-  // font-family: Roboto;
-  // font-size: 30px;
-  // font-weight: 500;
-  // line-height: 35px;
-  // letter-spacing: 0em;
-  // text-align: center;
-  // color: #ffffff;
+  @include fontRegular(Roboto, 30px, 500, 35px, $accent-color, center);
   @include transition((color, text-shadow));
   &:hover,
   &:focus {
-    color: #ff6b01;
-    text-shadow: rgba(255, 107, 1, 0.6) 3px 3px 10px;
+    color: $button-and-after;
+    text-shadow: $text-shadow 3px 3px 10px;
   }
   &:hover .logo-svg,
   &:focus .logo-svg {
-    stroke: #ff6b01;
-    box-shadow: 0px 3px 43px rgba(255, 107, 1, 0.6);
+    stroke: $button-and-after;
+    box-shadow: 0px 3px 43px $text-shadow;
   }
 }
 
 .logo-svg {
-  stroke: #ffffff;
+  stroke: $accent-color;
   @include transition((stroke, box-shadow));
   @media screen and (min-width: 520px) {
     margin-right: 10px;
@@ -125,66 +113,44 @@
 .home-btn {
   position: relative;
   background-color: inherit;
-  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
-  // font-family: Roboto;
-  // font-size: 12px;
-  // font-weight: 500;
-  // line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, $accent-color, center);
   letter-spacing: 0em;
-  // text-align: center;
-  // color: #ffffff;
   margin-left: auto;
   @include transition((color, text-shadow));
   &:hover,
   &:focus {
-    color: #ff6b01;
-    text-shadow: #ff6b01 1px 0px 10px;
+    color: $button-and-after;
+    text-shadow: $button-and-after 1px 0px 10px;
   }
 }
 
 .library-btn {
   position: relative;
   background-color: inherit;
-  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
-
-  // font-family: Roboto;
-  // font-size: 12px;
-  // font-weight: 500;
-  // line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, $accent-color, center);
   letter-spacing: 0em;
-  // text-align: center;
-  // color: #ffffff;
   @include transition((color, text-shadow));
   &:hover,
   &:focus {
-    color: #ff6b01;
-    text-shadow: #ff6b01 1px 0px 10px;
+    color: $button-and-after;
+    text-shadow: $button-and-after 1px 0px 10px;
   }
 }
 
 .login-btn {
   position: relative;
   background-color: inherit;
-  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
-
-  // font-family: Roboto;
-  // font-size: 12px;
-  // font-weight: 500;
-  // line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, $accent-color, center);
   letter-spacing: 0em;
-  // text-align: center;
-  // color: #ffffff;
   cursor: default;
   @include transition((color, text-shadow));
   &:hover,
   &:focus {
-    color: #ff6b01;
-    text-shadow: #ff6b01 1px 0px 10px;
+    color: $button-and-after;
+    text-shadow: $button-and-after 1px 0px 10px;
   }
   &:hover .popup,
   &:focus .popup {
-    // opacity: 1;
-    // display: block;
     visibility: visible;
   }
 }
@@ -195,7 +161,7 @@
 
 .search-form {
   width: 280px;
-  border-bottom: 0.5px solid #ffffff;
+  border-bottom: 0.5px solid $accent-color;
   margin: 0 auto;
   margin-bottom: 16px;
   @include tablet {
@@ -206,12 +172,9 @@
     width: 394px;
   }
 }
-// .search-form__margn {
-//   margin-bottom: 24px;
-// }
 
 .input-search {
-  color: #ffffff;
+  color: $accent-color;
   background-color: inherit;
   border: 0;
   width: 260px;
@@ -229,25 +192,17 @@
 
 .submit-btn {
   background-color: inherit;
-  //   background-image: url(../images/sprite.svg#icon-search);
-  // background-size: 15px 15px;
   border: 0;
   margin: 0;
   padding: 0;
 }
 
 .search-svg {
-  stroke: #ffffff;
+  stroke: $accent-color;
 }
 .search-error {
-  @include fontRegular(Roboto, 14px, 400, 16px, #ff001b, center);
-  // font-family: Roboto;
-  // font-size: 14px;
-  // font-weight: 400;
-  // line-height: 16px;
+  @include fontRegular(Roboto, 14px, 400, 16px, $second-accent, center);
   letter-spacing: 0em;
-  // text-align: center;
-  // color: #ff001b;
   margin: 0 auto;
   @media screen and (max-width: 481px) {
     width: 280px;
@@ -258,7 +213,7 @@
   position: absolute;
   left: 0;
   bottom: -3;
-  background-color: #ff001b;
+  background-color: $second-accent;
   content: '';
   width: 100%;
   height: 3px;
@@ -266,41 +221,30 @@
 
 .lib-btn {
   background-color: inherit;
-  @include fontRegular(Roboto, 12px, 500, 16px, #ffffff, center);
-  // color: #ffffff;
-  // font-family: 'Roboto';
-  // font-style: normal;
-  // font-weight: 500;
-  // font-size: 12px;
-  // line-height: 16px;
-  /* or 133% */
-
-  // text-align: center;
+  @include fontRegular(Roboto, 12px, 500, 16px, $accent-color, center);
   text-transform: uppercase;
   width: 152px;
   height: 44px;
   border-radius: 5px;
-  border: 1px solid #ffffff;
+  border: 1px solid $accent-color;
   @include transition((color, text-shadow));
   &:hover,
   &:focus {
-    background-color: #ff6b01;
-    box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+    background-color: $button-and-after;
+    box-shadow: 0px 8px 43px $text-shadow;
     border: 0;
   }
 }
 
 .lib-btn-current {
   border: 0;
-  background: #ff6b01;
-  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  background: $button-and-after;
+  box-shadow: 0px 8px 43px $text-shadow;
 }
 
 .btn-flex {
   @include centeredFlex(flex, null, center);
-  // display: flex;
   gap: 32px;
-  // justify-content: center;
 }
 
 .user-img {
@@ -314,7 +258,7 @@
 .user-name {
   white-space: nowrap;
   display: block;
-  color: #ffffff;
+  color: $accent-color;
   padding: 5px 10px;
 }
 
@@ -323,13 +267,9 @@
   position: absolute;
   top: 100%;
   right: 0;
-  // opacity: 0;
-  // display: none;
   visibility: hidden;
-  // width: 80px;
-  // height: 80px;
-  background-color: #ff0019c4;
-  box-shadow: 0px 8px 43px rgba(243, 0, 0, 0.6);
+  background-color: $logout-popup;
+  box-shadow: 0px 8px 43px $box-shadow;
   border-radius: 5px;
   @include transition(visibility);
 }
@@ -338,22 +278,16 @@
   width: 85px;
   padding: 8px 15px;
   background-color: inherit;
-  @include fontRegular(Roboto, 12px, 500, 14px, #ffffff, center);
-  // font-family: Roboto;
-  // font-size: 12px;
-  // font-weight: 500;
-  // line-height: 14px;
+  @include fontRegular(Roboto, 12px, 500, 14px, $accent-color, center);
   letter-spacing: 0em;
-  // text-align: center;
-  // color: #ffffff;
   cursor: pointer;
   border-radius: 5px;
   text-transform: uppercase;
 }
 
 .logout-btn:hover {
-  background: #ff6b01;
-  box-shadow: 0px 8px 43px rgba(255, 107, 1, 0.6);
+  background: $button-and-after;
+  box-shadow: 0px 8px 43px $text-shadow;
 }
 
 .popup-item:not(:last-child) {

@@ -12,7 +12,6 @@ export function removeLogoutListener() {
 }
 
 function onLogoutClick(e) {
-  console.log('hhh');
   signOutUser();
 }
 
