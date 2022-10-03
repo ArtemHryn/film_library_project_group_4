@@ -1,7 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { MoviesTrendAPIService } from './api-trending';
-import { MoviesFullInfoAPIService } from './api-full-info-movie';
-import { MoviesSearchAPIService } from './api-search-movies';
+import { MoviesTrendAPIService } from './apiFilms/apiTrending';
+import { MoviesFullInfoAPIService } from './apiFilms/apiFullInfoMovie';
+import { MoviesSearchAPIService } from './apiFilms/apiSearchMovies';
 import { renderFilms } from './rendering/renderFilms';
 import { lazyLoad } from './lazy-load';
 import { renderFilmModal } from './rendering/renderModalFilm';

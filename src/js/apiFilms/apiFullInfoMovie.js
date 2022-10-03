@@ -1,6 +1,6 @@
 import { API_KEY } from './API_KEY';
 import axios from 'axios';
-import { BASE_URL } from './api-trending';
+import { BASE_URL } from './baseUrl';
 
 export class MoviesFullInfoAPIService {
   constructor() {
@@ -10,7 +10,7 @@ export class MoviesFullInfoAPIService {
   async fetchMovies() {
     try {
       const response = await axios.get(
-        `${BASE_URL}movie/${this.movieId}?api_key=${API_KEY}`
+        `${BASE_URL}/movie/${this.movieId}?api_key=${API_KEY}`
       );
       return response.data;
     } catch (error) {
@@ -21,7 +21,7 @@ export class MoviesFullInfoAPIService {
   async fetchTreiler() {
     try {
       const response = await axios.get(
-        `${BASE_URL}movie/${this.movieId}/videos?api_key=${API_KEY}&language=en-US`
+        `${BASE_URL}/movie/${this.movieId}/videos?api_key=${API_KEY}&language=en-US`
       );
       return response.data.results;
     } catch (error) {

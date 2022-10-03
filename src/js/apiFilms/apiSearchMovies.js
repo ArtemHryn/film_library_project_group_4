@@ -1,6 +1,6 @@
 import { API_KEY } from './API_KEY';
 import axios from 'axios';
-import { BASE_URL } from './api-trending';
+import { BASE_URL } from './baseUrl';
 
 export class MoviesSearchAPIService {
   constructor() {
@@ -12,7 +12,7 @@ export class MoviesSearchAPIService {
   async fetchMovies() {
     try {
       const response = await axios.get(
-        `${BASE_URL}search/movie?api_key=${API_KEY}&query=${this.searchQuery}&page=${this.page}`
+        `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${this.searchQuery}&page=${this.page}`
       );
 
       return response.data;

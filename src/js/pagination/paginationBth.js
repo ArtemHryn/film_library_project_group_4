@@ -1,8 +1,8 @@
-import { Pagination } from './paginationclass';
+import { Pagination } from './paginationClass';
 import { throttle } from 'throttle-debounce';
 import { refs } from '../refs/index';
 import { ChangePageRender } from './changePageRender';
-import { scrollToTop } from '../back-to-top';
+import { scrollToTop } from '../backToTop';
 
 export const pagination = new Pagination();
 export const сhangePageRender = new ChangePageRender();
