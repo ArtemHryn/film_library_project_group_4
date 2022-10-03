@@ -1,6 +1,5 @@
 import { API_KEY } from './API_KEY';
 import axios from 'axios';
-import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export const BASE_URL = 'https://api.themoviedb.org/3/';
 
@@ -18,7 +17,7 @@ export class MoviesTrendAPIService {
       );
       return response.data;
     } catch (error) {
-      Notify.failure(`Oops, something went wrong`);
+      throw new Error(`Oops, something went wrong`);
     }
   }
   async fetchGenres() {
@@ -29,7 +28,7 @@ https://api.themoviedb.org/3/genre/movie/list?api_key=29563162ad0b73335f880d5650
       );
       return listofGenres.data.genres;
     } catch (error) {
-      Notify.failure(`Oops, something went wrong`);
+      throw new Error(`Oops, something went wrong`);
     }
   }
   resetPage() {

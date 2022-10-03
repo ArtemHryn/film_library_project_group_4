@@ -1,3 +1,4 @@
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { MoviesTrendAPIService } from './api-trending';
 import { MoviesFullInfoAPIService } from './api-full-info-movie';
 import { MoviesSearchAPIService } from './api-search-movies';
@@ -99,11 +100,11 @@ async function findFilmsInDB(searchBy) {
 
     if (!films) {
       refs.filmContainer.innerHTML = '';
-      hideSpinner()
+      hideSpinner();
       return;
     }
 
-    const filteredFilms = filterForLibrary(films, searchBy)
+    const filteredFilms = filterForLibrary(films, searchBy);
     if (filteredFilms.length === 0) {
       refs.filmContainer.innerHTML = '';
       hideSpinner();
@@ -116,7 +117,7 @@ async function findFilmsInDB(searchBy) {
     setInterval(() => hideSpinner(), 2000);
     lazyLoad();
   } catch (error) {
-    console.log(error);
+    Notify.failure(error);
   }
 }
 
@@ -146,7 +147,7 @@ export async function onSearchFilm(e) {
     hideSpinner();
     lazyLoad();
   } catch (error) {
-    console.log(error);
+    Notify.failure(error);
   }
 }
 
@@ -169,7 +170,7 @@ export async function filmer() {
     lazyLoad();
     searchFilm.query = '';
   } catch (error) {
-    console.log(error);
+    Notify.failure(error);
   }
 }
 
@@ -235,13 +236,13 @@ async function checkTreilersArr() {
     });
     return offTreiler;
   } catch (error) {
-    console.log(error);
+    Notify.failure(error);
   }
 }
 
 export function removeCloseListener() {
-    window.removeEventListener('keydown', onEscBtnPress);
-    refs.backdrop.removeEventListener('click', onBackdropClick);
+  window.removeEventListener('keydown', onEscBtnPress);
+  refs.backdrop.removeEventListener('click', onBackdropClick);
 }
 
 export function addCloseListeners() {
@@ -250,12 +251,11 @@ export function addCloseListeners() {
 }
 
 export async function getListOfFilmsByPage(page, searchBy) {
-  const films = await getFilms()
-  if(!films) return {data: [], totalPages: 0}
-  const getFimsBySearch = filterForLibrary(films, searchBy)
-  const lastIndex = page * 20 - 1
-  const listOfFilmsPerPage = getlistOfFilmsPerPage(getFimsBySearch, lastIndex)
+  const films = await getFilms();
+  if (!films) return { data: [], totalPages: 0 };
+  const getFimsBySearch = filterForLibrary(films, searchBy);
+  const lastIndex = page * 20 - 1;
+  const listOfFilmsPerPage = getlistOfFilmsPerPage(getFimsBySearch, lastIndex);
   const totalPages = Math.ceil(getFimsBySearch.length / 20);
-  return  {data: listOfFilmsPerPage, totalPages}
+  return { data: listOfFilmsPerPage, totalPages };
 }
-
