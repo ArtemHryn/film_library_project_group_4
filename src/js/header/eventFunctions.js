@@ -7,9 +7,7 @@ import {
   removeFormListener,
 } from './listerners';
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
-// import { onShowWatched, onShowQueue } from '../addingFilmToWeb';
-
-import { changeAPI } from '../pagination/paginationBth';
+import { сhangePageRender } from '../pagination/paginationBth';
 import { searchFilm } from '../addingFilmToWeb';
 
 export function onHomeClick(e) {
@@ -22,10 +20,9 @@ export function onHomeClick(e) {
   removeClass(refs.header, 'header-library');
   addClass(refs.header, 'header-home');
   addFormListener();
-  changeAPI.resetALLpage();
-  changeAPI.Page = 'trending';
-  changeAPI.changetrendingApi();
-  // removeClass(refs.pagination, 'visually-hidden');
+  сhangePageRender.resetAllPage();
+  сhangePageRender.Page = 'trending';
+  сhangePageRender.changePage();
 }
 
 export function onLibraryClick(e) {
@@ -39,31 +36,25 @@ export function onLibraryClick(e) {
   e.target.blur();
   onQueueClick();
   removeFormListener();
-      changeAPI.resetALLpage();
-      changeAPI.Page = 'queue';
-      changeAPI.changetrendingApi();
-  // onShowQueue(e);
-  // addClass(refs.pagination, 'visually-hidden');
+  сhangePageRender.resetAllPage();
+  сhangePageRender.Page = 'queue';
+  сhangePageRender.changePage();
 }
 
 export function onQueueClick(e) {
   addClass(refs.queue, 'lib-btn-current');
   removeClass(refs.wached, 'lib-btn-current');
-
-  // onShowQueue(e);
-    changeAPI.resetALLpage();
-    changeAPI.Page = 'queue';
-    changeAPI.changetrendingApi();
+  сhangePageRender.resetAllPage();
+  сhangePageRender.Page = 'queue';
+  сhangePageRender.changePage();
 }
 
 export function onWachedClick(e) {
   addClass(refs.wached, 'lib-btn-current');
   removeClass(refs.queue, 'lib-btn-current');
-  // onShowWatched(e);
-
-      changeAPI.resetALLpage();
-      changeAPI.Page = 'wached';
-      changeAPI.changetrendingApi();
+  сhangePageRender.resetAllPage();
+  сhangePageRender.Page = 'wached';
+  сhangePageRender.changePage();
 }
 
 export function onFormSubmit(e) {
@@ -74,9 +65,8 @@ export function onFormSubmit(e) {
     return;
   }
   addClass(refs.erorr, 'visually-hidden');
-
   searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
-  changeAPI.resetALLpage();
-  changeAPI.Page = 'search';
-  changeAPI.changetrendingApi();
+  сhangePageRender.resetAllPage();
+  сhangePageRender.Page = 'search';
+  сhangePageRender.changePage();
 }

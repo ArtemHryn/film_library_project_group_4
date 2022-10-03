@@ -1,7 +1,6 @@
 let player;
 let isPlayed = false;
 export function onYouTubeIframeAPIReady(id) {
-  console.log(window.location.href);
   player = new YT.Player('player', {
     height: '720',
     width: '1280',
@@ -42,7 +41,7 @@ export function getyt() {
   player.getIframe();
 }
 
-export function deleteyt() {
+export function deleteYt() {
   if (!isPlayed) {
     return;
   }

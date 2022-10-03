@@ -5,13 +5,13 @@ import { userInfo } from '../firebase/auth';
 refs.login.addEventListener('click', onLoginClick);
 
 function onLoginClick(e) {
+  e.target.blur();
   if (userInfo.IsLogIn) {
     // signOutUser();
     return;
   }
   singIn();
 }
-
 
 export function insertPhotoUrl(e, t) {
   const markup = `<img

@@ -1,6 +1,6 @@
 import { refs } from '../refs/index';
 import { toggleClass } from '../utils/changeclass';
-import { onYouTubeIframeAPIReady, deleteyt } from './YTplayer';
+import { onYouTubeIframeAPIReady, deleteYt } from './YTplayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
 export function addTrailerListener() {
@@ -22,7 +22,6 @@ export function removeBackdropListener() {
 }
 
 function onWatchClick(e) {
-  console.log(window.screen.width);
   if (window.screen.width < 1280) {
     const id = e.target.dataset.trailerid;
     parent.open(`https://www.youtube.com/watch?v=${id}`);
@@ -41,7 +40,7 @@ function onBackdropClick(e) {
   if (e.currentTarget === e.target) {
     toggleClass(refs.trailerModal, 'is-hidden');
     toggleClass(refs.body, 'no-scroll');
-    deleteyt();
+    deleteYt();
     document.removeEventListener('keydown', onEscClick);
     removeBackdropListener();
     setTimeout(() => {
@@ -53,7 +52,7 @@ function onBackdropClick(e) {
 function onEscClick(e) {
   if (e.code == 'Escape') {
     toggleClass(refs.trailerModal, 'is-hidden');
-    deleteyt();
+    deleteYt();
     document.removeEventListener('keydown', onEscClick);
     removeBackdropListener();
     setTimeout(() => {

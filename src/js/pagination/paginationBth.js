@@ -1,14 +1,13 @@
 import { Pagination } from './paginationclass';
 import { throttle } from 'throttle-debounce';
 import { refs } from '../refs/index';
-import { renderPages } from './renderNumPage';
-import { ChangeApi } from './changeApi';
+import { ChangePageRender } from './changePageRender';
 import { scrollToTop } from '../back-to-top';
 
 export const pagination = new Pagination();
-export const changeAPI = new ChangeApi();
+export const сhangePageRender = new ChangePageRender();
 
-changeAPI.changetrendingApi();
+сhangePageRender.changePage();
 
 refs.paginationContainerRef.addEventListener(
   'click',
@@ -26,8 +25,8 @@ function onChangePage(evt) {
   }
   const li = evt.target.closest('[data-page]');
   pagination.currentPage = +li.dataset.page;
-  renderPages();
-  changeAPI.changetrendingApi();
+  pagination.renderPages();
+  сhangePageRender.changePage();
   scrollToTop();
 }
 
@@ -36,8 +35,8 @@ function onPrevPage() {
     return;
   }
   pagination.currentPage -= 1;
-  renderPages();
-  changeAPI.changetrendingApi();
+  pagination.renderPages();
+  сhangePageRender.changePage();
   scrollToTop();
 }
 
@@ -46,7 +45,7 @@ function onNextPage() {
     return;
   }
   pagination.currentPage += 1;
-  renderPages();
-  changeAPI.changetrendingApi();
+  pagination.renderPages();
+  сhangePageRender.changePage();
   scrollToTop();
 }
