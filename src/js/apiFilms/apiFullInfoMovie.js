@@ -4,14 +4,14 @@ import { BASE_URL } from './baseUrl';
 
 export class MoviesFullInfoAPIService {
   constructor() {
-    this.movieId = null; // -----> для тестування 945657  718930  616037(number)
+    this.movieId = null;
   }
 
   async fetchMovies() {
     try {
-      const response = await axios.get(
-        `${BASE_URL}/movie/${this.movieId}?api_key=${API_KEY}`
-      );
+      const options = { params: { api_key: API_KEY} };
+      const url = `${BASE_URL}/movie/${this.movieId}?`;
+      const response = await axios.get(url, options);
       return response.data;
     } catch (error) {
       throw new Error(`Oops, something went wrong`);
