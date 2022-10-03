@@ -27,6 +27,7 @@ function onChange() {
 function getThemeFromLocal() {
   if (localStorage.getItem('theme') === Theme.DARK) {
     addClass(bodyRef, Theme.DARK);
+    toggleRef.checked = true;
   }
 }
 
