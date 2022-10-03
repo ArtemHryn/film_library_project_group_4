@@ -52,10 +52,18 @@ export function deleteFilmFromLocalStorage(film, param) {
   if (!param) return;
   const parsedLocalStorage = getFilmFromLocalStorage(FILMS);
   if (!parsedLocalStorage) {
-    return
+    return;
   }
   const filteredFilms = JSON.parse(parsedLocalStorage).filter(
     e => e.id !== film.id
   );
   addToLocalStorage(filteredFilms);
+}
+
+export function setThemeToLocal(elem, theme) {
+  if (elem.classList.contains(theme.LIGHT)) {
+    localStorage.setItem('theme', theme.LIGHT);
+  } else if (elem.classList.contains(theme.DARK)) {
+    localStorage.setItem('theme', theme.DARK);
+  }
 }
