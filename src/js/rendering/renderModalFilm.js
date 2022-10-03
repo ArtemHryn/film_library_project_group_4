@@ -15,12 +15,17 @@ export function renderFilmModal({
   isTrailer = true,
   key = 'R4bkJYAy4Ws',
 }) {
+  let poster =
+    'https://c8.alamy.com/comp/2BHX492/empty-space-for-posters-for-coming-movie-attractions-2BHX492.jpg';
   changeBackdrop(backdrop_path);
+  if (poster_path) {
+    poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+  } 
   const genresListEl = genres.map(genre => genre.name);
   return ` <div class="film-modal js-film-modal" data-id='${id}'>
     <div class="poster-container">
       <img
-        src="https://image.tmdb.org/t/p/w500/${poster_path}"
+        src="${poster}"
         alt="${original_title}"
         class="poster-image"
       />
