@@ -16,12 +16,11 @@ export function getTaskFromFirebaseStorage(id) {
         }
         return Object.values(snapshot.val());
       } else {
-        Notify.failure('No data available');
         setInterval(() => hideSpinner(), 2000);
       }
     })
     .catch(error => {
       setInterval(() => hideSpinner(), 2000);
-      Notify.failure(error);
+      Notify.failure('error');
     });
 }

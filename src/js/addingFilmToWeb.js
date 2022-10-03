@@ -30,45 +30,53 @@ export const searchFilm = new MoviesSearchAPIService();
 refs.filmContainer.addEventListener('click', film);
 
 async function film(e) {
-  e.preventDefault();
+  try {
+    e.preventDefault();
 
-  if (e.target.nodeName !== 'IMG') {
-    return;
-  }
+    if (e.target.nodeName !== 'IMG') {
+      return;
+    }
 
-  const film = e.target.closest('[data-id]');
-  const id = +film.dataset.id;
-  MovieInfo.movieId = id;
-  const trailerInfo = await checkTreilersArr();
-  const key = trailerInfo ? trailerInfo.key : undefined;
-  const filmData = {
-    ...(await MovieInfo.fetchMovies()),
-    key,
-    isTrailer: Boolean(key),
-  };
-  const genres = await trending.fetchGenres();
-  refs.backdrop.classList.remove('is-hidden');
-  const getFilm = await getFilmById(id);
-  if (getFilm) {
-    const { isQueue, isWatched } = getFilm;
-    refs.backdrop.innerHTML = renderFilmModal(
-      { ...filmData, isWatched, isQueue },
-      genres
-    );
-  } else {
-    refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
+    const film = e.target.closest('[data-id]');
+    const id = +film.dataset.id;
+    MovieInfo.movieId = id;
+    const trailerInfo = await checkTreilersArr();
+    const key = trailerInfo ? trailerInfo.key : undefined;
+    const filmData = {
+      ...(await MovieInfo.fetchMovies()),
+      key,
+      isTrailer: Boolean(key),
+    };
+    const genres = await trending.fetchGenres();
+    refs.backdrop.classList.remove('is-hidden');
+    const getFilm = await getFilmById(id);
+    if (getFilm) {
+      const { isQueue, isWatched } = getFilm;
+      refs.backdrop.innerHTML = renderFilmModal(
+        { ...filmData, isWatched, isQueue },
+        genres
+      );
+    } else {
+      refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
+    }
+    addModalListeres();
+    addTrailerListener();
+    addCloseListeners();
+    document.body.style.overflow = 'hidden';
+  } catch (error) {
+    Notify.failure('error');
   }
-  addModalListeres();
-  addTrailerListener();
-  addCloseListeners();
-  document.body.style.overflow = 'hidden';
 }
 
 async function getFilmById(id) {
-  if (userInfo.isLogIn) {
-    return await getTaskFromFirebaseStorage(id);
+  try {
+    if (userInfo.isLogIn) {
+      return await getTaskFromFirebaseStorage(id);
+    }
+    return checkFilmById(id);
+  } catch (error) {
+    Notify.failure('error');
   }
-  return checkFilmById(id);
 }
 
 export function onCloseModal() {
@@ -117,7 +125,7 @@ async function findFilmsInDB(searchBy) {
     setInterval(() => hideSpinner(), 2000);
     lazyLoad();
   } catch (error) {
-    Notify.failure(error);
+    Notify.failure('error');
   }
 }
 
@@ -147,7 +155,7 @@ export async function onSearchFilm(e) {
     hideSpinner();
     lazyLoad();
   } catch (error) {
-    Notify.failure(error);
+    Notify.failure('error');
   }
 }
 
@@ -170,56 +178,64 @@ export async function filmer() {
     lazyLoad();
     searchFilm.query = '';
   } catch (error) {
-    Notify.failure(error);
+    Notify.failure('error');
   }
 }
 
 export async function onAddToWatched(e) {
-  const dbInfo = prepareForDBInfo(e, true, false);
+  try {
+    const dbInfo = prepareForDBInfo(e, true, false);
 
-  const checkFilm = await getFilmById(dbInfo.id);
+    const checkFilm = await getFilmById(dbInfo.id);
 
-  if (userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
-    removeFromFirebase(checkFilm.id, checkFilm.isWatched);
+    if (userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
+      removeFromFirebase(checkFilm.id, checkFilm.isWatched);
+      onCloseModal();
+      return;
+    }
+
+    if (!userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
+      deleteFilmFromLocalStorage(checkFilm, checkFilm.isWatched);
+      onCloseModal();
+      return;
+    }
+    if (userInfo.isLogIn) {
+      addToFirebaseStorage(dbInfo);
+    } else {
+      addFilmToLocalStorage(dbInfo);
+    }
     onCloseModal();
-    return;
+  } catch (error) {
+    Notify.failure('error');
   }
-
-  if (!userInfo.isLogIn && checkFilm && checkFilm.isWatched) {
-    deleteFilmFromLocalStorage(checkFilm, checkFilm.isWatched);
-    onCloseModal();
-    return;
-  }
-  if (userInfo.isLogIn) {
-    addToFirebaseStorage(dbInfo);
-  } else {
-    addFilmToLocalStorage(dbInfo);
-  }
-  onCloseModal();
 }
 
 export async function onAddToQueue(e) {
-  const dbInfo = prepareForDBInfo(e, false, true);
-  const checkFilm = await getFilmById(dbInfo.id);
+  try {
+    const dbInfo = prepareForDBInfo(e, false, true);
+    const checkFilm = await getFilmById(dbInfo.id);
 
-  if (userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
-    removeFromFirebase(checkFilm.id, checkFilm.isQueue);
+    if (userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
+      removeFromFirebase(checkFilm.id, checkFilm.isQueue);
+      onCloseModal();
+      return;
+    }
+
+    if (!userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
+      deleteFilmFromLocalStorage(checkFilm, checkFilm.isQueue);
+      onCloseModal();
+      return;
+    }
+
+    if (userInfo.isLogIn) {
+      addToFirebaseStorage(dbInfo);
+    } else {
+      addFilmToLocalStorage(dbInfo);
+    }
     onCloseModal();
-    return;
+  } catch (error) {
+    Notify.failure('error');
   }
-
-  if (!userInfo.isLogIn && checkFilm && checkFilm.isQueue) {
-    deleteFilmFromLocalStorage(checkFilm, checkFilm.isQueue);
-    onCloseModal();
-    return;
-  }
-
-  if (userInfo.isLogIn) {
-    addToFirebaseStorage(dbInfo);
-  } else {
-    addFilmToLocalStorage(dbInfo);
-  }
-  onCloseModal();
 }
 
 // функція для пошуку офф трейлера
@@ -236,7 +252,7 @@ async function checkTreilersArr() {
     });
     return offTreiler;
   } catch (error) {
-    Notify.failure(error);
+    Notify.failure('error');
   }
 }
 
@@ -251,11 +267,18 @@ export function addCloseListeners() {
 }
 
 export async function getListOfFilmsByPage(page, searchBy) {
-  const films = await getFilms();
-  if (!films) return { data: [], totalPages: 0 };
-  const getFimsBySearch = filterForLibrary(films, searchBy);
-  const lastIndex = page * 20 - 1;
-  const listOfFilmsPerPage = getlistOfFilmsPerPage(getFimsBySearch, lastIndex);
-  const totalPages = Math.ceil(getFimsBySearch.length / 20);
-  return { data: listOfFilmsPerPage, totalPages };
+  try {
+    const films = await getFilms();
+    if (!films) return { data: [], totalPages: 0 };
+    const getFimsBySearch = filterForLibrary(films, searchBy);
+    const lastIndex = page * 20 - 1;
+    const listOfFilmsPerPage = getlistOfFilmsPerPage(
+      getFimsBySearch,
+      lastIndex
+    );
+    const totalPages = Math.ceil(getFimsBySearch.length / 20);
+    return { data: listOfFilmsPerPage, totalPages };
+  } catch (error) {
+    Notify.failure('error');
+  }
 }
