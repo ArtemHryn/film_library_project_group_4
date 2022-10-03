@@ -27,9 +27,21 @@
     }
 }
 .footer__icon {
-    display: inline;
-    padding: 0 10 0 10;
+    fill: #FF6B08;
+    margin: 0 10 0 10;
+    animation: heartbeat 1200ms infinite 1000ms;
 }
+@keyframes heartbeat {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.7);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 .developers {
 @media screen and (max-width: 767.9px) {
     display: block;
