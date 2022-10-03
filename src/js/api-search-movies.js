@@ -1,7 +1,7 @@
 import { API_KEY } from './API_KEY';
 import axios from 'axios';
 import { BASE_URL } from './api-trending';
-
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 export class MoviesSearchAPIService {
   constructor() {
@@ -18,7 +18,7 @@ export class MoviesSearchAPIService {
 
       return response.data;
     } catch (error) {
-      throw new Error(`Oops, something went wrong`);
+      Notify.failure(`Oops, something went wrong`);
     }
   }
 
