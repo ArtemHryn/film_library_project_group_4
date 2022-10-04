@@ -4,13 +4,13 @@ import { onYouTubeIframeAPIReady, deleteYt } from './YTplayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
 export function addTrailerListener() {
-  refs.dataOpenTrailer = document.querySelector('[data-open-trailer]');
-  refs.dataOpenTrailer.addEventListener('click', onWatchClick);
+  // refs.dataOpenTrailer = document.querySelector('[data-open-trailer]');
+  refs.backdrop.addEventListener('click', onWatchClick);
   refs.trailerModal.addEventListener('click', onBackdropClick);
 }
 
 export function removeTrailerListener() {
-  refs.dataOpenTrailer.removeEventListener('click', onWatchClick);
+  refs.backdrop.removeEventListener('click', onWatchClick);
 }
 
 function addBackdropListener() {
@@ -22,6 +22,12 @@ export function removeBackdropListener() {
 }
 
 function onWatchClick(e) {
+  if (e.target.nodeName !== 'BUTTON') {
+    return;
+  }
+  if (e.target.dataset.open !== 'trailer') {
+    return
+  }
   if (window.screen.width < 1280) {
     const id = e.target.dataset.trailerid;
     parent.open(`https://www.youtube.com/watch?v=${id}`);

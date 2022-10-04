@@ -51,9 +51,11 @@ export function signOutUser() {
       userInfo.USER_ID = 0;
       userInfo.userName = '';
       userInfo.IsLogIn = false;
-      changeBtnLabel('LOG IN');
-      toggleClass(refs.login, 'login-text');
-      removeLogoutListener();
+      // changeBtnLabel('LOG IN');
+      // toggleClass(refs.login, 'login-text');
+      // removeLogoutListener();
+      toggleClass(refs.containerLogout, 'visually-hidden');
+      toggleClass(refs.login, 'visually-hidden');
     })
     .catch(error => {
       Notify.failure('something wrong');
@@ -66,9 +68,13 @@ onAuthStateChanged(auth, user => {
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
     userInfo.userImg = user.photoURL;
-
-    insertPhotoUrl(userInfo.userImg, userInfo.userName);
-    addLogoutListener();
-    toggleClass(refs.login, 'login-text');
+    // console.log(refs.containerLogout.children[1].children[0].children[0].textContent);
+    refs.containerLogout.children[0].src = userInfo.userImg;
+    refs.containerLogout.children[1].children[0].children[0].textContent =
+      userInfo.userName;
+    // insertPhotoUrl(userInfo.userImg, userInfo.userName);
+    // addLogoutListener();
+    toggleClass(refs.containerLogout, 'visually-hidden');
+    toggleClass(refs.login, 'visually-hidden');
   }
 });

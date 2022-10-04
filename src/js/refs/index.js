@@ -7,7 +7,9 @@ export const refs = {
   home: document.querySelector('[data-value="home"]'),
   library: document.querySelector('[data-value="library"]'),
   login: document.querySelector('[data-value="login"]'),
+  logout :document.querySelector('[data-value="logout"]'),
   container: document.querySelector('#container-js'),
+  containerLogout: document.querySelector('.js-logout-cont'),
   //pagination
   pagination: document.querySelector('.js-pagination'),
   paginationContainerRef: document.querySelector('.js-pagination-box'),

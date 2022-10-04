@@ -31,6 +31,14 @@
     >
       LOG IN
     </button>
+    <div class="logout js-logout-cont visually-hidden"><img
+        class="user-img"
+        
+        alt="photo"
+      /><ul class='popup'>
+      <li class='popup-item'><span class='user-name'>user name</span></li>
+      <li class='popup-item'><button type='button' class='logout-btn' data-value='logout'>Log Out</button></li>
+      </ul></div>
   </nav>
   <div class="container-inner search-form__margn" id="container-js">
     <form class="search-form" id="search-form">
@@ -42,15 +50,15 @@
         class="input-search js-input-search"
         aria-label="Input search"
       />
-      <button type="submit" class="submit-btn" aria-label="Search">
-        <svg width="12" height="12" fill="none">
+      <button type="submit" class="submit-btn" aria-label="Search" data-value="search">
+        <!-- <svg width="12" height="12" fill="none">
           <path
             d="M5.5 9.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM10.5 10.5 8.325 8.325"
             stroke="#fff"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
-        </svg>
+        </svg> -->
       </button>
     </form>
     <p class="search-error visually-hidden">

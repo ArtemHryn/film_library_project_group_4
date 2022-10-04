@@ -42,30 +42,41 @@ export function onLibraryClick(e) {
 }
 
 export function onQueueClick(e) {
-  addClass(refs.queue, 'lib-btn-current');
-  removeClass(refs.wached, 'lib-btn-current');
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'queue';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  addClass(e.target, 'lib-btn-current');
+  removeClass(e.target.previousElementSibling, 'lib-btn-current');
+  // console.log(e.target);
 }
 
 export function onWachedClick(e) {
-  addClass(refs.wached, 'lib-btn-current');
-  removeClass(refs.queue, 'lib-btn-current');
+  // addClass(refs.wached, 'lib-btn-current');
+  // removeClass(refs.queue, 'lib-btn-current');
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'wached';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  addClass(e.target, 'lib-btn-current');
+  removeClass(e.target.nextElementSibling, 'lib-btn-current');
+  // console.log(e.target.nextElementSibling);
+  // console.log(e.target);
 }
 
 export function onFormSubmit(e) {
   e.preventDefault();
-  let onSearchText = e.currentTarget.elements.searchQuery.value.trim();
+  let onSearchText = e.target.elements.searchQuery.value.trim();
   if (!onSearchText) {
-    removeClass(refs.erorr, 'visually-hidden');
+    removeClass(e.target.nextElementSibling, 'visually-hidden');
     return;
   }
-  addClass(refs.erorr, 'visually-hidden');
-  searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+  addClass(e.target.nextElementSibling, 'visually-hidden');
+  searchFilm.searchQuery = onSearchText;
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'search';
   сhangePageRender.changePage();

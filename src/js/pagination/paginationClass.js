@@ -1,4 +1,3 @@
-import { pagination } from './paginationBth';
 import { refs } from '../refs/index';
 
 export class Pagination {
@@ -13,10 +12,10 @@ export class Pagination {
   let firstmarkup = '';
   let lastmarkup = '';
 
-  if (pagination.currentPage >= 6) {
-    firstmarkup = `<li data-page="${pagination.FirstPage}" 
+  if (this.CurrentPage >= 6) {
+    firstmarkup = `<li data-page="${this.FirstPage}" 
     class="pagination-item">
-    <button type="button" class="pagination-btn ">${pagination.FirstPage}
+    <button type="button" class="pagination-btn ">${this.FirstPage}
     </button>
     </li>
     <li 
@@ -26,38 +25,38 @@ export class Pagination {
     </li>`;
   } 
 
-  if (pagination.currentPage <= pagination.totalPages - 5) {
+  if (this.CurrentPage <= this.TotalPages - 5) {
 
     lastmarkup = `<li 
     class="pagination-item ">
     <button type="button" class="pagination-btn pagin">...
     </button>
     </li>
-    <li data-page="${pagination.totalPages}" 
+    <li data-page="${this.TotalPages}" 
     class="pagination-item">
-    <button type="button" class="pagination-btn">${pagination.totalPages}
+    <button type="button" class="pagination-btn">${this.TotalPages}
     </button>
     </li>
     `;
   }
 
-if (pagination.totalPages <= 5 ) {
+if (this.TotalPages <= 5 ) {
   for (
     let i =
-      ((pagination.currentPage >= (pagination.totalPages - 3)) ?
-    (pagination.currentPage >= (pagination.totalPages - 2)
-          ? pagination.totalPages <=4 ? pagination.firstPage :
-          pagination.currentPage - (4 - (pagination.totalPages - pagination.currentPage))
-        : pagination.firstPage )
+      ((this.CurrentPage >= (this.TotalPages - 3)) ?
+    (this.CurrentPage >= (this.TotalPages - 2)
+          ? this.TotalPages <=4 ? this.FirstPage :
+          this.CurrentPage - (4 - (this.TotalPages - this.CurrentPage))
+        : this.FirstPage )
       :
-      (pagination.currentPage <= 3
-        ? pagination.currentPage - (pagination.currentPage - 1)
-        : pagination.currentPage - 2));
-    i <= pagination.totalPages;
+      (this.CurrentPage <= 3
+        ? this.CurrentPage - (this.CurrentPage - 1)
+        : this.CurrentPage - 2));
+    i <= this.TotalPages;
     i += 1
   ) {
     const template = `<li data-page="${i}" class="pagination-item ${
-      i === pagination.currentPage ? 'active' : ''
+      i === this.CurrentPage ? 'active' : ''
     }">
     <button type="button" class="pagination-btn">${i}</button></li>`;
     itemsTemplate += template;
@@ -66,27 +65,27 @@ if (pagination.totalPages <= 5 ) {
   for (
     let i =
       (
-        (pagination.currentPage >= (pagination.totalPages - 3)) ? 
-        (pagination.currentPage >= (pagination.totalPages - 2)   
-          ? pagination.currentPage - (4 -(pagination.totalPages-pagination.currentPage))
-          :  pagination.currentPage- 2)
+        (this.CurrentPage >= (this.TotalPages - 3)) ? 
+        (this.CurrentPage >= (this.TotalPages - 2)   
+          ? this.CurrentPage - (4 -(this.TotalPages-this.CurrentPage))
+          :  this.CurrentPage- 2)
         :
-        (pagination.currentPage <= 3
-          ? pagination.currentPage - (pagination.currentPage - 1)
-          : pagination.currentPage - 2));
+        (this.CurrentPage <= 3
+          ? this.CurrentPage - (this.CurrentPage - 1)
+          : this.CurrentPage - 2));
     i <=
-    ((pagination.currentPage >= (pagination.totalPages - 3)) ?
-      (pagination.currentPage >= (pagination.totalPages - 2)
-        ? pagination.currentPage + (pagination.totalPages-pagination.currentPage)
-        : pagination.currentPage + 2)
+    ((this.CurrentPage >= (this.TotalPages - 3)) ?
+      (this.CurrentPage >= (this.TotalPages - 2)
+        ? this.CurrentPage + (this.TotalPages-this.CurrentPage)
+        : this.CurrentPage + 2)
       :
-      (pagination.currentPage <= 3
-        ? pagination.currentPage + (5 - pagination.currentPage)
-        : pagination.currentPage + 2));
+      (this.CurrentPage <= 3
+        ? this.CurrentPage + (5 - this.CurrentPage)
+        : this.CurrentPage + 2));
     i += 1
   ) {
     const template = `<li data-page="${i}" class="pagination-item ${
-      i === pagination.currentPage ? 'active' : ''
+      i === this.CurrentPage ? 'active' : ''
     }">
     <button type="button" class="pagination-btn">${i}</button></li>`;
     itemsTemplate += template;
