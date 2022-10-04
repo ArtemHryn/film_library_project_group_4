@@ -1,5 +1,5 @@
 import { refs } from '../refs/index';
-import { addClass, removeClass } from '../utils/changeClass';
+import { addClass, removeClass } from '../utils/changeСlass';
 import { addFormListener, removeFormListener } from './listerners';
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
 import { сhangePageRender } from '../pagination/paginationBth';
