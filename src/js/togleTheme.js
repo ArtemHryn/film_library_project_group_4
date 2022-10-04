@@ -1,4 +1,4 @@
-import { addClass, removeClass } from './utils/changeClass';
+import { addClass, removeClass } from './utils/changeСlass';
 import { setThemeToLocal } from './localstorage';
 
 const Theme = {
