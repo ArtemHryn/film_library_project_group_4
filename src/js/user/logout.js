@@ -1,20 +1,17 @@
 import { signOutUser } from '../firebase/auth';
 import { refs } from '../refs/index';
-import {signOutUser} from '../firebase/auth'
+import { signOutUser } from '../firebase/auth';
+import { onHomeClick } from '../header/eventFunctions';
 
-export function addLogoutListener() {
-  refs.logout = document.querySelector('[data-value="logout"]');
+export function addListenerLogout(params) {
   refs.logout.addEventListener('click', onLogoutClick);
 }
 
-export function removeLogoutListener() {
+export function removeListenerLogout(params) {
   refs.logout.removeEventListener('click', onLogoutClick);
 }
 
 function onLogoutClick(e) {
+  onHomeClick();
   signOutUser();
-}
-
-export function changeBtnLabel(e) {
-  refs.login.textContent = e;
 }

@@ -4,7 +4,7 @@ import { pagination } from './paginationBth';
 import { trending, searchFilm, getListOfFilmsByPage } from '../addingFilmToWeb';
 import { renderFilms } from '../rendering/renderFilms';
 import { showSpinner, hideSpinner } from '../spinner';
-import { lazyLoad } from '../lazy-load';
+import { lazyLoad } from '../lazyLoad';
 import { renderFilms } from '../rendering/renderFilms';
 
 export class ChangePageRender {

@@ -3,7 +3,7 @@ import { MoviesTrendAPIService } from './apiFilms/apiTrending';
 import { MoviesFullInfoAPIService } from './apiFilms/apiFullInfoMovie';
 import { MoviesSearchAPIService } from './apiFilms/apiSearchMovies';
 import { renderFilms } from './rendering/renderFilms';
-import { lazyLoad } from './lazy-load';
+import { lazyLoad } from './lazyLoad';
 import { renderFilmModal } from './rendering/renderModalFilm';
 import { addToFirebaseStorage } from './firebase/set';
 import { userInfo } from './firebase/auth';
@@ -15,7 +15,7 @@ import {
   deleteFilmFromLocalStorage,
 } from './localstorage';
 import { refs } from './refs';
-import { addModalListeres } from './header/listerners';
+import { removeLogoutListener, addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
 import {
   addTrailerListener,
@@ -60,6 +60,7 @@ async function film(e) {
       refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
     }
     addModalListeres();
+    addModalListeres()
     addTrailerListener();
     addCloseListeners();
     document.body.style.overflow = 'hidden';

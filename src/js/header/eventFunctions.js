@@ -1,18 +1,11 @@
 import { refs } from '../refs/index';
-import { addClass, removeClass } from '../utils/changeclass';
-import {
-  addLibraryListener,
-  removeLibraryListener,
-  addFormListener,
-  removeFormListener,
-} from './listerners';
+import { addClass, removeClass } from '../utils/changeClass';
+import { addFormListener, removeFormListener } from './listerners';
 import { markupLibraryBtn, markupSearchQuery, clearContainer } from './markup';
 import { сhangePageRender } from '../pagination/paginationBth';
 import { searchFilm } from '../addingFilmToWeb';
 
 export function onHomeClick(e) {
-  e.currentTarget.blur();
-  removeLibraryListener();
   clearContainer();
   markupSearchQuery();
   addClass(refs.home, 'current-page');
@@ -23,6 +16,10 @@ export function onHomeClick(e) {
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'trending';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  e.currentTarget.blur();
 }
 
 export function onLibraryClick(e) {
@@ -32,7 +29,6 @@ export function onLibraryClick(e) {
   removeClass(refs.home, 'current-page');
   removeClass(refs.header, 'header-home');
   addClass(refs.header, 'header-library');
-  addLibraryListener();
   e.target.blur();
   onQueueClick();
   removeFormListener();
@@ -42,30 +38,36 @@ export function onLibraryClick(e) {
 }
 
 export function onQueueClick(e) {
-  addClass(refs.queue, 'lib-btn-current');
-  removeClass(refs.wached, 'lib-btn-current');
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'queue';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  addClass(e.target, 'lib-btn-current');
+  removeClass(e.target.previousElementSibling, 'lib-btn-current');
 }
 
 export function onWachedClick(e) {
-  addClass(refs.wached, 'lib-btn-current');
-  removeClass(refs.queue, 'lib-btn-current');
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'wached';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  addClass(e.target, 'lib-btn-current');
+  removeClass(e.target.nextElementSibling, 'lib-btn-current');
 }
 
 export function onFormSubmit(e) {
   e.preventDefault();
-  let onSearchText = e.currentTarget.elements.searchQuery.value.trim();
+  let onSearchText = e.target.elements.searchQuery.value.trim();
   if (!onSearchText) {
-    removeClass(refs.erorr, 'visually-hidden');
+    removeClass(e.target.nextElementSibling, 'visually-hidden');
     return;
   }
-  addClass(refs.erorr, 'visually-hidden');
-  searchFilm.searchQuery = e.currentTarget.elements.searchQuery.value.trim();
+  addClass(e.target.nextElementSibling, 'visually-hidden');
+  searchFilm.searchQuery = onSearchText;
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'search';
   сhangePageRender.changePage();
