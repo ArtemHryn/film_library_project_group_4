@@ -2,7 +2,6 @@ import { API_KEY } from './API_KEY';
 import axios from 'axios';
 import { BASE_URL } from './baseUrl';
 
-// export const BASE_URL = 'https://api.themoviedb.org/3';
 
 export class MoviesTrendAPIService {
   constructor() {
@@ -53,5 +52,4 @@ export class MoviesTrendAPIService {
   }
 }
 
-// const test = new MoviesTrendAPIService();   -----> для тестування
-// test.fetchMovies()
+
