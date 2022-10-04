@@ -39,12 +39,19 @@ export class ChangePageRender {
       pagination.TotalPages = lookedForFilms.total_pages;
       pagination.renderPages();
       searchFilm.films = lookedForFilms.results;
+      if (!searchFilm.films.length) {
+        setTimeout(() => {
+          hideSpinner();
+        }, 300);
+        Notify.failure('Please Enter Valid Movie Name');
+        return;
+      }
       const genres = await trending.genres;
       refs.filmContainer.innerHTML = renderFilms(searchFilm.films, genres);
       lazyLoad();
       setTimeout(() => {
         hideSpinner();
-      }, 1000);
+      }, 300);
     } catch (error) {
       Notify.failure(error);
     }
@@ -64,7 +71,7 @@ export class ChangePageRender {
       lazyLoad();
       setTimeout(() => {
         hideSpinner();
-      }, 1000);
+      }, 300);
     } catch (error) {
       Notify.failure(error);
     }
