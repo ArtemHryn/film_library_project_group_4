@@ -3,15 +3,6 @@ import { toggleClass } from '../utils/changeClass';
 import { onYouTubeIframeAPIReady, deleteYt } from './youtubePlayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
-// export function addTrailerListener() {
-//   refs.backdrop.addEventListener('click', onWatchClick);
-//   refs.trailerModal.addEventListener('click', onBackdropClick);
-// }
-
-// export function removeTrailerListener() {
-//   refs.backdrop.removeEventListener('click', onWatchClick);
-// }
-
 function addBackdropListener() {
   refs.trailerModal.addEventListener('click', onBackdropClick);
 }
