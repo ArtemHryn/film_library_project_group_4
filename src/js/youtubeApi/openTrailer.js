@@ -1,10 +1,9 @@
 import { refs } from '../refs/index';
-import { toggleClass } from '../utils/changeclass';
-import { onYouTubeIframeAPIReady, deleteYt } from './YTplayer';
+import { toggleClass } from '../utils/changeClass';
+import { onYouTubeIframeAPIReady, deleteYt } from './youtubePlayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
 export function addTrailerListener() {
-  // refs.dataOpenTrailer = document.querySelector('[data-open-trailer]');
   refs.backdrop.addEventListener('click', onWatchClick);
   refs.trailerModal.addEventListener('click', onBackdropClick);
 }

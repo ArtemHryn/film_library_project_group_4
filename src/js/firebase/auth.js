@@ -8,13 +8,8 @@ import {
 } from 'firebase/auth';
 import { UserInfo } from '../firebase/user';
 import { refs } from '../refs/index';
-import {
-  addLogoutListener,
-  changeBtnLabel,
-  removeLogoutListener,
-} from '../user/logout';
-import { insertPhotoUrl } from '../user/login';
-import { toggleClass } from '../utils/changeclass';
+import { toggleClass } from '../utils/changeClass';
+import { addListenerLogout, removeListenerLogout } from '../user/logout';
 
 export const userInfo = new UserInfo();
 
@@ -24,24 +19,16 @@ const auth = getAuth();
 export function singIn() {
   signInWithPopup(auth, provider)
     .then(result => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
-      // The signed-in user info.
       const user = result.user;
       document.querySelector('#audio').play();
-      // console.log(user);
-      // ...
     })
     .catch(error => {
-      // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
-      // The email of the user's account used.
       const email = error.customData.email;
-      // The AuthCredential type that was used.
       const credential = GoogleAuthProvider.credentialFromError(error);
-      // ...
     });
 }
 
@@ -51,11 +38,9 @@ export function signOutUser() {
       userInfo.USER_ID = 0;
       userInfo.userName = '';
       userInfo.IsLogIn = false;
-      // changeBtnLabel('LOG IN');
-      // toggleClass(refs.login, 'login-text');
-      // removeLogoutListener();
       toggleClass(refs.containerLogout, 'visually-hidden');
       toggleClass(refs.login, 'visually-hidden');
+      removeListenerLogout();
     })
     .catch(error => {
       Notify.failure('something wrong');
@@ -68,13 +53,10 @@ onAuthStateChanged(auth, user => {
     userInfo.userName = user.displayName;
     userInfo.IsLogIn = true;
     userInfo.userImg = user.photoURL;
-    // console.log(refs.containerLogout.children[1].children[0].children[0].textContent);
-    refs.containerLogout.children[0].src = userInfo.userImg;
-    refs.containerLogout.children[1].children[0].children[0].textContent =
-      userInfo.userName;
-    // insertPhotoUrl(userInfo.userImg, userInfo.userName);
-    // addLogoutListener();
+    refs.userImg.src = userInfo.userImg;
+    refs.userName.textContent = userInfo.userName;
     toggleClass(refs.containerLogout, 'visually-hidden');
     toggleClass(refs.login, 'visually-hidden');
+    addListenerLogout();
   }
 });

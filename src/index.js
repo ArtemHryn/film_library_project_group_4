@@ -2,7 +2,7 @@ import './js/firebase/service';
 import './js/header/eventFunctions';
 import './js/user/login';
 import './js/addingFilmToWeb';
-import './js/youtubeApi/iframe-Api';
+import './js/youtubeApi/iframeApi';
 import './js/pagination/paginationBth';
 import './js/backToTop';
 import './js/teamModal';
