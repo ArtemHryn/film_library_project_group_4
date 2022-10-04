@@ -1,5 +1,5 @@
 import { refs } from '../refs/index';
-import { toggleClass } from '../utils/changeСlass';
+import { toggleClass } from '../utils/changeClass';
 import { onYouTubeIframeAPIReady, deleteYt } from './youtubePlayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
