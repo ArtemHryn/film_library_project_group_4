@@ -6,7 +6,6 @@ import { сhangePageRender } from '../pagination/paginationBth';
 import { searchFilm } from '../addingFilmToWeb';
 
 export function onHomeClick(e) {
-  e.currentTarget.blur();
   clearContainer();
   markupSearchQuery();
   addClass(refs.home, 'current-page');
@@ -17,6 +16,10 @@ export function onHomeClick(e) {
   сhangePageRender.resetAllPage();
   сhangePageRender.Page = 'trending';
   сhangePageRender.changePage();
+  if (!e) {
+    return;
+  }
+  e.currentTarget.blur();
 }
 
 export function onLibraryClick(e) {
