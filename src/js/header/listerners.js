@@ -7,10 +7,12 @@ import {
   onFormSubmit,
 } from './eventFunctions';
 import { onAddToWatched, onAddToQueue, onCloseModal } from '../addingFilmToWeb';
+import { onWatchClick } from '../youtubeApi/openTrailer';
 
 refs.logo.addEventListener('click', onHomeClick);
 refs.home.addEventListener('click', onHomeClick);
 refs.library.addEventListener('click', onLibraryClick);
+refs.backdrop.addEventListener('click', onModalEvents);
 
 addFormListener();
 
@@ -22,13 +24,23 @@ export function removeFormListener() {
   refs.container.removeEventListener('submit', onFormSubmit);
 }
 
-export function addModalListeres() {
-  refs.addToWatched = document.querySelector('.js-add-to-watched');
-  refs.addtoQueue = document.querySelector('.js-add-to-queue');
-  refs.closeModalFilm = document.querySelector('[data-modal-close]');
-  refs.addToWatched.addEventListener('click', onAddToWatched);
-  refs.addtoQueue.addEventListener('click', onAddToQueue);
-  refs.closeModalFilm.addEventListener('click', onCloseModal);
+function onModalEvents(e) {
+  if (e.target.dataset.open === 'trailer') {
+    onWatchClick(e);
+    return;
+  }
+  if (e.target.classList.value.includes('js-add-to-watched')) {
+    onAddToWatched(e);
+    return;
+  }
+  if (e.target.classList.value.includes('js-add-to-queue')) {
+    onAddToQueue(e);
+    return;
+  }
+  if (e.target.classList.value.includes('js-button-close')) {
+    onCloseModal(e);
+    return;
+  }
 }
 
 refs.container.addEventListener('click', onHeaderDeleg);
