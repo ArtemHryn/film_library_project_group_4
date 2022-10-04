@@ -1,5 +1,5 @@
 
-import { addClass, removeClass } from './utils/changeСlass';
+import { addClass, removeClass } from './utils/changeClass';
 import { refs } from './refs/index';
 
 export function showSpinner() {

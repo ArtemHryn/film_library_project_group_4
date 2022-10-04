@@ -8,7 +8,7 @@ import {
 } from 'firebase/auth';
 import { UserInfo } from '../firebase/user';
 import { refs } from '../refs/index';
-import { toggleClass } from '../utils/changeСlass';
+import { toggleClass } from '../utils/changeClass';
 import { addListenerLogout, removeListenerLogout } from '../user/logout';
 
 export const userInfo = new UserInfo();
