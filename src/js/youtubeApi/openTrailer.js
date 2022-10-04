@@ -3,14 +3,14 @@ import { toggleClass } from '../utils/changeClass';
 import { onYouTubeIframeAPIReady, deleteYt } from './youtubePlayer';
 import { removeCloseListener, addCloseListeners } from '../addingFilmToWeb';
 
-export function addTrailerListener() {
-  refs.backdrop.addEventListener('click', onWatchClick);
-  refs.trailerModal.addEventListener('click', onBackdropClick);
-}
+// export function addTrailerListener() {
+//   refs.backdrop.addEventListener('click', onWatchClick);
+//   refs.trailerModal.addEventListener('click', onBackdropClick);
+// }
 
-export function removeTrailerListener() {
-  refs.backdrop.removeEventListener('click', onWatchClick);
-}
+// export function removeTrailerListener() {
+//   refs.backdrop.removeEventListener('click', onWatchClick);
+// }
 
 function addBackdropListener() {
   refs.trailerModal.addEventListener('click', onBackdropClick);
@@ -20,13 +20,7 @@ export function removeBackdropListener() {
   refs.trailerModal.removeEventListener('click', onBackdropClick);
 }
 
-function onWatchClick(e) {
-  if (e.target.nodeName !== 'BUTTON') {
-    return;
-  }
-  if (e.target.dataset.open !== 'trailer') {
-    return
-  }
+export function onWatchClick(e) {
   if (window.screen.width < 1280) {
     const id = e.target.dataset.trailerid;
     parent.open(`https://www.youtube.com/watch?v=${id}`);

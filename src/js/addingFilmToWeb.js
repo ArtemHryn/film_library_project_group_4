@@ -15,12 +15,8 @@ import {
   deleteFilmFromLocalStorage,
 } from './localstorage';
 import { refs } from './refs';
-import { removeLogoutListener, addModalListeres } from './header/listerners';
 import { removeFromFirebase } from './firebase/remove.js';
-import {
-  addTrailerListener,
-  removeTrailerListener,
-} from './youtubeApi/openTrailer';
+
 import { getlistOfFilmsPerPage, getFilms, filterForLibrary } from './helper';
 
 export const trending = new MoviesTrendAPIService();
@@ -59,9 +55,6 @@ async function film(e) {
     } else {
       refs.backdrop.innerHTML = renderFilmModal(filmData, genres);
     }
-    addModalListeres();
-    addModalListeres()
-    addTrailerListener();
     addCloseListeners();
     document.body.style.overflow = 'hidden';
   } catch (error) {
@@ -86,7 +79,6 @@ export function onCloseModal() {
   refs.backdrop.classList.add('is-hidden');
   document.body.style.overflow = 'auto';
   removeCloseListener();
-  removeTrailerListener();
 }
 
 function prepareForDBInfo(el, isWatched, isQueue) {
